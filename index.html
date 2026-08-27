@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -12,6 +13,7 @@
   <title>Controle de Portaria</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -117,6 +119,11 @@
       cursor: pointer;
     }
 
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     .btn-camera {
       background: #8b0000;
       color: white;
@@ -138,11 +145,6 @@
       background: #111827;
       color: white;
       font-size: 18px;
-    }
-
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
     }
 
     #mensagem {
@@ -178,6 +180,7 @@
     }
 
     @media (max-width: 600px) {
+
       .container {
         width: 95%;
         padding: 20px;
@@ -186,12 +189,16 @@
       .camera {
         min-height: 280px;
       }
+
     }
+
   </style>
+
 </head>
 
 
 <body>
+
 
 <header>
   🔑 CONTROLE DE PORTARIA
@@ -305,18 +312,14 @@
 
 
 <!-- =========================================================
-     FORMULÁRIO PARA ENVIAR AO APPS SCRIPT
+     FORMULÁRIO DE ENVIO
      ========================================================= -->
 
 <form
   id="formCadastro"
-
   method="POST"
-
   action="https://script.google.com/macros/s/AKfycbwTsrLKu32wU4bvqSs0OL0_QynZuKiJTZzOpboNHeOb6A8OEtfBAEemAUkpZaay23e7pg/exec"
-
   target="iframeEnvio"
-
   style="display:none;"
 >
 
@@ -350,6 +353,7 @@
 
 <script>
 
+
 // ============================================================
 // VARIÁVEIS
 // ============================================================
@@ -357,6 +361,8 @@
 let stream = null;
 
 let fotoBase64 = '';
+
+let enviando = false;
 
 
 // ============================================================
@@ -387,6 +393,12 @@ const mensagem =
 const resultado =
   document.getElementById('resultado');
 
+const formCadastro =
+  document.getElementById('formCadastro');
+
+const iframeEnvio =
+  document.getElementById('iframeEnvio');
+
 
 // ============================================================
 // ABRIR CÂMERA
@@ -406,7 +418,6 @@ async function abrirCamera() {
 
     }
 
-
     if (!navigator.mediaDevices.getUserMedia) {
 
       throw new Error(
@@ -416,7 +427,6 @@ async function abrirCamera() {
     }
 
 
-    // Se já existir câmera aberta
     if (stream) {
 
       stream
@@ -441,7 +451,6 @@ async function abrirCamera() {
           width: {
             ideal: 1280
           },
-
           height: {
             ideal: 720
           }
@@ -477,9 +486,8 @@ async function abrirCamera() {
       'sucesso'
     );
 
-  }
 
-  catch (erro) {
+  } catch (erro) {
 
     console.error(
       'Erro da câmera:',
@@ -581,7 +589,6 @@ function tirarFoto() {
   canvas.width =
     video.videoWidth;
 
-
   canvas.height =
     video.videoHeight;
 
@@ -599,15 +606,17 @@ function tirarFoto() {
   );
 
 
-  // Converte a imagem para JPEG
+  // ==========================================================
+  // REDUZ A FOTO PARA FACILITAR O ENVIO
+  // ==========================================================
+
   fotoBase64 =
     canvas.toDataURL(
       'image/jpeg',
-      0.75
+      0.70
     );
 
 
-  // Mostra a foto
   preview.src =
     fotoBase64;
 
@@ -620,7 +629,6 @@ function tirarFoto() {
     'none';
 
 
-  // Fecha a câmera depois da foto
   fecharStream();
 
 
@@ -633,7 +641,7 @@ function tirarFoto() {
 
 
   mostrarMensagem(
-    '📸 Foto capturada. Confira a imagem e clique em "Salvar Pessoa".',
+    '📸 Foto capturada. Confira e clique em "Salvar Pessoa".',
     'sucesso'
   );
 
@@ -647,7 +655,6 @@ function tirarFoto() {
 function fecharCamera() {
 
   fecharStream();
-
 
   btnFoto.disabled =
     true;
@@ -698,6 +705,11 @@ function fecharStream() {
 
 function salvarPessoa() {
 
+  if (enviando) {
+    return;
+  }
+
+
   const nome =
     document
       .getElementById('nome')
@@ -729,84 +741,108 @@ function salvarPessoa() {
   }
 
 
+  enviando =
+    true;
+
+
   btnSalvar.disabled =
     true;
 
 
   mostrarMensagem(
-    '⏳ Enviando cadastro...',
+    '⏳ Enviando cadastro para o sistema...',
     'info'
   );
 
 
-  // Nome
+  // ----------------------------------------------------------
+  // COLOCAR NOME NO FORMULÁRIO
+  // ----------------------------------------------------------
+
   document
     .getElementById('formNome')
     .value =
     nome;
 
 
-  // Foto
+  // ----------------------------------------------------------
+  // COLOCAR FOTO NO FORMULÁRIO
+  // ----------------------------------------------------------
+
   document
     .getElementById('formFoto')
     .value =
     fotoBase64;
 
 
-  // Envia para o Apps Script
-  document
-    .getElementById('formCadastro')
-    .submit();
+  console.log(
+    'Enviando cadastro...',
+    {
+      nome: nome,
+      tamanhoFoto: fotoBase64.length
+    }
+  );
 
 
-  // Limpa a tela depois do envio
+  // ----------------------------------------------------------
+  // ENVIAR PARA APPS SCRIPT
+  // ----------------------------------------------------------
+
+  formCadastro.submit();
+
+
+  // ----------------------------------------------------------
+  // AVISO
+  // ----------------------------------------------------------
+
   setTimeout(
     function() {
 
       mostrarMensagem(
-        '✅ Cadastro enviado. Confira a planilha em alguns segundos.',
-        'sucesso'
+        '📤 Dados enviados. Aguarde alguns segundos e confira a aba PESSOAS.',
+        'info'
       );
 
-
-      document
-        .getElementById('nome')
-        .value =
-        '';
+    },
+    1000
+  );
 
 
-      fotoBase64 =
-        '';
+  // ----------------------------------------------------------
+  // LIBERAR NOVO CADASTRO
+  // ----------------------------------------------------------
 
+  setTimeout(
+    function() {
 
-      preview.src =
-        '';
-
-
-      preview.style.display =
-        'none';
-
-
-      video.style.display =
-        'none';
-
-
-      cameraStatus.style.display =
-        'block';
-
-
-      resultado.textContent =
-        '';
-
-
-      btnSalvar.disabled =
-        true;
+      enviando =
+        false;
 
     },
-    1500
+    5000
   );
 
 }
+
+
+// ============================================================
+// DETECTAR RESPOSTA DO APPS SCRIPT
+// ============================================================
+
+iframeEnvio.addEventListener(
+  'load',
+  function() {
+
+    if (!enviando) {
+      return;
+    }
+
+    console.log(
+      'Resposta do Apps Script recebida.'
+    );
+
+  }
+);
 
 
 // ============================================================
@@ -821,10 +857,8 @@ function mostrarMensagem(
   mensagem.textContent =
     texto;
 
-
   mensagem.className =
     tipo;
-
 
   mensagem.style.display =
     'block';
@@ -840,7 +874,6 @@ function limparMensagem() {
 
   mensagem.textContent =
     '';
-
 
   mensagem.style.display =
     'none';
@@ -860,6 +893,7 @@ window.addEventListener(
 
   }
 );
+
 
 </script>
 
