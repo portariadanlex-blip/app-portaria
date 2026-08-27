@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Controle de Portaria</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f1f3f6;
+      color: #111827;
+    }
+
+    header {
+      background: #8b0000;
+      color: white;
+      padding: 22px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 850px;
+      margin: 35px auto;
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #8b0000;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 17px;
+    }
+
+    .camera {
+      width: 100%;
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 15px;
+      min-height: 400px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    video {
+      width: 100%;
+      max-height: 500px;
+      display: none;
+      object-fit: cover;
+    }
+
+    canvas {
+      display: none;
+    }
+
+    .preview {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      display: none;
+    }
+
+    .camera-status {
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-camera {
+      background: #8b0000;
+      color: white;
+    }
+
+    .btn-photo {
+      background: #16803c;
+      color: white;
+    }
+
+    .btn-close {
+      background: #666;
+      color: white;
+    }
+
+    .btn-save {
+      width: 100%;
+      margin-top: 25px;
+      background: #111827;
+      color: white;
+      font-size: 18px;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #mensagem {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      display: none;
+    }
+
+    .sucesso {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .erro {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .info {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .numero {
+      font-size: 30px;
+      color: #8b0000;
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 95%;
+        padding: 20px;
+      }
+
+      .camera {
+        min-height: 280px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+<header>
+  🔑 CONTROLE DE PORTARIA
+</header>
+
+
+<div class="container">
+
+  <h2>
+    Cadastro de Pessoa
+  </h2>
+
+
+  <label for="nome">
+    Nome completo
+  </label>
+
+
+  <input
+    type="text"
+    id="nome"
+    placeholder="Digite o nome da pessoa"
+    autocomplete="off"
+  >
+
+
+  <label>
+    Foto
+  </label>
+
+
+  <div class="camera">
+
+    <video
+      id="video"
+      autoplay
+      playsinline
+    ></video>
+
+
+    <img
+      id="preview"
+      class="preview"
+      alt="Foto da pessoa"
+    >
+
+
+    <div
+      id="cameraStatus"
+      class="camera-status"
+    >
+      📷 Clique em "Abrir câmera"
+    </div>
+
+  </div>
+
+
+  <canvas id="canvas"></canvas>
+
+
+  <div class="buttons">
+
+    <button
+      class="btn-camera"
+      id="btnAbrir"
+      onclick="abrirCamera()"
+    >
+      📷 Abrir câmera
+    </button>
+
+
+    <button
+      class="btn-photo"
+      id="btnFoto"
+      onclick="tirarFoto()"
+      disabled
+    >
+      📸 Tirar foto
+    </button>
+
+
+    <button
+      class="btn-close"
+      onclick="fecharCamera()"
+    >
+      ❌ Fechar câmera
+    </button>
+
+  </div>
+
+
+  <button
+    class="btn-save"
+    id="btnSalvar"
+    onclick="salvarPessoa()"
+    disabled
+  >
+    💾 SALVAR PESSOA
+  </button>
+
+
+  <div id="mensagem"></div>
+
+
+  <div
+    id="resultado"
+    class="numero"
+  ></div>
+
+</div>
+
+
+<!-- =========================================================
+     FORMULÁRIO PARA ENVIAR AO APPS SCRIPT
+     ========================================================= -->
+
+<form
+  id="formCadastro"
+
+  method="POST"
+
+  action="https://script.google.com/macros/s/AKfycbwTsrLKu32wU4bvqSs0OL0_QynZuKiJTZzOpboNHeOb6A8OEtfBAEemAUkpZaay23e7pg/exec"
+
+  target="iframeEnvio"
+
+  style="display:none;"
+>
+
+  <input
+    type="hidden"
+    name="acao"
+    value="cadastrarPessoa"
+  >
+
+  <input
+    type="hidden"
+    name="nome"
+    id="formNome"
+  >
+
+  <input
+    type="hidden"
+    name="foto"
+    id="formFoto"
+  >
+
+</form>
+
+
+<iframe
+  name="iframeEnvio"
+  id="iframeEnvio"
+  style="display:none;"
+></iframe>
+
+
+<script>
+
+// ============================================================
+// VARIÁVEIS
+// ============================================================
+
+let stream = null;
+
+let fotoBase64 = '';
+
+
+// ============================================================
+// ELEMENTOS
+// ============================================================
+
+const video =
+  document.getElementById('video');
+
+const preview =
+  document.getElementById('preview');
+
+const canvas =
+  document.getElementById('canvas');
+
+const cameraStatus =
+  document.getElementById('cameraStatus');
+
+const btnFoto =
+  document.getElementById('btnFoto');
+
+const btnSalvar =
+  document.getElementById('btnSalvar');
+
+const mensagem =
+  document.getElementById('mensagem');
+
+const resultado =
+  document.getElementById('resultado');
+
+
+// ============================================================
+// ABRIR CÂMERA
+// ============================================================
+
+async function abrirCamera() {
+
+  limparMensagem();
+
+  try {
+
+    if (!navigator.mediaDevices) {
+
+      throw new Error(
+        'O navegador não disponibilizou acesso à câmera.'
+      );
+
+    }
+
+
+    if (!navigator.mediaDevices.getUserMedia) {
+
+      throw new Error(
+        'Este navegador não suporta acesso à câmera.'
+      );
+
+    }
+
+
+    // Se já existir câmera aberta
+    if (stream) {
+
+      stream
+        .getTracks()
+        .forEach(
+          track => track.stop()
+        );
+
+    }
+
+
+    mostrarMensagem(
+      '⏳ Solicitando acesso à câmera...',
+      'info'
+    );
+
+
+    stream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video: {
+          width: {
+            ideal: 1280
+          },
+
+          height: {
+            ideal: 720
+          }
+        },
+
+        audio: false
+
+      });
+
+
+    video.srcObject =
+      stream;
+
+
+    video.style.display =
+      'block';
+
+
+    preview.style.display =
+      'none';
+
+
+    cameraStatus.style.display =
+      'none';
+
+
+    btnFoto.disabled =
+      false;
+
+
+    mostrarMensagem(
+      '✅ Câmera aberta. Posicione a pessoa e clique em "Tirar foto".',
+      'sucesso'
+    );
+
+  }
+
+  catch (erro) {
+
+    console.error(
+      'Erro da câmera:',
+      erro
+    );
+
+
+    let texto =
+      'Não foi possível abrir a câmera.';
+
+
+    if (
+      erro.name ===
+      'NotAllowedError'
+    ) {
+
+      texto =
+        'O acesso à câmera foi bloqueado. Permita o uso da câmera no navegador.';
+
+    }
+
+
+    else if (
+      erro.name ===
+      'NotFoundError'
+    ) {
+
+      texto =
+        'Nenhuma câmera foi encontrada no PC.';
+
+    }
+
+
+    else if (
+      erro.name ===
+      'NotReadableError'
+    ) {
+
+      texto =
+        'A câmera está sendo usada por outro programa.';
+
+    }
+
+
+    else if (
+      erro.name ===
+      'SecurityError'
+    ) {
+
+      texto =
+        'O navegador bloqueou o acesso à câmera por segurança.';
+
+    }
+
+
+    mostrarMensagem(
+      '❌ ' + texto,
+      'erro'
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// TIRAR FOTO
+// ============================================================
+
+function tirarFoto() {
+
+  if (!stream) {
+
+    mostrarMensagem(
+      'Abra a câmera primeiro.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if (
+    video.videoWidth === 0 ||
+    video.videoHeight === 0
+  ) {
+
+    mostrarMensagem(
+      'A câmera ainda não está pronta.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  canvas.width =
+    video.videoWidth;
+
+
+  canvas.height =
+    video.videoHeight;
+
+
+  const contexto =
+    canvas.getContext('2d');
+
+
+  contexto.drawImage(
+    video,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  // Converte a imagem para JPEG
+  fotoBase64 =
+    canvas.toDataURL(
+      'image/jpeg',
+      0.75
+    );
+
+
+  // Mostra a foto
+  preview.src =
+    fotoBase64;
+
+
+  preview.style.display =
+    'block';
+
+
+  video.style.display =
+    'none';
+
+
+  // Fecha a câmera depois da foto
+  fecharStream();
+
+
+  btnFoto.disabled =
+    true;
+
+
+  btnSalvar.disabled =
+    false;
+
+
+  mostrarMensagem(
+    '📸 Foto capturada. Confira a imagem e clique em "Salvar Pessoa".',
+    'sucesso'
+  );
+
+}
+
+
+// ============================================================
+// FECHAR CÂMERA
+// ============================================================
+
+function fecharCamera() {
+
+  fecharStream();
+
+
+  btnFoto.disabled =
+    true;
+
+
+  if (!fotoBase64) {
+
+    video.style.display =
+      'none';
+
+
+    preview.style.display =
+      'none';
+
+
+    cameraStatus.style.display =
+      'block';
+
+  }
+
+}
+
+
+// ============================================================
+// PARAR CÂMERA
+// ============================================================
+
+function fecharStream() {
+
+  if (stream) {
+
+    stream
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+    stream = null;
+
+  }
+
+}
+
+
+// ============================================================
+// SALVAR PESSOA
+// ============================================================
+
+function salvarPessoa() {
+
+  const nome =
+    document
+      .getElementById('nome')
+      .value
+      .trim();
+
+
+  if (!nome) {
+
+    mostrarMensagem(
+      'Digite o nome da pessoa.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if (!fotoBase64) {
+
+    mostrarMensagem(
+      'Tire uma foto antes de salvar.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  btnSalvar.disabled =
+    true;
+
+
+  mostrarMensagem(
+    '⏳ Enviando cadastro...',
+    'info'
+  );
+
+
+  // Nome
+  document
+    .getElementById('formNome')
+    .value =
+    nome;
+
+
+  // Foto
+  document
+    .getElementById('formFoto')
+    .value =
+    fotoBase64;
+
+
+  // Envia para o Apps Script
+  document
+    .getElementById('formCadastro')
+    .submit();
+
+
+  // Limpa a tela depois do envio
+  setTimeout(
+    function() {
+
+      mostrarMensagem(
+        '✅ Cadastro enviado. Confira a planilha em alguns segundos.',
+        'sucesso'
+      );
+
+
+      document
+        .getElementById('nome')
+        .value =
+        '';
+
+
+      fotoBase64 =
+        '';
+
+
+      preview.src =
+        '';
+
+
+      preview.style.display =
+        'none';
+
+
+      video.style.display =
+        'none';
+
+
+      cameraStatus.style.display =
+        'block';
+
+
+      resultado.textContent =
+        '';
+
+
+      btnSalvar.disabled =
+        true;
+
+    },
+    1500
+  );
+
+}
+
+
+// ============================================================
+// MOSTRAR MENSAGEM
+// ============================================================
+
+function mostrarMensagem(
+  texto,
+  tipo
+) {
+
+  mensagem.textContent =
+    texto;
+
+
+  mensagem.className =
+    tipo;
+
+
+  mensagem.style.display =
+    'block';
+
+}
+
+
+// ============================================================
+// LIMPAR MENSAGEM
+// ============================================================
+
+function limparMensagem() {
+
+  mensagem.textContent =
+    '';
+
+
+  mensagem.style.display =
+    'none';
+
+}
+
+
+// ============================================================
+// FECHAR CÂMERA AO SAIR
+// ============================================================
+
+window.addEventListener(
+  'beforeunload',
+  function() {
+
+    fecharStream();
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
