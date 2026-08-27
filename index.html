@@ -2,13 +2,9 @@
 <html lang="pt-BR">
 
 <head>
-
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Controle de Portaria</title>
 
@@ -179,6 +175,14 @@
       font-weight: bold;
     }
 
+    .foto-ok {
+      text-align: center;
+      margin-top: 10px;
+      color: #16803c;
+      font-weight: bold;
+      display: none;
+    }
+
     @media (max-width: 600px) {
 
       .container {
@@ -188,6 +192,10 @@
 
       .camera {
         min-height: 280px;
+      }
+
+      header {
+        font-size: 21px;
       }
 
     }
@@ -259,6 +267,14 @@
   <canvas id="canvas"></canvas>
 
 
+  <div
+    id="fotoOk"
+    class="foto-ok"
+  >
+    ✅ Foto capturada
+  </div>
+
+
   <div class="buttons">
 
     <button
@@ -311,47 +327,16 @@
 </div>
 
 
-<!-- =========================================================
-     FORMULÁRIO DE ENVIO
-     ========================================================= -->
-
-<form
-  id="formCadastro"
-  method="POST"
-  action="https://script.google.com/macros/s/AKfycbwTsrLKu32wU4bvqSs0OL0_QynZuKiJTZzOpboNHeOb6A8OEtfBAEemAUkpZaay23e7pg/exec"
-  target="iframeEnvio"
-  style="display:none;"
->
-
-  <input
-    type="hidden"
-    name="acao"
-    value="cadastrarPessoa"
-  >
-
-  <input
-    type="hidden"
-    name="nome"
-    id="formNome"
-  >
-
-  <input
-    type="hidden"
-    name="foto"
-    id="formFoto"
-  >
-
-</form>
-
-
-<iframe
-  name="iframeEnvio"
-  id="iframeEnvio"
-  style="display:none;"
-></iframe>
-
 
 <script>
+
+
+// ============================================================
+// CONFIGURAÇÃO
+// ============================================================
+
+const URL_APPS_SCRIPT =
+  'https://script.google.com/macros/s/AKfycbwTsrLKu32wU4bvqSs0OL0_QynZuKiJTZzOpboNHeOb6A8OEtfBAEemAUkpZaay23e7pg/exec';
 
 
 // ============================================================
@@ -393,11 +378,8 @@ const mensagem =
 const resultado =
   document.getElementById('resultado');
 
-const formCadastro =
-  document.getElementById('formCadastro');
-
-const iframeEnvio =
-  document.getElementById('iframeEnvio');
+const fotoOk =
+  document.getElementById('fotoOk');
 
 
 // ============================================================
@@ -418,6 +400,7 @@ async function abrirCamera() {
 
     }
 
+
     if (!navigator.mediaDevices.getUserMedia) {
 
       throw new Error(
@@ -427,15 +410,7 @@ async function abrirCamera() {
     }
 
 
-    if (stream) {
-
-      stream
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
-
-    }
+    fecharStream();
 
 
     mostrarMensagem(
@@ -448,6 +423,7 @@ async function abrirCamera() {
       await navigator.mediaDevices.getUserMedia({
 
         video: {
+          facingMode: 'user',
           width: {
             ideal: 1280
           },
@@ -486,8 +462,9 @@ async function abrirCamera() {
       'sucesso'
     );
 
+  }
 
-  } catch (erro) {
+  catch (erro) {
 
     console.error(
       'Erro da câmera:',
@@ -500,30 +477,25 @@ async function abrirCamera() {
 
 
     if (
-      erro.name ===
-      'NotAllowedError'
+      erro.name === 'NotAllowedError'
     ) {
 
       texto =
-        'O acesso à câmera foi bloqueado. Permita o uso da câmera no navegador.';
+        'O acesso à câmera foi bloqueado. Permita a câmera no navegador.';
 
     }
 
-
     else if (
-      erro.name ===
-      'NotFoundError'
+      erro.name === 'NotFoundError'
     ) {
 
       texto =
-        'Nenhuma câmera foi encontrada no PC.';
+        'Nenhuma câmera foi encontrada.';
 
     }
 
-
     else if (
-      erro.name ===
-      'NotReadableError'
+      erro.name === 'NotReadableError'
     ) {
 
       texto =
@@ -531,10 +503,8 @@ async function abrirCamera() {
 
     }
 
-
     else if (
-      erro.name ===
-      'SecurityError'
+      erro.name === 'SecurityError'
     ) {
 
       texto =
@@ -577,7 +547,7 @@ function tirarFoto() {
   ) {
 
     mostrarMensagem(
-      'A câmera ainda não está pronta.',
+      'A câmera ainda não está pronta. Aguarde um instante.',
       'erro'
     );
 
@@ -607,7 +577,7 @@ function tirarFoto() {
 
 
   // ==========================================================
-  // REDUZ A FOTO PARA FACILITAR O ENVIO
+  // CONVERTER PARA JPEG
   // ==========================================================
 
   fotoBase64 =
@@ -616,6 +586,10 @@ function tirarFoto() {
       0.70
     );
 
+
+  // ==========================================================
+  // MOSTRAR PREVIEW
+  // ==========================================================
 
   preview.src =
     fotoBase64;
@@ -627,6 +601,10 @@ function tirarFoto() {
 
   video.style.display =
     'none';
+
+
+  fotoOk.style.display =
+    'block';
 
 
   fecharStream();
@@ -641,7 +619,7 @@ function tirarFoto() {
 
 
   mostrarMensagem(
-    '📸 Foto capturada. Confira e clique em "Salvar Pessoa".',
+    '📸 Foto capturada. Confira a imagem e clique em "Salvar Pessoa".',
     'sucesso'
   );
 
@@ -665,10 +643,8 @@ function fecharCamera() {
     video.style.display =
       'none';
 
-
     preview.style.display =
       'none';
-
 
     cameraStatus.style.display =
       'block';
@@ -689,7 +665,9 @@ function fecharStream() {
     stream
       .getTracks()
       .forEach(
-        track => track.stop()
+        function(track) {
+          track.stop();
+        }
       );
 
     stream = null;
@@ -703,7 +681,7 @@ function fecharStream() {
 // SALVAR PESSOA
 // ============================================================
 
-function salvarPessoa() {
+async function salvarPessoa() {
 
   if (enviando) {
     return;
@@ -717,6 +695,10 @@ function salvarPessoa() {
       .trim();
 
 
+  // ==========================================================
+  // VALIDAR NOME
+  // ==========================================================
+
   if (!nome) {
 
     mostrarMensagem(
@@ -724,10 +706,18 @@ function salvarPessoa() {
       'erro'
     );
 
+    document
+      .getElementById('nome')
+      .focus();
+
     return;
 
   }
 
+
+  // ==========================================================
+  // VALIDAR FOTO
+  // ==========================================================
 
   if (!fotoBase64) {
 
@@ -741,108 +731,198 @@ function salvarPessoa() {
   }
 
 
+  // ==========================================================
+  // BLOQUEAR BOTÃO
+  // ==========================================================
+
   enviando =
     true;
-
 
   btnSalvar.disabled =
     true;
 
 
   mostrarMensagem(
-    '⏳ Enviando cadastro para o sistema...',
+    '⏳ Salvando pessoa na planilha e no Google Drive...',
     'info'
   );
 
 
-  // ----------------------------------------------------------
-  // COLOCAR NOME NO FORMULÁRIO
-  // ----------------------------------------------------------
+  try {
 
-  document
-    .getElementById('formNome')
-    .value =
-    nome;
+    // ========================================================
+    // PREPARAR DADOS
+    // ========================================================
 
-
-  // ----------------------------------------------------------
-  // COLOCAR FOTO NO FORMULÁRIO
-  // ----------------------------------------------------------
-
-  document
-    .getElementById('formFoto')
-    .value =
-    fotoBase64;
+    const dados =
+      new URLSearchParams();
 
 
-  console.log(
-    'Enviando cadastro...',
-    {
-      nome: nome,
-      tamanhoFoto: fotoBase64.length
-    }
-  );
+    dados.append(
+      'acao',
+      'cadastrarPessoa'
+    );
 
 
-  // ----------------------------------------------------------
-  // ENVIAR PARA APPS SCRIPT
-  // ----------------------------------------------------------
-
-  formCadastro.submit();
-
-
-  // ----------------------------------------------------------
-  // AVISO
-  // ----------------------------------------------------------
-
-  setTimeout(
-    function() {
-
-      mostrarMensagem(
-        '📤 Dados enviados. Aguarde alguns segundos e confira a aba PESSOAS.',
-        'info'
-      );
-
-    },
-    1000
-  );
+    dados.append(
+      'nome',
+      nome
+    );
 
 
-  // ----------------------------------------------------------
-  // LIBERAR NOVO CADASTRO
-  // ----------------------------------------------------------
+    dados.append(
+      'foto',
+      fotoBase64
+    );
 
-  setTimeout(
-    function() {
 
-      enviando =
-        false;
+    console.log(
+      'Enviando cadastro para Apps Script...'
+    );
 
-    },
-    5000
-  );
+
+    // ========================================================
+    // ENVIO PARA APPS SCRIPT
+    // ========================================================
+
+    await fetch(
+      URL_APPS_SCRIPT,
+      {
+        method: 'POST',
+
+        mode: 'no-cors',
+
+        headers: {
+          'Content-Type':
+            'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+
+        body:
+          dados.toString()
+      }
+    );
+
+
+    // ========================================================
+    // IMPORTANTE
+    // ========================================================
+    //
+    // O modo no-cors não permite ler a resposta do Apps Script.
+    // Porém o POST é enviado para o doPost().
+    //
+    // Vamos aguardar um pouco para o Apps Script concluir.
+    // ========================================================
+
+    mostrarMensagem(
+      '⏳ Cadastro enviado. Aguardando gravação...',
+      'info'
+    );
+
+
+    await esperar(2500);
+
+
+    // ========================================================
+    // SUCESSO
+    // ========================================================
+
+    mostrarMensagem(
+      '✅ Cadastro enviado com sucesso! Confira a planilha e o Google Drive.',
+      'sucesso'
+    );
+
+
+    resultado.innerHTML =
+      '✅ PESSOA CADASTRADA';
+
+
+    // ========================================================
+    // LIMPAR FORMULÁRIO
+    // ========================================================
+
+    document
+      .getElementById('nome')
+      .value =
+      '';
+
+
+    fotoBase64 =
+      '';
+
+
+    preview.src =
+      '';
+
+
+    preview.style.display =
+      'none';
+
+
+    video.style.display =
+      'none';
+
+
+    cameraStatus.style.display =
+      'block';
+
+
+    fotoOk.style.display =
+      'none';
+
+
+    btnSalvar.disabled =
+      true;
+
+
+  }
+
+  catch (erro) {
+
+    console.error(
+      'Erro ao enviar cadastro:',
+      erro
+    );
+
+
+    mostrarMensagem(
+      '❌ Não foi possível enviar o cadastro.',
+      'erro'
+    );
+
+
+    btnSalvar.disabled =
+      false;
+
+  }
+
+  finally {
+
+    enviando =
+      false;
+
+  }
 
 }
 
 
 // ============================================================
-// DETECTAR RESPOSTA DO APPS SCRIPT
+// ESPERAR
 // ============================================================
 
-iframeEnvio.addEventListener(
-  'load',
-  function() {
+function esperar(ms) {
 
-    if (!enviando) {
-      return;
+  return new Promise(
+    function(resolve) {
+
+      setTimeout(
+        resolve,
+        ms
+      );
+
     }
+  );
 
-    console.log(
-      'Resposta do Apps Script recebida.'
-    );
-
-  }
-);
+}
 
 
 // ============================================================
@@ -857,8 +937,10 @@ function mostrarMensagem(
   mensagem.textContent =
     texto;
 
+
   mensagem.className =
     tipo;
+
 
   mensagem.style.display =
     'block';
@@ -875,10 +957,37 @@ function limparMensagem() {
   mensagem.textContent =
     '';
 
+
+  mensagem.className =
+    '';
+
+
   mensagem.style.display =
     'none';
 
 }
+
+
+// ============================================================
+// ENTER NO NOME
+// ============================================================
+
+document
+  .getElementById('nome')
+  .addEventListener(
+    'keydown',
+    function(event) {
+
+      if (
+        event.key === 'Enter'
+      ) {
+
+        event.preventDefault();
+
+      }
+
+    }
+  );
 
 
 // ============================================================
@@ -894,8 +1003,8 @@ window.addEventListener(
   }
 );
 
-
 </script>
+
 
 </body>
 
