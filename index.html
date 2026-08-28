@@ -29,6 +29,7 @@ body.bloqueado {
   overflow: hidden;
 }
 
+
 /* ==========================================================
    LOGIN
 ========================================================== */
@@ -37,43 +38,57 @@ body.bloqueado {
   position: fixed;
   inset: 0;
   z-index: 100000;
+
   background: linear-gradient(
     135deg,
     #620000,
     #a60000
   );
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 20px;
 }
 
 .login-card {
   background: white;
+
   width: 100%;
   max-width: 430px;
+
   border-radius: 18px;
+
   padding: 35px;
+
   box-shadow:
     0 20px 60px rgba(0,0,0,.35);
 }
 
 .login-logo {
   text-align: center;
+
   font-size: 55px;
+
   margin-bottom: 10px;
 }
 
 .login-card h1 {
   margin: 0;
+
   text-align: center;
+
   color: #8b0000;
+
   font-size: 27px;
 }
 
 .login-card p {
   text-align: center;
+
   color: #666;
+
   margin-bottom: 28px;
 }
 
@@ -83,33 +98,48 @@ body.bloqueado {
 
 .login-card input {
   width: 100%;
+
   padding: 15px;
+
   border: 1px solid #bbb;
+
   border-radius: 9px;
+
   font-size: 17px;
 }
 
 .login-card input:focus {
   outline: none;
+
   border-color: #8b0000;
+
   box-shadow:
     0 0 0 3px rgba(139,0,0,.10);
 }
 
 #erroLogin {
   display: none;
+
   background: #ffe4e8;
+
   color: #a00020;
+
   border-radius: 8px;
+
   padding: 12px;
+
   margin-top: 15px;
+
   font-weight: bold;
 }
 
 #carregandoLogin {
   display: none;
+
   text-align: center;
+
   color: #666;
+
   margin-top: 15px;
 }
 
@@ -124,44 +154,60 @@ body.bloqueado {
 
 header {
   background: #8b0000;
+
   color: white;
+
   padding: 16px 25px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   box-shadow:
     0 2px 8px rgba(0,0,0,.20);
 }
 
 header h1 {
   margin: 0;
+
   font-size: 24px;
 }
 
 .header-direita {
   display: flex;
+
   gap: 22px;
+
   align-items: center;
 }
 
 .usuario-logado {
   text-align: right;
+
   font-size: 13px;
 }
 
 .usuario-logado strong {
   display: block;
+
   font-size: 15px;
 }
 
 .btn-sair {
   background: white;
+
   color: #8b0000;
+
   border: 0;
+
   padding: 8px 13px;
+
   border-radius: 7px;
+
   font-weight: bold;
+
   cursor: pointer;
+
   margin-top: 6px;
 }
 
@@ -171,33 +217,48 @@ header h1 {
 
 nav {
   background: white;
+
   padding: 12px;
+
   display: flex;
+
   justify-content: center;
+
   gap: 8px;
+
   flex-wrap: wrap;
+
   box-shadow:
     0 2px 6px rgba(0,0,0,.08);
 }
 
 nav button {
   border: 0;
+
   background: #eee;
+
   padding: 13px 20px;
+
   border-radius: 8px;
+
   font-weight: bold;
+
   cursor: pointer;
+
   font-size: 15px;
 }
 
 nav button.ativo {
   background: #8b0000;
+
   color: white;
 }
 
 main {
   max-width: 1200px;
+
   margin: 25px auto;
+
   padding: 0 18px;
 }
 
@@ -211,53 +272,79 @@ main {
 
 .card {
   background: white;
+
   padding: 25px;
+
   border-radius: 12px;
+
   margin-bottom: 20px;
+
   box-shadow:
     0 2px 10px rgba(0,0,0,.08);
 }
 
 .card h2 {
   color: #8b0000;
+
   margin-top: 0;
 }
 
 label {
   display: block;
+
   font-weight: bold;
+
   margin-top: 15px;
+
   margin-bottom: 7px;
 }
 
 input[type="text"],
 input[type="password"] {
   width: 100%;
+
   padding: 14px;
+
   font-size: 17px;
+
   border: 1px solid #ccc;
+
   border-radius: 8px;
 }
 
 input:focus {
   outline: none;
+
   border-color: #8b0000;
 }
 
 .botao {
   border: 0;
+
   background: #8b0000;
+
   color: white;
+
   padding: 14px 22px;
+
   border-radius: 8px;
+
   font-weight: bold;
+
   font-size: 16px;
+
   cursor: pointer;
+
   margin-top: 15px;
+}
+
+.botao:hover {
+  filter: brightness(1.07);
 }
 
 .botao:disabled {
   background: #999;
+
   cursor: not-allowed;
 }
 
@@ -271,36 +358,54 @@ input:focus {
 
 .login-botao {
   width: 100%;
+
   padding: 16px;
+
   font-size: 18px;
 }
 
+
+/* ==========================================================
+   RESUMO
+========================================================== */
+
 .cards-resumo {
   display: grid;
+
   grid-template-columns:
     repeat(4,1fr);
+
   gap: 15px;
+
   margin-bottom: 20px;
 }
 
 .resumo {
   background: white;
+
   border-radius: 12px;
+
   padding: 22px;
+
   text-align: center;
+
   box-shadow:
     0 2px 8px rgba(0,0,0,.08);
 }
 
 .resumo-numero {
   font-size: 36px;
+
   font-weight: bold;
 }
 
 .resumo-titulo {
   color: #666;
+
   font-size: 13px;
+
   font-weight: bold;
+
   margin-top: 5px;
 }
 
@@ -323,50 +428,75 @@ input:focus {
 
 .pessoa-selecionada {
   display: none;
+
   margin-top: 20px;
+
   padding: 18px;
+
   background: #f7f7f7;
+
   border-radius: 10px;
+
   align-items: center;
+
   gap: 18px;
+
   border: 2px solid #19713a;
 }
 
 .pessoa-selecionada img {
   width: 100px;
+
   height: 100px;
+
   border-radius: 10px;
+
   object-fit: cover;
+
   background: #ddd;
 }
 
 .pessoa-selecionada h3 {
   margin: 0 0 6px;
+
   font-size: 22px;
 }
 
 .resultado-pessoa {
   display: flex;
+
   align-items: center;
+
   gap: 15px;
+
   padding: 13px;
+
   background: #f7f7f7;
+
   border: 1px solid #ddd;
+
   border-radius: 10px;
+
   margin-top: 10px;
+
   cursor: pointer;
 }
 
 .resultado-pessoa:hover {
   border-color: #8b0000;
+
   background: white;
 }
 
 .resultado-pessoa img {
   width: 75px;
+
   height: 75px;
+
   border-radius: 8px;
+
   object-fit: cover;
+
   background: #ddd;
 }
 
@@ -389,60 +519,86 @@ input:focus {
 
 .barra-chaves {
   display: flex;
+
   gap: 10px;
+
   flex-wrap: wrap;
+
   align-items: center;
+
   margin: 15px 0;
 }
 
 .contador-chaves {
   font-weight: bold;
+
   color: #8b0000;
+
   font-size: 17px;
 }
 
 .lista-chaves {
   display: grid;
+
   grid-template-columns:
     repeat(2,1fr);
+
   gap: 10px;
+
   max-height: 520px;
+
   overflow-y: auto;
+
   padding: 5px;
 }
 
 .item-chave {
   display: flex;
+
   align-items: flex-start;
+
   gap: 12px;
+
   padding: 14px;
+
   border: 2px solid #ddd;
+
   border-radius: 10px;
+
   background: #fafafa;
+
   cursor: pointer;
+
   transition: .15s;
+
   margin: 0;
 }
 
 .item-chave:hover {
   border-color: #8b0000;
+
   background: white;
 }
 
 .item-chave.selecionada {
   border-color: #19713a;
+
   background: #edf8f0;
 }
 
 .item-chave input {
   width: 22px;
+
   height: 22px;
+
   margin-top: 3px;
 }
 
 .numero-chave {
   color: #8b0000;
+
   font-weight: bold;
+
   font-size: 18px;
 }
 
@@ -452,16 +608,23 @@ input:focus {
 
 .setor-chave {
   margin-top: 5px;
+
   color: #666;
+
   font-size: 13px;
 }
 
 .retirada-original {
   background: #fff4d6;
+
   color: #694700;
+
   padding: 7px 10px;
+
   border-radius: 6px;
+
   font-size: 13px;
+
   margin-top: 8px;
 }
 
@@ -472,12 +635,19 @@ input:focus {
 
 .movimento {
   background: #f8f8f8;
+
   border-left: 5px solid #8b0000;
+
   border-radius: 8px;
+
   padding: 16px;
+
   margin-bottom: 12px;
+
   display: flex;
+
   align-items: center;
+
   gap: 15px;
 }
 
@@ -491,24 +661,31 @@ input:focus {
 
 .movimento-info p {
   color: #555;
+
   margin: 6px 0;
 }
 
 .status {
   display: inline-block;
+
   border-radius: 20px;
+
   padding: 5px 10px;
+
   font-size: 12px;
+
   font-weight: bold;
 }
 
 .status-aberta {
   background: #fff0cc;
+
   color: #805300;
 }
 
 .status-atrasada {
   background: #ffd9df;
+
   color: #a00020;
 }
 
@@ -519,16 +696,22 @@ input:focus {
 
 .camera-area {
   max-width: 600px;
+
   margin: 20px auto;
+
   text-align: center;
 }
 
 video,
 #fotoCapturada {
   width: 100%;
+
   max-height: 420px;
+
   object-fit: cover;
+
   border-radius: 12px;
+
   background: #111;
 }
 
@@ -542,7 +725,9 @@ canvas {
 
 .camera-botoes {
   display: flex;
+
   justify-content: center;
+
   gap: 10px;
 }
 
@@ -553,17 +738,28 @@ canvas {
 
 .mensagem {
   position: fixed;
-  z-index: 999999;
+
+  z-index: 99999999;
+
   top: 20px;
+
   left: 50%;
+
   transform: translateX(-50%);
+
   padding: 15px 25px;
+
   color: white;
+
   font-weight: bold;
+
   border-radius: 8px;
+
   display: none;
+
   box-shadow:
     0 3px 15px rgba(0,0,0,.25);
+
   text-align: center;
 }
 
@@ -577,8 +773,329 @@ canvas {
 
 .carregando {
   display: none;
+
   margin-top: 15px;
+
   font-weight: bold;
+}
+
+
+/* ==========================================================
+   NOVO MODAL DE CONFIRMAÇÃO
+========================================================== */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0,0,0,.60);
+
+  backdrop-filter:
+    blur(4px);
+
+  -webkit-backdrop-filter:
+    blur(4px);
+
+  z-index: 9999999;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.modal-overlay.ativo {
+  display: flex;
+}
+
+.modal-confirmacao {
+  width: 100%;
+
+  max-width: 570px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.42);
+
+  animation:
+    animacaoModal .20s ease;
+}
+
+@keyframes animacaoModal {
+
+  from {
+    opacity: 0;
+    transform:
+      scale(.93)
+      translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      scale(1)
+      translateY(0);
+  }
+
+}
+
+.modal-topo {
+  display: flex;
+
+  align-items: center;
+
+  padding: 22px 25px;
+
+  border-bottom:
+    1px solid #eee;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      #fff7f7
+    );
+}
+
+.modal-icone {
+  width: 58px;
+
+  height: 58px;
+
+  min-width: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #fbe9e9;
+
+  color: #8b0000;
+
+  font-size: 29px;
+
+  margin-right: 15px;
+}
+
+.modal-topo h2 {
+  flex: 1;
+
+  margin: 0;
+
+  color: #8b0000;
+
+  font-size: 25px;
+}
+
+.modal-fechar {
+  border: none;
+
+  background: transparent;
+
+  color: #8b0000;
+
+  font-size: 35px;
+
+  cursor: pointer;
+
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 9px;
+}
+
+.modal-fechar:hover {
+  background: #f8e6e6;
+}
+
+.modal-corpo {
+  padding: 27px;
+}
+
+.modal-linha {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.modal-mini-icone {
+  width: 50px;
+
+  height: 50px;
+
+  min-width: 50px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #fbe9e9;
+
+  border-radius: 11px;
+
+  font-size: 23px;
+}
+
+.modal-label {
+  color: #777;
+
+  font-size: 13px;
+
+  margin-bottom: 4px;
+}
+
+.modal-valor {
+  color: #222;
+
+  font-size: 19px;
+
+  font-weight: bold;
+}
+
+.modal-pergunta {
+  margin-top: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 18px;
+
+  background: #fff3f3;
+
+  border:
+    1px solid #edc8c8;
+
+  border-radius: 11px;
+
+  color: #570000;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+}
+
+.modal-pergunta-icone {
+  width: 37px;
+
+  height: 37px;
+
+  min-width: 37px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    2px solid #8b0000;
+
+  color: #8b0000;
+
+  border-radius: 50%;
+
+  font-weight: bold;
+
+  font-size: 19px;
+}
+
+.modal-rodape {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  padding: 19px 25px;
+
+  background: #fafafa;
+
+  border-top:
+    1px solid #eee;
+}
+
+.modal-btn {
+  border: none;
+
+  border-radius: 9px;
+
+  padding: 14px 21px;
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: .15s;
+}
+
+.modal-cancelar {
+  background: white;
+
+  color: #555;
+
+  border:
+    1px solid #ccc;
+}
+
+.modal-cancelar:hover {
+  background: #eee;
+}
+
+.modal-confirmar {
+  background:
+    linear-gradient(
+      135deg,
+      #8b0000,
+      #b00000
+    );
+
+  color: white;
+
+  box-shadow:
+    0 5px 14px
+    rgba(139,0,0,.20);
+}
+
+.modal-confirmar:hover {
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 7px 18px
+    rgba(139,0,0,.30);
 }
 
 
@@ -594,11 +1111,13 @@ canvas {
   }
 
   .lista-chaves {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
   }
 
   header {
-    align-items: flex-start;
+    align-items:
+      flex-start;
   }
 
 }
@@ -606,11 +1125,39 @@ canvas {
 @media(max-width:550px) {
 
   .cards-resumo {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
   }
 
   .relogio {
     display: none;
+  }
+
+  .modal-confirmacao {
+    border-radius: 15px;
+  }
+
+  .modal-topo {
+    padding: 18px;
+  }
+
+  .modal-topo h2 {
+    font-size: 21px;
+  }
+
+  .modal-corpo {
+    padding: 20px;
+  }
+
+  .modal-rodape {
+    flex-direction:
+      column-reverse;
+
+    padding: 17px;
+  }
+
+  .modal-btn {
+    width: 100%;
   }
 
 }
@@ -634,6 +1181,205 @@ canvas {
   name="frameEnvio"
   style="display:none"
 ></iframe>
+
+
+<!-- ========================================================
+     NOVO MODAL DE CONFIRMAÇÃO
+========================================================= -->
+
+<div
+  id="modalConfirmacao"
+  class="modal-overlay"
+>
+
+  <div
+    class="modal-confirmacao"
+  >
+
+    <div
+      class="modal-topo"
+    >
+
+      <div
+        id="modalIconePrincipal"
+        class="modal-icone"
+      >
+        🔑
+      </div>
+
+
+      <h2
+        id="modalTitulo"
+      >
+        Confirmar operação
+      </h2>
+
+
+      <button
+        class="modal-fechar"
+        onclick="fecharModalConfirmacao(false)"
+        title="Fechar"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="modal-corpo"
+    >
+
+
+      <div
+        class="modal-linha"
+      >
+
+        <div
+          class="modal-mini-icone"
+        >
+          👤
+        </div>
+
+
+        <div>
+
+          <div
+            id="modalLabelPessoa"
+            class="modal-label"
+          >
+            Pessoa
+          </div>
+
+          <div
+            id="modalPessoa"
+            class="modal-valor"
+          >
+            -
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="modal-linha"
+      >
+
+        <div
+          class="modal-mini-icone"
+        >
+          🔑
+        </div>
+
+
+        <div>
+
+          <div
+            class="modal-label"
+          >
+            Chaves
+          </div>
+
+          <div
+            id="modalChaves"
+            class="modal-valor"
+          >
+            -
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="modalDetalhes"
+        class="modal-linha"
+        style="display:none"
+      >
+
+        <div
+          class="modal-mini-icone"
+        >
+          📋
+        </div>
+
+
+        <div>
+
+          <div
+            class="modal-label"
+          >
+            Quantidade
+          </div>
+
+          <div
+            id="modalQuantidade"
+            class="modal-valor"
+          >
+            -
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="modal-pergunta"
+      >
+
+        <div
+          class="modal-pergunta-icone"
+        >
+          ?
+        </div>
+
+
+        <div
+          id="modalTextoPergunta"
+        >
+          Deseja confirmar esta operação?
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="modal-rodape"
+    >
+
+      <button
+        class="
+          modal-btn
+          modal-cancelar
+        "
+        onclick="fecharModalConfirmacao(false)"
+      >
+        ✕ Cancelar
+      </button>
+
+
+      <button
+        id="modalBotaoConfirmar"
+        class="
+          modal-btn
+          modal-confirmar
+        "
+        onclick="fecharModalConfirmacao(true)"
+      >
+        ✓ Confirmar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <!-- ========================================================
@@ -695,9 +1441,14 @@ canvas {
     </button>
 
 
-    <div id="erroLogin"></div>
+    <div
+      id="erroLogin"
+    ></div>
 
-    <div id="carregandoLogin">
+
+    <div
+      id="carregandoLogin"
+    >
       Verificando acesso...
     </div>
 
@@ -726,9 +1477,12 @@ canvas {
 
       Acesso:
 
-      <strong id="nomeUsuarioLogado">
+      <strong
+        id="nomeUsuarioLogado"
+      >
         -
       </strong>
+
 
       <button
         class="btn-sair"
@@ -742,9 +1496,13 @@ canvas {
 
     <div class="relogio">
 
-      <div id="dataAtual"></div>
+      <div
+        id="dataAtual"
+      ></div>
 
-      <div id="horaAtual"></div>
+      <div
+        id="horaAtual"
+      ></div>
 
     </div>
 
@@ -762,17 +1520,20 @@ canvas {
     📊 Painel
   </button>
 
+
   <button
     onclick="abrirPagina('retirada',this)"
   >
     🔑 Retirar Chaves
   </button>
 
+
   <button
     onclick="abrirPagina('devolucao',this)"
   >
     ↩️ Devolver Chaves
   </button>
+
 
   <button
     onclick="abrirPagina('cadastro',this)"
@@ -795,61 +1556,113 @@ canvas {
   class="pagina ativa"
 >
 
-  <div class="cards-resumo">
+  <div
+    class="cards-resumo"
+  >
 
-    <div class="resumo">
+    <div
+      class="resumo"
+    >
+
       <div
         id="totalChaves"
         class="resumo-numero"
-      >-</div>
-      <div class="resumo-titulo">
+      >
+        -
+      </div>
+
+      <div
+        class="resumo-titulo"
+      >
         TOTAL DE CHAVES
       </div>
+
     </div>
 
 
-    <div class="resumo">
+    <div
+      class="resumo"
+    >
+
       <div
         id="totalDisponiveis"
-        class="resumo-numero verde"
-      >-</div>
-      <div class="resumo-titulo">
+        class="
+          resumo-numero
+          verde
+        "
+      >
+        -
+      </div>
+
+      <div
+        class="resumo-titulo"
+      >
         DISPONÍVEIS
       </div>
+
     </div>
 
 
-    <div class="resumo">
+    <div
+      class="resumo"
+    >
+
       <div
         id="totalRetiradas"
-        class="resumo-numero laranja"
-      >-</div>
-      <div class="resumo-titulo">
+        class="
+          resumo-numero
+          laranja
+        "
+      >
+        -
+      </div>
+
+      <div
+        class="resumo-titulo"
+      >
         RETIRADAS
       </div>
+
     </div>
 
 
-    <div class="resumo">
+    <div
+      class="resumo"
+    >
+
       <div
         id="totalAtrasadas"
-        class="resumo-numero vermelho"
-      >-</div>
-      <div class="resumo-titulo">
+        class="
+          resumo-numero
+          vermelho
+        "
+      >
+        -
+      </div>
+
+      <div
+        class="resumo-titulo"
+      >
         ATRASADAS
       </div>
+
     </div>
 
   </div>
 
 
-  <div class="card">
+  <div
+    class="card"
+  >
 
     <h2>
       🔑 Chaves não devolvidas
     </h2>
 
-    <div id="listaAbertas">
+
+    <div
+      id="listaAbertas"
+    >
       Carregando...
     </div>
 
@@ -867,7 +1680,9 @@ canvas {
   class="pagina"
 >
 
-  <div class="card">
+  <div
+    class="card"
+  >
 
     <h2>
       🔑 Retirada de Chaves
@@ -881,6 +1696,7 @@ canvas {
     <label>
       Nome da pessoa
     </label>
+
 
     <input
       type="text"
@@ -905,7 +1721,10 @@ canvas {
 
     <div
       id="resultadosPessoasRetirada"
-      style="display:none;margin-top:20px"
+      style="
+        display:none;
+        margin-top:20px
+      "
     ></div>
 
 
@@ -918,6 +1737,7 @@ canvas {
         id="fotoPessoaRetirada"
         alt="Foto"
       >
+
 
       <div>
 
@@ -948,10 +1768,15 @@ canvas {
       </h3>
 
 
-      <div class="barra-chaves">
+      <div
+        class="barra-chaves"
+      >
 
         <button
-          class="botao botao-cinza"
+          class="
+            botao
+            botao-cinza
+          "
           onclick="selecionarTodasRetirada()"
         >
           ☑ Selecionar todas
@@ -959,7 +1784,10 @@ canvas {
 
 
         <button
-          class="botao botao-cinza"
+          class="
+            botao
+            botao-cinza
+          "
           onclick="limparSelecaoRetirada()"
         >
           ⬜ Limpar seleção
@@ -984,7 +1812,10 @@ canvas {
 
       <button
         id="btnRetirar"
-        class="botao botao-verde"
+        class="
+          botao
+          botao-verde
+        "
         onclick="confirmarRetirada()"
       >
         🔑 Confirmar Retirada
@@ -1014,11 +1845,14 @@ canvas {
   class="pagina"
 >
 
-  <div class="card">
+  <div
+    class="card"
+  >
 
     <h2>
       ↩️ Devolução de Chaves
     </h2>
+
 
     <p>
       Informe quem está entregando as chaves.
@@ -1054,7 +1888,10 @@ canvas {
 
     <div
       id="resultadosPessoasDevolucao"
-      style="display:none;margin-top:20px"
+      style="
+        display:none;
+        margin-top:20px
+      "
     ></div>
 
 
@@ -1068,11 +1905,13 @@ canvas {
         alt="Foto"
       >
 
+
       <div>
 
         <h3
           id="nomePessoaDevolucao"
         ></h3>
+
 
         <div>
           Cadastro Nº
@@ -1080,6 +1919,7 @@ canvas {
             id="codigoPessoaDevolucao"
           ></strong>
         </div>
+
 
         <div
           style="
@@ -1111,10 +1951,15 @@ canvas {
       </p>
 
 
-      <div class="barra-chaves">
+      <div
+        class="barra-chaves"
+      >
 
         <button
-          class="botao botao-cinza"
+          class="
+            botao
+            botao-cinza
+          "
           onclick="selecionarTodasDevolucao()"
         >
           ☑ Selecionar todas
@@ -1122,7 +1967,10 @@ canvas {
 
 
         <button
-          class="botao botao-cinza"
+          class="
+            botao
+            botao-cinza
+          "
           onclick="limparSelecaoDevolucao()"
         >
           ⬜ Limpar seleção
@@ -1147,7 +1995,10 @@ canvas {
 
       <button
         id="btnDevolver"
-        class="botao botao-verde"
+        class="
+          botao
+          botao-verde
+        "
         onclick="confirmarDevolucao()"
       >
         ↩️ Devolver Selecionadas
@@ -1177,7 +2028,9 @@ canvas {
   class="pagina"
 >
 
-  <div class="card">
+  <div
+    class="card"
+  >
 
     <h2>
       👤 Cadastro de Pessoa
@@ -1197,7 +2050,9 @@ canvas {
     >
 
 
-    <div class="camera-area">
+    <div
+      class="camera-area"
+    >
 
       <video
         id="video"
@@ -1217,7 +2072,9 @@ canvas {
       ></canvas>
 
 
-      <div class="camera-botoes">
+      <div
+        class="camera-botoes"
+      >
 
         <button
           id="btnFoto"
@@ -1230,7 +2087,10 @@ canvas {
 
         <button
           id="btnNovaFoto"
-          class="botao botao-cinza"
+          class="
+            botao
+            botao-cinza
+          "
           onclick="novaFoto()"
           style="display:none"
         >
@@ -1244,7 +2104,10 @@ canvas {
 
     <button
       id="btnCadastrar"
-      class="botao botao-verde"
+      class="
+        botao
+        botao-verde
+      "
       onclick="cadastrarPessoa()"
     >
       💾 Cadastrar Pessoa
@@ -1275,7 +2138,7 @@ canvas {
 // ============================================================
 
 const URL_SCRIPT =
-  'https://script.google.com/macros/s/AKfycbzytM6CncsFj_1nqd4w_LIGyjOgeUIzkOK8o6pP-mYvgCito0Zrh7jeIJZsLGYQpHbr/exec';
+'https://script.google.com/macros/s/AKfycbzytM6CncsFj_1nqd4w_LIGyjOgeUIzkOK8o6pP-mYvgCito0Zrh7jeIJZsLGYQpHbr/exec';
 
 
 // ============================================================
@@ -1295,6 +2158,9 @@ let pessoaSelecionadaRetirada =
   null;
 
 let pessoaSelecionadaDevolucao =
+  null;
+
+let resolverModalConfirmacao =
   null;
 
 
@@ -1326,6 +2192,239 @@ window.addEventListener(
 
   }
 );
+
+
+// ============================================================
+// NOVO MODAL
+// ============================================================
+
+function abrirModalConfirmacao(
+  configuracao
+) {
+
+  document
+    .getElementById(
+      'modalTitulo'
+    )
+    .textContent =
+      configuracao.titulo ||
+      'Confirmar operação';
+
+
+  document
+    .getElementById(
+      'modalPessoa'
+    )
+    .textContent =
+      configuracao.pessoa ||
+      '-';
+
+
+  document
+    .getElementById(
+      'modalChaves'
+    )
+    .textContent =
+      configuracao.chaves ||
+      '-';
+
+
+  document
+    .getElementById(
+      'modalLabelPessoa'
+    )
+    .textContent =
+      configuracao.labelPessoa ||
+      'Pessoa';
+
+
+  document
+    .getElementById(
+      'modalTextoPergunta'
+    )
+    .textContent =
+      configuracao.pergunta ||
+      'Deseja confirmar esta operação?';
+
+
+  document
+    .getElementById(
+      'modalBotaoConfirmar'
+    )
+    .textContent =
+      '✓ ' +
+      (
+        configuracao.textoBotao ||
+        'Confirmar'
+      );
+
+
+  document
+    .getElementById(
+      'modalIconePrincipal'
+    )
+    .textContent =
+      configuracao.icone ||
+      '🔑';
+
+
+  const quantidade =
+    configuracao.quantidade;
+
+
+  const detalhes =
+    document.getElementById(
+      'modalDetalhes'
+    );
+
+
+  if (
+    quantidade !== undefined &&
+    quantidade !== null
+  ) {
+
+    detalhes.style.display =
+      'flex';
+
+
+    document
+      .getElementById(
+        'modalQuantidade'
+      )
+      .textContent =
+
+        quantidade === 1
+          ? '1 chave'
+          : quantidade +
+            ' chaves';
+
+  } else {
+
+    detalhes.style.display =
+      'none';
+
+  }
+
+
+  document
+    .getElementById(
+      'modalConfirmacao'
+    )
+    .classList.add(
+      'ativo'
+    );
+
+
+  document.body.style.overflow =
+    'hidden';
+
+
+  return new Promise(
+    function(resolve) {
+
+      resolverModalConfirmacao =
+        resolve;
+
+    }
+  );
+
+}
+
+
+function fecharModalConfirmacao(
+  resultado
+) {
+
+  document
+    .getElementById(
+      'modalConfirmacao'
+    )
+    .classList.remove(
+      'ativo'
+    );
+
+
+  if (
+    document
+      .getElementById(
+        'telaLogin'
+      )
+      .style.display !==
+      'flex'
+  ) {
+
+    document.body.style.overflow =
+      '';
+
+  }
+
+
+  if (
+    resolverModalConfirmacao
+  ) {
+
+    resolverModalConfirmacao(
+      resultado
+    );
+
+
+    resolverModalConfirmacao =
+      null;
+
+  }
+
+}
+
+
+// ESC PARA CANCELAR
+document.addEventListener(
+  'keydown',
+  function(evento) {
+
+    if (
+      evento.key ===
+        'Escape' &&
+      document
+        .getElementById(
+          'modalConfirmacao'
+        )
+        .classList
+        .contains(
+          'ativo'
+        )
+    ) {
+
+      fecharModalConfirmacao(
+        false
+      );
+
+    }
+
+  }
+);
+
+
+// CLIQUE NO FUNDO CANCELA
+document
+  .getElementById(
+    'modalConfirmacao'
+  )
+  .addEventListener(
+    'click',
+    function(evento) {
+
+      if (
+        evento.target === this
+      ) {
+
+        fecharModalConfirmacao(
+          false
+        );
+
+      }
+
+    }
+  );
 
 
 // ============================================================
@@ -1372,7 +2471,8 @@ async function entrar() {
     );
 
 
-  botao.disabled = true;
+  botao.disabled =
+    true;
 
 
   document
@@ -1388,7 +2488,6 @@ async function entrar() {
 
   try {
 
-    // 1 - pede desafio
     const desafio =
       await jsonpPublico(
         'desafioLogin',
@@ -1398,7 +2497,6 @@ async function entrar() {
       );
 
 
-    // 2 - cria hash da senha localmente
     const senhaHash =
       await sha256Hex(
         usuario +
@@ -1407,7 +2505,6 @@ async function entrar() {
       );
 
 
-    // 3 - responde desafio
     const resposta =
       await hmacSha256Hex(
         desafio.desafio,
@@ -1415,7 +2512,6 @@ async function entrar() {
       );
 
 
-    // 4 - login
     const login =
       await jsonpPublico(
         'login',
@@ -1475,7 +2571,8 @@ async function entrar() {
 
   } finally {
 
-    botao.disabled = false;
+    botao.disabled =
+      false;
 
 
     document
@@ -1494,11 +2591,15 @@ async function entrar() {
 // SHA256
 // ============================================================
 
-async function sha256Hex(texto) {
+async function sha256Hex(
+  texto
+) {
 
   const dados =
     new TextEncoder()
-      .encode(texto);
+      .encode(
+        texto
+      );
 
 
   const hash =
@@ -1509,20 +2610,26 @@ async function sha256Hex(texto) {
 
 
   return Array.from(
-    new Uint8Array(hash)
-  )
-    .map(
-      b =>
-        b.toString(16)
-          .padStart(2,'0')
+    new Uint8Array(
+      hash
     )
-    .join('');
+  )
+  .map(
+    b =>
+      b
+        .toString(16)
+        .padStart(
+          2,
+          '0'
+        )
+  )
+  .join('');
 
 }
 
 
 // ============================================================
-// HMAC SHA256
+// HMAC
 // ============================================================
 
 async function hmacSha256Hex(
@@ -1536,26 +2643,36 @@ async function hmacSha256Hex(
 
   const chave =
     await crypto.subtle.importKey(
+
       'raw',
+
       encoder.encode(
         chaveTexto
       ),
+
       {
         name: 'HMAC',
         hash: 'SHA-256'
       },
+
       false,
+
       ['sign']
+
     );
 
 
   const assinatura =
     await crypto.subtle.sign(
+
       'HMAC',
+
       chave,
+
       encoder.encode(
         mensagem
       )
+
     );
 
 
@@ -1564,18 +2681,22 @@ async function hmacSha256Hex(
       assinatura
     )
   )
-    .map(
-      b =>
-        b.toString(16)
-          .padStart(2,'0')
-    )
-    .join('');
+  .map(
+    b =>
+      b
+        .toString(16)
+        .padStart(
+          2,
+          '0'
+        )
+  )
+  .join('');
 
 }
 
 
 // ============================================================
-// VERIFICAR SESSÃO EXISTENTE
+// VERIFICAR SESSÃO
 // ============================================================
 
 async function verificarSessao() {
@@ -1613,7 +2734,7 @@ async function verificarSessao() {
 
 
 // ============================================================
-// MOSTRAR LOGIN
+// LOGIN / SISTEMA
 // ============================================================
 
 function mostrarLogin() {
@@ -1655,10 +2776,6 @@ function mostrarLogin() {
 }
 
 
-// ============================================================
-// MOSTRAR SISTEMA
-// ============================================================
-
 function mostrarSistema() {
 
   document.body.classList.remove(
@@ -1685,7 +2802,7 @@ function mostrarSistema() {
 
 
 // ============================================================
-// SAIR
+// LOGOUT
 // ============================================================
 
 async function sair() {
@@ -1694,7 +2811,8 @@ async function sair() {
     TOKEN;
 
 
-  TOKEN = '';
+  TOKEN =
+    '';
 
 
   localStorage.removeItem(
@@ -1702,7 +2820,9 @@ async function sair() {
   );
 
 
-  if (tokenAntigo) {
+  if (
+    tokenAntigo
+  ) {
 
     try {
 
@@ -1731,13 +2851,10 @@ async function sair() {
 }
 
 
-// ============================================================
-// SESSÃO EXPIRADA
-// ============================================================
-
 function expirarSessao() {
 
-  TOKEN = '';
+  TOKEN =
+    '';
 
 
   localStorage.removeItem(
@@ -1762,7 +2879,9 @@ function expirarSessao() {
 // ERRO LOGIN
 // ============================================================
 
-function mostrarErroLogin(texto) {
+function mostrarErroLogin(
+  texto
+) {
 
   const caixa =
     document.getElementById(
@@ -1793,7 +2912,7 @@ function esconderErroLogin() {
 
 
 // ============================================================
-// JSONP PÚBLICO
+// JSONP
 // ============================================================
 
 function jsonpPublico(
@@ -1809,10 +2928,6 @@ function jsonpPublico(
 
 }
 
-
-// ============================================================
-// JSONP PROTEGIDO
-// ============================================================
 
 function jsonp(
   acao,
@@ -1839,10 +2954,6 @@ function jsonp(
 }
 
 
-// ============================================================
-// JSONP COM TOKEN ESPECÍFICO
-// ============================================================
-
 function jsonpComToken(
   acao,
   parametros,
@@ -1858,10 +2969,6 @@ function jsonpComToken(
 }
 
 
-// ============================================================
-// EXECUTAR JSONP
-// ============================================================
-
 function executarJsonp(
   acao,
   parametros,
@@ -1869,7 +2976,10 @@ function executarJsonp(
 ) {
 
   return new Promise(
-    function(resolve, reject) {
+    function(
+      resolve,
+      reject
+    ) {
 
       const callback =
         'cb_' +
@@ -1903,7 +3013,9 @@ function executarJsonp(
       );
 
 
-      if (token) {
+      if (
+        token
+      ) {
 
         params.set(
           'token',
@@ -1916,23 +3028,29 @@ function executarJsonp(
       Object.keys(
         parametros || {}
       )
-        .forEach(
-          function(chave) {
+      .forEach(
+        function(chave) {
 
-            params.set(
-              chave,
-              parametros[chave]
-            );
+          params.set(
+            chave,
+            parametros[
+              chave
+            ]
+          );
 
-          }
-        );
+        }
+      );
 
 
       let timeout;
 
 
-      window[callback] =
-        function(dados) {
+      window[
+        callback
+      ] =
+        function(
+          dados
+        ) {
 
           clearTimeout(
             timeout
@@ -1949,7 +3067,8 @@ function executarJsonp(
 
           if (
             dados &&
-            dados.sucesso === false
+            dados.sucesso ===
+              false
           ) {
 
             if (
@@ -1969,12 +3088,15 @@ function executarJsonp(
               )
             );
 
+
             return;
 
           }
 
 
-          resolve(dados);
+          resolve(
+            dados
+          );
 
         };
 
@@ -2020,7 +3142,9 @@ function executarJsonp(
           function() {
 
             if (
-              window[callback]
+              window[
+                callback
+              ]
             ) {
 
               delete window[
@@ -2050,12 +3174,16 @@ function executarJsonp(
 
 
 // ============================================================
-// POST PROTEGIDO
+// POST
 // ============================================================
 
-function enviarPost(dados) {
+function enviarPost(
+  dados
+) {
 
-  if (!TOKEN) {
+  if (
+    !TOKEN
+  ) {
 
     expirarSessao();
 
@@ -2073,11 +3201,14 @@ function enviarPost(dados) {
   form.method =
     'POST';
 
+
   form.action =
     URL_SCRIPT;
 
+
   form.target =
     'frameEnvio';
+
 
   form.style.display =
     'none';
@@ -2087,32 +3218,40 @@ function enviarPost(dados) {
     TOKEN;
 
 
-  Object.keys(dados)
-    .forEach(
-      function(chave) {
+  Object.keys(
+    dados
+  )
+  .forEach(
+    function(
+      chave
+    ) {
 
-        const input =
-          document.createElement(
-            'input'
-          );
-
-
-        input.type =
-          'hidden';
-
-        input.name =
-          chave;
-
-        input.value =
-          dados[chave];
-
-
-        form.appendChild(
-          input
+      const input =
+        document.createElement(
+          'input'
         );
 
-      }
-    );
+
+      input.type =
+        'hidden';
+
+
+      input.name =
+        chave;
+
+
+      input.value =
+        dados[
+          chave
+        ];
+
+
+      form.appendChild(
+        input
+      );
+
+    }
+  );
 
 
   document.body.appendChild(
@@ -2160,7 +3299,9 @@ function atualizarRelogio() {
     );
 
 
-  if (data) {
+  if (
+    data
+  ) {
 
     data.textContent =
       agora.toLocaleDateString(
@@ -2170,7 +3311,9 @@ function atualizarRelogio() {
   }
 
 
-  if (hora) {
+  if (
+    hora
+  ) {
 
     hora.textContent =
       agora.toLocaleTimeString(
@@ -2230,7 +3373,9 @@ function abrirPagina(
     );
 
 
-  if (botao) {
+  if (
+    botao
+  ) {
 
     botao.classList.add(
       'ativo'
@@ -2240,7 +3385,8 @@ function abrirPagina(
 
 
   if (
-    pagina === 'painel'
+    pagina ===
+    'painel'
   ) {
 
     atualizarPainel();
@@ -2249,7 +3395,8 @@ function abrirPagina(
 
 
   if (
-    pagina === 'cadastro'
+    pagina ===
+    'cadastro'
   ) {
 
     iniciarCamera();
@@ -2265,7 +3412,8 @@ function abrirPagina(
 
 function mostrarMensagem(
   texto,
-  tipo = 'sucesso'
+  tipo =
+    'sucesso'
 ) {
 
   const caixa =
@@ -2279,7 +3427,8 @@ function mostrarMensagem(
 
 
   caixa.className =
-    'mensagem ' + tipo;
+    'mensagem ' +
+    tipo;
 
 
   caixa.style.display =
@@ -2300,7 +3449,7 @@ function mostrarMensagem(
 
 
 // ============================================================
-// RESULTADO PESSOA
+// PESSOA RESULTADO
 // ============================================================
 
 function criarResultadoPessoa(
@@ -2325,7 +3474,9 @@ function criarResultadoPessoa(
 
 
   foto.src =
-    pessoa.foto || '';
+    pessoa.foto ||
+    '';
+
 
   foto.alt =
     'Foto';
@@ -2366,6 +3517,7 @@ function criarResultadoPessoa(
     nome
   );
 
+
   info.appendChild(
     numero
   );
@@ -2380,17 +3532,22 @@ function criarResultadoPessoa(
   botao.className =
     'botao botao-verde';
 
+
   botao.textContent =
     'Selecionar';
+
 
   botao.style.marginTop =
     '0';
 
 
   botao.onclick =
-    function(evento) {
+    function(
+      evento
+    ) {
 
       evento.stopPropagation();
+
 
       aoSelecionar(
         pessoa
@@ -2413,9 +3570,11 @@ function criarResultadoPessoa(
     foto
   );
 
+
   item.appendChild(
     info
   );
+
 
   item.appendChild(
     botao
@@ -2428,7 +3587,7 @@ function criarResultadoPessoa(
 
 
 // ============================================================
-// RETIRADA - BUSCAR PESSOA
+// RETIRADA - BUSCAR
 // ============================================================
 
 async function buscarPessoaRetirada() {
@@ -2442,7 +3601,9 @@ async function buscarPessoaRetirada() {
       .trim();
 
 
-  if (!nome) {
+  if (
+    !nome
+  ) {
 
     mostrarMensagem(
       'Digite o nome da pessoa.',
@@ -2494,7 +3655,8 @@ async function buscarPessoaRetirada() {
       await jsonp(
         'buscarPessoasPorNome',
         {
-          nome: nome
+          nome:
+            nome
         }
       );
 
@@ -2503,7 +3665,9 @@ async function buscarPessoaRetirada() {
       '';
 
 
-    if (!pessoas.length) {
+    if (
+      !pessoas.length
+    ) {
 
       area.innerHTML =
         '<p>Nenhuma pessoa encontrada.</p>';
@@ -2514,7 +3678,9 @@ async function buscarPessoaRetirada() {
 
 
     pessoas.forEach(
-      function(pessoa) {
+      function(
+        pessoa
+      ) {
 
         area.appendChild(
           criarResultadoPessoa(
@@ -2576,7 +3742,8 @@ async function selecionarPessoaRetirada(
       'fotoPessoaRetirada'
     )
     .src =
-      pessoa.foto || '';
+      pessoa.foto ||
+      '';
 
 
   document
@@ -2609,7 +3776,7 @@ async function selecionarPessoaRetirada(
 
 
 // ============================================================
-// CHAVES DISPONÍVEIS
+// LISTAR CHAVES
 // ============================================================
 
 async function carregarChavesDisponiveis() {
@@ -2636,10 +3803,13 @@ async function carregarChavesDisponiveis() {
       '';
 
 
-    if (!chaves.length) {
+    if (
+      !chaves.length
+    ) {
 
       area.innerHTML =
         '<p>Nenhuma chave disponível.</p>';
+
 
       atualizarContadorRetirada();
 
@@ -2649,7 +3819,9 @@ async function carregarChavesDisponiveis() {
 
 
     chaves.forEach(
-      function(chave) {
+      function(
+        chave
+      ) {
 
         const label =
           document.createElement(
@@ -2670,8 +3842,10 @@ async function carregarChavesDisponiveis() {
         checkbox.type =
           'checkbox';
 
+
         checkbox.className =
           'check-retirada';
+
 
         checkbox.value =
           chave.numero;
@@ -2723,9 +3897,11 @@ async function carregarChavesDisponiveis() {
           checkbox
         );
 
+
         label.appendChild(
           info
         );
+
 
         area.appendChild(
           label
@@ -2755,7 +3931,7 @@ async function carregarChavesDisponiveis() {
 
 
 // ============================================================
-// RETIRADA - SELEÇÃO
+// RETIRADA - SELEÇÕES
 // ============================================================
 
 function selecionarTodasRetirada() {
@@ -2836,19 +4012,20 @@ function atualizarContadorRetirada() {
 
       quantidade === 1
 
-        ? '1 chave selecionada'
+      ? '1 chave selecionada'
 
-        : quantidade +
-          ' chaves selecionadas';
+      : quantidade +
+        ' chaves selecionadas';
 
 }
 
 
 // ============================================================
 // CONFIRMAR RETIRADA
+// AGORA COM MODAL BONITO
 // ============================================================
 
-function confirmarRetirada() {
+async function confirmarRetirada() {
 
   if (
     !pessoaSelecionadaRetirada
@@ -2872,7 +4049,9 @@ function confirmarRetirada() {
     );
 
 
-  if (!selecionadas.length) {
+  if (
+    !selecionadas.length
+  ) {
 
     mostrarMensagem(
       'Selecione pelo menos uma chave.',
@@ -2896,13 +4075,42 @@ function confirmarRetirada() {
     );
 
 
+  const confirmou =
+    await abrirModalConfirmacao({
+
+      titulo:
+        'Confirmar retirada',
+
+      icone:
+        '🔑',
+
+      labelPessoa:
+        'Pessoa que está retirando',
+
+      pessoa:
+        pessoaSelecionadaRetirada.nome,
+
+      chaves:
+        numeros.join(', '),
+
+      quantidade:
+        numeros.length,
+
+      pergunta:
+        numeros.length === 1
+
+        ? 'Deseja confirmar a retirada desta chave?'
+
+        : 'Deseja confirmar a retirada destas chaves?',
+
+      textoBotao:
+        'Confirmar retirada'
+
+    });
+
+
   if (
-    !confirm(
-      pessoaSelecionadaRetirada.nome +
-      '\n\nChaves: ' +
-      numeros.join(', ') +
-      '\n\nConfirmar retirada?'
-    )
+    !confirmou
   ) {
 
     return;
@@ -2945,8 +4153,12 @@ function confirmarRetirada() {
     });
 
 
-  if (!enviado) {
+  if (
+    !enviado
+  ) {
+
     return;
+
   }
 
 
@@ -2955,7 +4167,6 @@ function confirmarRetirada() {
 
       try {
 
-        // VERIFICA SE REALMENTE FOI GRAVADO
         const abertas =
           await jsonp(
             'listarMovimentacoesAbertas'
@@ -2965,17 +4176,24 @@ function confirmarRetirada() {
         const confirmadas =
           numeros.every(
             numero =>
+
               abertas.some(
                 item =>
+
                   Number(
                     item.chave
                   ) ===
-                  Number(numero)
+                  Number(
+                    numero
+                  )
+
               )
           );
 
 
-        if (!confirmadas) {
+        if (
+          !confirmadas
+        ) {
 
           mostrarMensagem(
             'Não foi possível confirmar toda a retirada. Verifique o painel.',
@@ -2988,8 +4206,12 @@ function confirmarRetirada() {
 
 
         mostrarMensagem(
-          numeros.length +
-          ' chave(s) retiradas com sucesso!'
+          numeros.length === 1
+
+          ? 'Chave retirada com sucesso!'
+
+          : numeros.length +
+            ' chaves retiradas com sucesso!'
         );
 
 
@@ -3055,7 +4277,7 @@ function confirmarRetirada() {
 
 
 // ============================================================
-// DEVOLUÇÃO - BUSCAR PESSOA
+// DEVOLUÇÃO - BUSCAR
 // ============================================================
 
 async function buscarPessoaDevolucao() {
@@ -3069,7 +4291,9 @@ async function buscarPessoaDevolucao() {
       .trim();
 
 
-  if (!nome) {
+  if (
+    !nome
+  ) {
 
     mostrarMensagem(
       'Digite o nome de quem está devolvendo.',
@@ -3121,7 +4345,8 @@ async function buscarPessoaDevolucao() {
       await jsonp(
         'buscarPessoasPorNome',
         {
-          nome: nome
+          nome:
+            nome
         }
       );
 
@@ -3130,7 +4355,9 @@ async function buscarPessoaDevolucao() {
       '';
 
 
-    if (!pessoas.length) {
+    if (
+      !pessoas.length
+    ) {
 
       area.innerHTML =
         '<p>Nenhuma pessoa encontrada.</p>';
@@ -3141,7 +4368,9 @@ async function buscarPessoaDevolucao() {
 
 
     pessoas.forEach(
-      function(pessoa) {
+      function(
+        pessoa
+      ) {
 
         area.appendChild(
           criarResultadoPessoa(
@@ -3203,7 +4432,8 @@ async function selecionarPessoaDevolucao(
       'fotoPessoaDevolucao'
     )
     .src =
-      pessoa.foto || '';
+      pessoa.foto ||
+      '';
 
 
   document
@@ -3236,7 +4466,7 @@ async function selecionarPessoaDevolucao(
 
 
 // ============================================================
-// CARREGAR CHAVES EM ABERTO
+// CHAVES DEVOLUÇÃO
 // ============================================================
 
 async function carregarChavesDevolucao() {
@@ -3263,10 +4493,13 @@ async function carregarChavesDevolucao() {
       '';
 
 
-    if (!dados.length) {
+    if (
+      !dados.length
+    ) {
 
       area.innerHTML =
         '<p>✅ Nenhuma chave aguardando devolução.</p>';
+
 
       atualizarContadorDevolucao();
 
@@ -3276,7 +4509,9 @@ async function carregarChavesDevolucao() {
 
 
     dados.forEach(
-      function(item) {
+      function(
+        item
+      ) {
 
         const label =
           document.createElement(
@@ -3297,8 +4532,10 @@ async function carregarChavesDevolucao() {
         checkbox.type =
           'checkbox';
 
+
         checkbox.className =
           'check-devolucao';
+
 
         checkbox.value =
           item.chave;
@@ -3330,9 +4567,9 @@ async function carregarChavesDevolucao() {
           item.status ===
           'ATRASADA'
 
-            ? '⚠️ ATRASADA'
+          ? '⚠️ ATRASADA'
 
-            : '⏳ NÃO DEVOLVIDA';
+          : '⏳ NÃO DEVOLVIDA';
 
 
         info.innerHTML =
@@ -3387,9 +4624,11 @@ async function carregarChavesDevolucao() {
           checkbox
         );
 
+
         label.appendChild(
           info
         );
+
 
         area.appendChild(
           label
@@ -3419,7 +4658,7 @@ async function carregarChavesDevolucao() {
 
 
 // ============================================================
-// DEVOLUÇÃO - SELEÇÕES
+// DEVOLUÇÃO - SELEÇÃO
 // ============================================================
 
 function selecionarTodasDevolucao() {
@@ -3500,19 +4739,20 @@ function atualizarContadorDevolucao() {
 
       quantidade === 1
 
-        ? '1 chave selecionada'
+      ? '1 chave selecionada'
 
-        : quantidade +
-          ' chaves selecionadas';
+      : quantidade +
+        ' chaves selecionadas';
 
 }
 
 
 // ============================================================
 // CONFIRMAR DEVOLUÇÃO
+// AGORA TAMBÉM COM MODAL BONITO
 // ============================================================
 
-function confirmarDevolucao() {
+async function confirmarDevolucao() {
 
   if (
     !pessoaSelecionadaDevolucao
@@ -3536,7 +4776,9 @@ function confirmarDevolucao() {
     );
 
 
-  if (!selecionadas.length) {
+  if (
+    !selecionadas.length
+  ) {
 
     mostrarMensagem(
       'Selecione pelo menos uma chave.',
@@ -3560,14 +4802,42 @@ function confirmarDevolucao() {
     );
 
 
+  const confirmou =
+    await abrirModalConfirmacao({
+
+      titulo:
+        'Confirmar devolução',
+
+      icone:
+        '↩️',
+
+      labelPessoa:
+        'Pessoa que está devolvendo',
+
+      pessoa:
+        pessoaSelecionadaDevolucao.nome,
+
+      chaves:
+        numeros.join(', '),
+
+      quantidade:
+        numeros.length,
+
+      pergunta:
+        numeros.length === 1
+
+        ? 'Deseja confirmar a devolução desta chave?'
+
+        : 'Deseja confirmar a devolução destas chaves?',
+
+      textoBotao:
+        'Confirmar devolução'
+
+    });
+
+
   if (
-    !confirm(
-      'QUEM ESTÁ DEVOLVENDO:\n' +
-      pessoaSelecionadaDevolucao.nome +
-      '\n\nCHAVES:\n' +
-      numeros.join(', ') +
-      '\n\nConfirmar devolução?'
-    )
+    !confirmou
   ) {
 
     return;
@@ -3614,7 +4884,6 @@ function confirmarDevolucao() {
 
       try {
 
-        // VERIFICAÇÃO REAL
         const abertas =
           await jsonp(
             'listarMovimentacoesAbertas'
@@ -3624,12 +4893,17 @@ function confirmarDevolucao() {
         const aindaAbertas =
           numeros.filter(
             numero =>
+
               abertas.some(
                 item =>
+
                   Number(
                     item.chave
                   ) ===
-                  Number(numero)
+                  Number(
+                    numero
+                  )
+
               )
           );
 
@@ -3681,10 +4955,18 @@ function confirmarDevolucao() {
 
 
         mostrarMensagem(
-          numeros.length +
-          ' chave(s) devolvidas por ' +
-          nomeDevolvedor +
-          '!'
+
+          numeros.length === 1
+
+          ? 'Chave devolvida por ' +
+            nomeDevolvedor +
+            '!'
+
+          : numeros.length +
+            ' chaves devolvidas por ' +
+            nomeDevolvedor +
+            '!'
+
         );
 
 
@@ -3791,7 +5073,9 @@ async function atualizarPainel() {
 
 
     resumo.abertas.forEach(
-      function(item) {
+      function(
+        item
+      ) {
 
         area.appendChild(
           criarMovimentoPainel(
@@ -3823,7 +5107,7 @@ async function atualizarPainel() {
 
 
 // ============================================================
-// CARD PAINEL
+// MOVIMENTO PAINEL
 // ============================================================
 
 function criarMovimentoPainel(
@@ -3910,9 +5194,9 @@ function criarMovimentoPainel(
       item.status ===
       'ATRASADA'
 
-        ? 'status-atrasada'
+      ? 'status-atrasada'
 
-        : 'status-aberta'
+      : 'status-aberta'
     );
 
 
@@ -3924,17 +5208,21 @@ function criarMovimentoPainel(
     titulo
   );
 
+
   info.appendChild(
     pessoa
   );
+
 
   info.appendChild(
     setor
   );
 
+
   info.appendChild(
     data
   );
+
 
   info.appendChild(
     status
@@ -3955,14 +5243,34 @@ function criarMovimentoPainel(
 // ESCAPAR HTML
 // ============================================================
 
-function escaparHtml(texto) {
+function escaparHtml(
+  texto
+) {
 
-  return String(texto || '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+  return String(
+    texto ||
+    ''
+  )
+  .replace(
+    /&/g,
+    '&amp;'
+  )
+  .replace(
+    /</g,
+    '&lt;'
+  )
+  .replace(
+    />/g,
+    '&gt;'
+  )
+  .replace(
+    /"/g,
+    '&quot;'
+  )
+  .replace(
+    /'/g,
+    '&#039;'
+  );
 
 }
 
@@ -3973,8 +5281,12 @@ function escaparHtml(texto) {
 
 async function iniciarCamera() {
 
-  if (streamCamera) {
+  if (
+    streamCamera
+  ) {
+
     return;
+
   }
 
 
@@ -3999,15 +5311,19 @@ async function iniciarCamera() {
         .getUserMedia({
 
           video: {
+
             width: {
               ideal: 1280
             },
+
             height: {
               ideal: 720
             }
+
           },
 
-          audio: false
+          audio:
+            false
 
         });
 
@@ -4038,12 +5354,16 @@ async function iniciarCamera() {
 
 function pararCamera() {
 
-  if (streamCamera) {
+  if (
+    streamCamera
+  ) {
 
     streamCamera
       .getTracks()
       .forEach(
-        function(track) {
+        function(
+          track
+        ) {
 
           track.stop();
 
@@ -4071,7 +5391,9 @@ function tirarFoto() {
     );
 
 
-  if (!video.videoWidth) {
+  if (
+    !video.videoWidth
+  ) {
 
     mostrarMensagem(
       'A câmera ainda não está pronta.',
@@ -4098,13 +5420,19 @@ function tirarFoto() {
 
 
   canvas
-    .getContext('2d')
+    .getContext(
+      '2d'
+    )
     .drawImage(
+
       video,
+
       0,
       0,
+
       canvas.width,
       canvas.height
+
     );
 
 
@@ -4196,7 +5524,7 @@ function novaFoto() {
 
 
 // ============================================================
-// CADASTRAR PESSOA
+// CADASTRAR
 // ============================================================
 
 function cadastrarPessoa() {
@@ -4210,7 +5538,9 @@ function cadastrarPessoa() {
       .trim();
 
 
-  if (!nome) {
+  if (
+    !nome
+  ) {
 
     mostrarMensagem(
       'Digite o nome.',
@@ -4222,7 +5552,9 @@ function cadastrarPessoa() {
   }
 
 
-  if (!fotoBase64) {
+  if (
+    !fotoBase64
+  ) {
 
     mostrarMensagem(
       'Tire a foto da pessoa.',
@@ -4275,7 +5607,8 @@ function cadastrarPessoa() {
           await jsonp(
             'buscarPessoasPorNome',
             {
-              nome: nome
+              nome:
+                nome
             }
           );
 
@@ -4283,13 +5616,18 @@ function cadastrarPessoa() {
         const encontrado =
           resultado.some(
             pessoa =>
+
               pessoa.nome
                 .toLowerCase() ===
-              nome.toLowerCase()
+              nome
+                .toLowerCase()
+
           );
 
 
-        if (!encontrado) {
+        if (
+          !encontrado
+        ) {
 
           mostrarMensagem(
             'Não foi possível confirmar o cadastro.',
