@@ -25,19 +25,144 @@ body {
   color: #222;
 }
 
+body.bloqueado {
+  overflow: hidden;
+}
+
+/* ==========================================================
+   LOGIN
+========================================================== */
+
+#telaLogin {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: linear-gradient(
+    135deg,
+    #620000,
+    #a60000
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  width: 100%;
+  max-width: 430px;
+  border-radius: 18px;
+  padding: 35px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.35);
+}
+
+.login-logo {
+  text-align: center;
+  font-size: 55px;
+  margin-bottom: 10px;
+}
+
+.login-card h1 {
+  margin: 0;
+  text-align: center;
+  color: #8b0000;
+  font-size: 27px;
+}
+
+.login-card p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 28px;
+}
+
+.login-card label {
+  margin-top: 15px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #bbb;
+  border-radius: 9px;
+  font-size: 17px;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: #8b0000;
+  box-shadow:
+    0 0 0 3px rgba(139,0,0,.10);
+}
+
+#erroLogin {
+  display: none;
+  background: #ffe4e8;
+  color: #a00020;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+#carregandoLogin {
+  display: none;
+  text-align: center;
+  color: #666;
+  margin-top: 15px;
+}
+
+
+/* ==========================================================
+   SISTEMA
+========================================================== */
+
+#sistema {
+  display: none;
+}
+
 header {
   background: #8b0000;
   color: white;
-  padding: 18px 25px;
+  padding: 16px 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0,0,0,.20);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.20);
 }
 
 header h1 {
   margin: 0;
-  font-size: 25px;
+  font-size: 24px;
+}
+
+.header-direita {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+.usuario-logado {
+  text-align: right;
+  font-size: 13px;
+}
+
+.usuario-logado strong {
+  display: block;
+  font-size: 15px;
+}
+
+.btn-sair {
+  background: white;
+  color: #8b0000;
+  border: 0;
+  padding: 8px 13px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;
 }
 
 .relogio {
@@ -51,7 +176,8 @@ nav {
   justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.08);
 }
 
 nav button {
@@ -88,7 +214,8 @@ main {
   padding: 25px;
   border-radius: 12px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.08);
 }
 
 .card h2 {
@@ -103,7 +230,8 @@ label {
   margin-bottom: 7px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 14px;
   font-size: 17px;
@@ -111,7 +239,7 @@ input[type="text"] {
   border-radius: 8px;
 }
 
-input[type="text"]:focus {
+input:focus {
   outline: none;
   border-color: #8b0000;
 }
@@ -141,13 +269,16 @@ input[type="text"]:focus {
   background: #555;
 }
 
-.botao-azul {
-  background: #245c8f;
+.login-botao {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
 }
 
 .cards-resumo {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
   gap: 15px;
   margin-bottom: 20px;
 }
@@ -157,7 +288,8 @@ input[type="text"]:focus {
   border-radius: 12px;
   padding: 22px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.08);
 }
 
 .resumo-numero {
@@ -248,7 +380,7 @@ input[type="text"]:focus {
 
 
 /* ==========================================================
-   LISTAS DE CHAVES
+   CHAVES
 ========================================================== */
 
 .area-chaves {
@@ -271,7 +403,8 @@ input[type="text"]:focus {
 
 .lista-chaves {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns:
+    repeat(2,1fr);
   gap: 10px;
   max-height: 520px;
   overflow-y: auto;
@@ -305,7 +438,6 @@ input[type="text"]:focus {
   width: 22px;
   height: 22px;
   margin-top: 3px;
-  cursor: pointer;
 }
 
 .numero-chave {
@@ -335,7 +467,7 @@ input[type="text"]:focus {
 
 
 /* ==========================================================
-   MOVIMENTAÇÕES DO PAINEL
+   PAINEL
 ========================================================== */
 
 .movimento {
@@ -421,7 +553,7 @@ canvas {
 
 .mensagem {
   position: fixed;
-  z-index: 99999;
+  z-index: 999999;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -430,7 +562,8 @@ canvas {
   font-weight: bold;
   border-radius: 8px;
   display: none;
-  box-shadow: 0 3px 15px rgba(0,0,0,.25);
+  box-shadow:
+    0 3px 15px rgba(0,0,0,.25);
   text-align: center;
 }
 
@@ -456,11 +589,16 @@ canvas {
 @media(max-width:800px) {
 
   .cards-resumo {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .lista-chaves {
     grid-template-columns: 1fr;
+  }
+
+  header {
+    align-items: flex-start;
   }
 
 }
@@ -471,6 +609,10 @@ canvas {
     grid-template-columns: 1fr;
   }
 
+  .relogio {
+    display: none;
+  }
+
 }
 
 </style>
@@ -478,7 +620,7 @@ canvas {
 </head>
 
 
-<body>
+<body class="bloqueado">
 
 
 <div
@@ -494,17 +636,117 @@ canvas {
 ></iframe>
 
 
+<!-- ========================================================
+     LOGIN
+========================================================= -->
+
+<div id="telaLogin">
+
+  <div class="login-card">
+
+    <div class="login-logo">
+      🔐
+    </div>
+
+    <h1>
+      Controle de Portaria
+    </h1>
+
+    <p>
+      Acesso restrito aos funcionários autorizados
+    </p>
+
+
+    <label>
+      Usuário
+    </label>
+
+    <input
+      id="loginUsuario"
+      type="text"
+      placeholder="Digite seu usuário"
+      autocomplete="username"
+    >
+
+
+    <label>
+      Senha
+    </label>
+
+    <input
+      id="loginSenha"
+      type="password"
+      placeholder="Digite sua senha"
+      autocomplete="current-password"
+      onkeydown="
+        if(event.key === 'Enter') {
+          entrar();
+        }
+      "
+    >
+
+
+    <button
+      id="btnLogin"
+      class="botao login-botao"
+      onclick="entrar()"
+    >
+      🔐 Entrar
+    </button>
+
+
+    <div id="erroLogin"></div>
+
+    <div id="carregandoLogin">
+      Verificando acesso...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================
+     SISTEMA
+========================================================= -->
+
+<div id="sistema">
+
+
 <header>
 
   <h1>
     🔑 CONTROLE DE PORTARIA
   </h1>
 
-  <div class="relogio">
 
-    <div id="dataAtual"></div>
+  <div class="header-direita">
 
-    <div id="horaAtual"></div>
+    <div class="usuario-logado">
+
+      Acesso:
+
+      <strong id="nomeUsuarioLogado">
+        -
+      </strong>
+
+      <button
+        class="btn-sair"
+        onclick="sair()"
+      >
+        Sair
+      </button>
+
+    </div>
+
+
+    <div class="relogio">
+
+      <div id="dataAtual"></div>
+
+      <div id="horaAtual"></div>
+
+    </div>
 
   </div>
 
@@ -556,66 +798,46 @@ canvas {
   <div class="cards-resumo">
 
     <div class="resumo">
-
       <div
         id="totalChaves"
         class="resumo-numero"
-      >
-        -
-      </div>
-
+      >-</div>
       <div class="resumo-titulo">
         TOTAL DE CHAVES
       </div>
-
     </div>
 
 
     <div class="resumo">
-
       <div
         id="totalDisponiveis"
         class="resumo-numero verde"
-      >
-        -
-      </div>
-
+      >-</div>
       <div class="resumo-titulo">
         DISPONÍVEIS
       </div>
-
     </div>
 
 
     <div class="resumo">
-
       <div
         id="totalRetiradas"
         class="resumo-numero laranja"
-      >
-        -
-      </div>
-
+      >-</div>
       <div class="resumo-titulo">
         RETIRADAS
       </div>
-
     </div>
 
 
     <div class="resumo">
-
       <div
         id="totalAtrasadas"
         class="resumo-numero vermelho"
-      >
-        -
-      </div>
-
+      >-</div>
       <div class="resumo-titulo">
         ATRASADAS
       </div>
-
     </div>
 
   </div>
@@ -660,7 +882,6 @@ canvas {
       Nome da pessoa
     </label>
 
-
     <input
       type="text"
       id="nomeBuscaRetirada"
@@ -697,7 +918,6 @@ canvas {
         id="fotoPessoaRetirada"
         alt="Foto"
       >
-
 
       <div>
 
@@ -801,8 +1021,8 @@ canvas {
     </h2>
 
     <p>
-      Primeiro informe quem está entregando as chaves.
-      Essa pessoa pode ser diferente de quem fez a retirada.
+      Informe quem está entregando as chaves.
+      Pode ser uma pessoa diferente de quem retirou.
     </p>
 
 
@@ -848,7 +1068,6 @@ canvas {
         alt="Foto"
       >
 
-
       <div>
 
         <h3
@@ -862,7 +1081,13 @@ canvas {
           ></strong>
         </div>
 
-        <div style="margin-top:5px;color:#19713a;font-weight:bold">
+        <div
+          style="
+            margin-top:5px;
+            color:#19713a;
+            font-weight:bold
+          "
+        >
           Pessoa que está entregando
         </div>
 
@@ -881,10 +1106,8 @@ canvas {
         Chaves atualmente retiradas
       </h3>
 
-
       <p>
-        Você pode selecionar qualquer chave abaixo,
-        mesmo que tenha sido retirada por outra pessoa.
+        Selecione uma ou várias chaves.
       </p>
 
 
@@ -1042,11 +1265,13 @@ canvas {
 
 </main>
 
+</div>
+
 
 <script>
 
 // ============================================================
-// URL APPS SCRIPT
+// URL DO APPS SCRIPT
 // ============================================================
 
 const URL_SCRIPT =
@@ -1057,13 +1282,20 @@ const URL_SCRIPT =
 // VARIÁVEIS
 // ============================================================
 
+let TOKEN =
+  localStorage.getItem(
+    'portaria_token'
+  ) || '';
+
 let streamCamera = null;
 
 let fotoBase64 = '';
 
-let pessoaSelecionadaRetirada = null;
+let pessoaSelecionadaRetirada =
+  null;
 
-let pessoaSelecionadaDevolucao = null;
+let pessoaSelecionadaDevolucao =
+  null;
 
 
 // ============================================================
@@ -1072,7 +1304,7 @@ let pessoaSelecionadaDevolucao = null;
 
 window.addEventListener(
   'load',
-  function() {
+  async function() {
 
     atualizarRelogio();
 
@@ -1081,81 +1313,299 @@ window.addEventListener(
       1000
     );
 
-    iniciarCamera();
 
-    atualizarPainel();
+    if (TOKEN) {
+
+      await verificarSessao();
+
+    } else {
+
+      mostrarLogin();
+
+    }
 
   }
 );
 
 
 // ============================================================
-// RELÓGIO
+// LOGIN
 // ============================================================
 
-function atualizarRelogio() {
+async function entrar() {
 
-  const agora =
-    new Date();
+  const usuario =
+    document
+      .getElementById(
+        'loginUsuario'
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const senha =
+    document
+      .getElementById(
+        'loginSenha'
+      )
+      .value;
+
+
+  if (
+    !usuario ||
+    !senha
+  ) {
+
+    mostrarErroLogin(
+      'Digite usuário e senha.'
+    );
+
+    return;
+
+  }
+
+
+  const botao =
+    document.getElementById(
+      'btnLogin'
+    );
+
+
+  botao.disabled = true;
 
 
   document
-    .getElementById('dataAtual')
-    .textContent =
-      agora.toLocaleDateString(
-        'pt-BR'
+    .getElementById(
+      'carregandoLogin'
+    )
+    .style.display =
+      'block';
+
+
+  esconderErroLogin();
+
+
+  try {
+
+    // 1 - pede desafio
+    const desafio =
+      await jsonpPublico(
+        'desafioLogin',
+        {
+          usuario: usuario
+        }
       );
 
 
-  document
-    .getElementById('horaAtual')
-    .textContent =
-      agora.toLocaleTimeString(
-        'pt-BR'
+    // 2 - cria hash da senha localmente
+    const senhaHash =
+      await sha256Hex(
+        usuario +
+        '|' +
+        senha
       );
+
+
+    // 3 - responde desafio
+    const resposta =
+      await hmacSha256Hex(
+        desafio.desafio,
+        senhaHash
+      );
+
+
+    // 4 - login
+    const login =
+      await jsonpPublico(
+        'login',
+        {
+          usuario:
+            usuario,
+
+          desafioId:
+            desafio.desafioId,
+
+          resposta:
+            resposta
+        }
+      );
+
+
+    TOKEN =
+      login.token;
+
+
+    localStorage.setItem(
+      'portaria_token',
+      TOKEN
+    );
+
+
+    document
+      .getElementById(
+        'nomeUsuarioLogado'
+      )
+      .textContent =
+        login.nome ||
+        login.usuario;
+
+
+    document
+      .getElementById(
+        'loginSenha'
+      )
+      .value =
+        '';
+
+
+    mostrarSistema();
+
+
+    await atualizarPainel();
+
+
+  } catch (erro) {
+
+    mostrarErroLogin(
+      erro.message ||
+      'Não foi possível entrar.'
+    );
+
+
+  } finally {
+
+    botao.disabled = false;
+
+
+    document
+      .getElementById(
+        'carregandoLogin'
+      )
+      .style.display =
+        'none';
+
+  }
 
 }
 
 
 // ============================================================
-// NAVEGAÇÃO
+// SHA256
 // ============================================================
 
-function abrirPagina(pagina, botao) {
+async function sha256Hex(texto) {
 
-  document
-    .querySelectorAll('.pagina')
-    .forEach(function(item) {
-
-      item.classList.remove('ativa');
-
-    });
+  const dados =
+    new TextEncoder()
+      .encode(texto);
 
 
-  document
-    .getElementById(pagina)
-    .classList.add('ativa');
+  const hash =
+    await crypto.subtle.digest(
+      'SHA-256',
+      dados
+    );
 
 
-  document
-    .querySelectorAll('nav button')
-    .forEach(function(item) {
+  return Array.from(
+    new Uint8Array(hash)
+  )
+    .map(
+      b =>
+        b.toString(16)
+          .padStart(2,'0')
+    )
+    .join('');
 
-      item.classList.remove('ativo');
-
-    });
-
-
-  if (botao) {
-
-    botao.classList.add('ativo');
-
-  }
+}
 
 
-  if (pagina === 'painel') {
+// ============================================================
+// HMAC SHA256
+// ============================================================
 
-    atualizarPainel();
+async function hmacSha256Hex(
+  mensagem,
+  chaveTexto
+) {
+
+  const encoder =
+    new TextEncoder();
+
+
+  const chave =
+    await crypto.subtle.importKey(
+      'raw',
+      encoder.encode(
+        chaveTexto
+      ),
+      {
+        name: 'HMAC',
+        hash: 'SHA-256'
+      },
+      false,
+      ['sign']
+    );
+
+
+  const assinatura =
+    await crypto.subtle.sign(
+      'HMAC',
+      chave,
+      encoder.encode(
+        mensagem
+      )
+    );
+
+
+  return Array.from(
+    new Uint8Array(
+      assinatura
+    )
+  )
+    .map(
+      b =>
+        b.toString(16)
+          .padStart(2,'0')
+    )
+    .join('');
+
+}
+
+
+// ============================================================
+// VERIFICAR SESSÃO EXISTENTE
+// ============================================================
+
+async function verificarSessao() {
+
+  try {
+
+    const dados =
+      await jsonp(
+        'validarSessao'
+      );
+
+
+    document
+      .getElementById(
+        'nomeUsuarioLogado'
+      )
+      .textContent =
+        dados.nome ||
+        dados.usuario;
+
+
+    mostrarSistema();
+
+
+    await atualizarPainel();
+
+
+  } catch (erro) {
+
+    expirarSessao();
 
   }
 
@@ -1163,10 +1613,260 @@ function abrirPagina(pagina, botao) {
 
 
 // ============================================================
-// JSONP
+// MOSTRAR LOGIN
 // ============================================================
 
-function jsonp(acao, parametros = {}) {
+function mostrarLogin() {
+
+  document.body.classList.add(
+    'bloqueado'
+  );
+
+
+  document
+    .getElementById(
+      'sistema'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'telaLogin'
+    )
+    .style.display =
+      'flex';
+
+
+  setTimeout(
+    function() {
+
+      document
+        .getElementById(
+          'loginUsuario'
+        )
+        .focus();
+
+    },
+    100
+  );
+
+}
+
+
+// ============================================================
+// MOSTRAR SISTEMA
+// ============================================================
+
+function mostrarSistema() {
+
+  document.body.classList.remove(
+    'bloqueado'
+  );
+
+
+  document
+    .getElementById(
+      'telaLogin'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'sistema'
+    )
+    .style.display =
+      'block';
+
+}
+
+
+// ============================================================
+// SAIR
+// ============================================================
+
+async function sair() {
+
+  const tokenAntigo =
+    TOKEN;
+
+
+  TOKEN = '';
+
+
+  localStorage.removeItem(
+    'portaria_token'
+  );
+
+
+  if (tokenAntigo) {
+
+    try {
+
+      await jsonpComToken(
+        'logout',
+        {},
+        tokenAntigo
+      );
+
+    } catch (erro) {
+
+      console.log(
+        'Sessão encerrada localmente.'
+      );
+
+    }
+
+  }
+
+
+  pararCamera();
+
+
+  mostrarLogin();
+
+}
+
+
+// ============================================================
+// SESSÃO EXPIRADA
+// ============================================================
+
+function expirarSessao() {
+
+  TOKEN = '';
+
+
+  localStorage.removeItem(
+    'portaria_token'
+  );
+
+
+  pararCamera();
+
+
+  mostrarLogin();
+
+
+  mostrarErroLogin(
+    'Sua sessão expirou. Entre novamente.'
+  );
+
+}
+
+
+// ============================================================
+// ERRO LOGIN
+// ============================================================
+
+function mostrarErroLogin(texto) {
+
+  const caixa =
+    document.getElementById(
+      'erroLogin'
+    );
+
+
+  caixa.textContent =
+    texto;
+
+
+  caixa.style.display =
+    'block';
+
+}
+
+
+function esconderErroLogin() {
+
+  document
+    .getElementById(
+      'erroLogin'
+    )
+    .style.display =
+      'none';
+
+}
+
+
+// ============================================================
+// JSONP PÚBLICO
+// ============================================================
+
+function jsonpPublico(
+  acao,
+  parametros = {}
+) {
+
+  return executarJsonp(
+    acao,
+    parametros,
+    ''
+  );
+
+}
+
+
+// ============================================================
+// JSONP PROTEGIDO
+// ============================================================
+
+function jsonp(
+  acao,
+  parametros = {}
+) {
+
+  if (!TOKEN) {
+
+    return Promise.reject(
+      new Error(
+        'SESSAO_EXPIRADA'
+      )
+    );
+
+  }
+
+
+  return executarJsonp(
+    acao,
+    parametros,
+    TOKEN
+  );
+
+}
+
+
+// ============================================================
+// JSONP COM TOKEN ESPECÍFICO
+// ============================================================
+
+function jsonpComToken(
+  acao,
+  parametros,
+  token
+) {
+
+  return executarJsonp(
+    acao,
+    parametros,
+    token
+  );
+
+}
+
+
+// ============================================================
+// EXECUTAR JSONP
+// ============================================================
+
+function executarJsonp(
+  acao,
+  parametros,
+  token
+) {
 
   return new Promise(
     function(resolve, reject) {
@@ -1176,7 +1876,8 @@ function jsonp(acao, parametros = {}) {
         Date.now() +
         '_' +
         Math.floor(
-          Math.random() * 100000
+          Math.random() *
+          100000
         );
 
 
@@ -1190,20 +1891,41 @@ function jsonp(acao, parametros = {}) {
         new URLSearchParams();
 
 
-      params.set('acao', acao);
+      params.set(
+        'acao',
+        acao
+      );
 
-      params.set('callback', callback);
+
+      params.set(
+        'callback',
+        callback
+      );
 
 
-      Object.keys(parametros)
-        .forEach(function(chave) {
+      if (token) {
 
-          params.set(
-            chave,
-            parametros[chave]
-          );
+        params.set(
+          'token',
+          token
+        );
 
-        });
+      }
+
+
+      Object.keys(
+        parametros || {}
+      )
+        .forEach(
+          function(chave) {
+
+            params.set(
+              chave,
+              parametros[chave]
+            );
+
+          }
+        );
 
 
       let timeout;
@@ -1212,9 +1934,15 @@ function jsonp(acao, parametros = {}) {
       window[callback] =
         function(dados) {
 
-          clearTimeout(timeout);
+          clearTimeout(
+            timeout
+          );
 
-          delete window[callback];
+
+          delete window[
+            callback
+          ];
+
 
           script.remove();
 
@@ -1223,6 +1951,16 @@ function jsonp(acao, parametros = {}) {
             dados &&
             dados.sucesso === false
           ) {
+
+            if (
+              dados.erro ===
+              'SESSAO_EXPIRADA'
+            ) {
+
+              expirarSessao();
+
+            }
+
 
             reject(
               new Error(
@@ -1244,9 +1982,15 @@ function jsonp(acao, parametros = {}) {
       script.onerror =
         function() {
 
-          clearTimeout(timeout);
+          clearTimeout(
+            timeout
+          );
 
-          delete window[callback];
+
+          delete window[
+            callback
+          ];
+
 
           script.remove();
 
@@ -1275,9 +2019,13 @@ function jsonp(acao, parametros = {}) {
         setTimeout(
           function() {
 
-            if (window[callback]) {
+            if (
+              window[callback]
+            ) {
 
-              delete window[callback];
+              delete window[
+                callback
+              ];
 
             }
 
@@ -1292,7 +2040,7 @@ function jsonp(acao, parametros = {}) {
             );
 
           },
-          15000
+          20000
         );
 
     }
@@ -1302,10 +2050,19 @@ function jsonp(acao, parametros = {}) {
 
 
 // ============================================================
-// POST
+// POST PROTEGIDO
 // ============================================================
 
 function enviarPost(dados) {
+
+  if (!TOKEN) {
+
+    expirarSessao();
+
+    return false;
+
+  }
+
 
   const form =
     document.createElement(
@@ -1313,46 +2070,191 @@ function enviarPost(dados) {
     );
 
 
-  form.method = 'POST';
+  form.method =
+    'POST';
 
-  form.action = URL_SCRIPT;
+  form.action =
+    URL_SCRIPT;
 
-  form.target = 'frameEnvio';
+  form.target =
+    'frameEnvio';
 
-  form.style.display = 'none';
+  form.style.display =
+    'none';
+
+
+  dados.token =
+    TOKEN;
 
 
   Object.keys(dados)
-    .forEach(function(chave) {
+    .forEach(
+      function(chave) {
 
-      const input =
-        document.createElement(
-          'input'
+        const input =
+          document.createElement(
+            'input'
+          );
+
+
+        input.type =
+          'hidden';
+
+        input.name =
+          chave;
+
+        input.value =
+          dados[chave];
+
+
+        form.appendChild(
+          input
         );
 
-
-      input.type = 'hidden';
-
-      input.name = chave;
-
-      input.value = dados[chave];
+      }
+    );
 
 
-      form.appendChild(input);
+  document.body.appendChild(
+    form
+  );
 
-    });
-
-
-  document.body.appendChild(form);
 
   form.submit();
 
 
-  setTimeout(function() {
+  setTimeout(
+    function() {
 
-    form.remove();
+      form.remove();
 
-  }, 3000);
+    },
+    3000
+  );
+
+
+  return true;
+
+}
+
+
+// ============================================================
+// RELÓGIO
+// ============================================================
+
+function atualizarRelogio() {
+
+  const agora =
+    new Date();
+
+
+  const data =
+    document.getElementById(
+      'dataAtual'
+    );
+
+
+  const hora =
+    document.getElementById(
+      'horaAtual'
+    );
+
+
+  if (data) {
+
+    data.textContent =
+      agora.toLocaleDateString(
+        'pt-BR'
+      );
+
+  }
+
+
+  if (hora) {
+
+    hora.textContent =
+      agora.toLocaleTimeString(
+        'pt-BR'
+      );
+
+  }
+
+}
+
+
+// ============================================================
+// NAVEGAÇÃO
+// ============================================================
+
+function abrirPagina(
+  pagina,
+  botao
+) {
+
+  document
+    .querySelectorAll(
+      '.pagina'
+    )
+    .forEach(
+      function(item) {
+
+        item.classList.remove(
+          'ativa'
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      pagina
+    )
+    .classList.add(
+      'ativa'
+    );
+
+
+  document
+    .querySelectorAll(
+      'nav button'
+    )
+    .forEach(
+      function(item) {
+
+        item.classList.remove(
+          'ativo'
+        );
+
+      }
+    );
+
+
+  if (botao) {
+
+    botao.classList.add(
+      'ativo'
+    );
+
+  }
+
+
+  if (
+    pagina === 'painel'
+  ) {
+
+    atualizarPainel();
+
+  }
+
+
+  if (
+    pagina === 'cadastro'
+  ) {
+
+    iniciarCamera();
+
+  }
 
 }
 
@@ -1372,27 +2274,33 @@ function mostrarMensagem(
     );
 
 
-  caixa.textContent = texto;
+  caixa.textContent =
+    texto;
+
 
   caixa.className =
     'mensagem ' + tipo;
+
 
   caixa.style.display =
     'block';
 
 
-  setTimeout(function() {
+  setTimeout(
+    function() {
 
-    caixa.style.display =
-      'none';
+      caixa.style.display =
+        'none';
 
-  }, 4500);
+    },
+    4500
+  );
 
 }
 
 
 // ============================================================
-// CRIAR RESULTADO DE PESSOA
+// RESULTADO PESSOA
 // ============================================================
 
 function criarResultadoPessoa(
@@ -1401,7 +2309,9 @@ function criarResultadoPessoa(
 ) {
 
   const item =
-    document.createElement('div');
+    document.createElement(
+      'div'
+    );
 
 
   item.className =
@@ -1409,7 +2319,9 @@ function criarResultadoPessoa(
 
 
   const foto =
-    document.createElement('img');
+    document.createElement(
+      'img'
+    );
 
 
   foto.src =
@@ -1420,7 +2332,9 @@ function criarResultadoPessoa(
 
 
   const info =
-    document.createElement('div');
+    document.createElement(
+      'div'
+    );
 
 
   info.className =
@@ -1428,7 +2342,9 @@ function criarResultadoPessoa(
 
 
   const nome =
-    document.createElement('strong');
+    document.createElement(
+      'strong'
+    );
 
 
   nome.textContent =
@@ -1436,7 +2352,9 @@ function criarResultadoPessoa(
 
 
   const numero =
-    document.createElement('div');
+    document.createElement(
+      'div'
+    );
 
 
   numero.textContent =
@@ -1444,13 +2362,19 @@ function criarResultadoPessoa(
     pessoa.numero;
 
 
-  info.appendChild(nome);
+  info.appendChild(
+    nome
+  );
 
-  info.appendChild(numero);
+  info.appendChild(
+    numero
+  );
 
 
   const botao =
-    document.createElement('button');
+    document.createElement(
+      'button'
+    );
 
 
   botao.className =
@@ -1468,7 +2392,9 @@ function criarResultadoPessoa(
 
       evento.stopPropagation();
 
-      aoSelecionar(pessoa);
+      aoSelecionar(
+        pessoa
+      );
 
     };
 
@@ -1476,16 +2402,24 @@ function criarResultadoPessoa(
   item.onclick =
     function() {
 
-      aoSelecionar(pessoa);
+      aoSelecionar(
+        pessoa
+      );
 
     };
 
 
-  item.appendChild(foto);
+  item.appendChild(
+    foto
+  );
 
-  item.appendChild(info);
+  item.appendChild(
+    info
+  );
 
-  item.appendChild(botao);
+  item.appendChild(
+    botao
+  );
 
 
   return item;
@@ -1494,7 +2428,7 @@ function criarResultadoPessoa(
 
 
 // ============================================================
-// BUSCAR PESSOA - RETIRADA
+// RETIRADA - BUSCAR PESSOA
 // ============================================================
 
 async function buscarPessoaRetirada() {
@@ -1565,7 +2499,8 @@ async function buscarPessoaRetirada() {
       );
 
 
-    area.innerHTML = '';
+    area.innerHTML =
+      '';
 
 
     if (!pessoas.length) {
@@ -1578,23 +2513,25 @@ async function buscarPessoaRetirada() {
     }
 
 
-    pessoas.forEach(function(pessoa) {
+    pessoas.forEach(
+      function(pessoa) {
 
-      area.appendChild(
+        area.appendChild(
+          criarResultadoPessoa(
+            pessoa,
+            selecionarPessoaRetirada
+          )
+        );
 
-        criarResultadoPessoa(
-          pessoa,
-          selecionarPessoaRetirada
-        )
-
-      );
-
-    });
+      }
+    );
 
 
   } catch (erro) {
 
-    area.innerHTML = '';
+    area.innerHTML =
+      '';
+
 
     mostrarMensagem(
       erro.message,
@@ -1607,7 +2544,7 @@ async function buscarPessoaRetirada() {
 
 
 // ============================================================
-// SELECIONAR PESSOA - RETIRADA
+// RETIRADA - SELECIONAR PESSOA
 // ============================================================
 
 async function selecionarPessoaRetirada(
@@ -1672,7 +2609,7 @@ async function selecionarPessoaRetirada(
 
 
 // ============================================================
-// CARREGAR CHAVES DISPONÍVEIS
+// CHAVES DISPONÍVEIS
 // ============================================================
 
 async function carregarChavesDisponiveis() {
@@ -1684,7 +2621,7 @@ async function carregarChavesDisponiveis() {
 
 
   area.innerHTML =
-    '<p>Carregando chaves...</p>';
+    '<p>Sincronizando e carregando chaves...</p>';
 
 
   try {
@@ -1695,7 +2632,8 @@ async function carregarChavesDisponiveis() {
       );
 
 
-    area.innerHTML = '';
+    area.innerHTML =
+      '';
 
 
     if (!chaves.length) {
@@ -1710,76 +2648,91 @@ async function carregarChavesDisponiveis() {
     }
 
 
-    chaves.forEach(function(chave) {
+    chaves.forEach(
+      function(chave) {
 
-      const label =
-        document.createElement('label');
-
-
-      label.className =
-        'item-chave';
-
-
-      const checkbox =
-        document.createElement('input');
-
-
-      checkbox.type =
-        'checkbox';
-
-      checkbox.className =
-        'check-retirada';
-
-      checkbox.value =
-        chave.numero;
-
-
-      checkbox.addEventListener(
-        'change',
-        function() {
-
-          label.classList.toggle(
-            'selecionada',
-            checkbox.checked
+        const label =
+          document.createElement(
+            'label'
           );
 
 
-          atualizarContadorRetirada();
-
-        }
-      );
+        label.className =
+          'item-chave';
 
 
-      const info =
-        document.createElement('div');
+        const checkbox =
+          document.createElement(
+            'input'
+          );
 
 
-      info.innerHTML =
-        '<div class="numero-chave">' +
-        '🔑 Chave ' +
-        chave.numero +
-        '</div>' +
+        checkbox.type =
+          'checkbox';
 
-        '<div class="nome-chave">' +
-        escaparHtml(
-          chave.identificacao
-        ) +
-        '</div>' +
+        checkbox.className =
+          'check-retirada';
 
-        '<div class="setor-chave">' +
-        escaparHtml(
-          chave.setor
-        ) +
-        '</div>';
+        checkbox.value =
+          chave.numero;
 
 
-      label.appendChild(checkbox);
+        checkbox.addEventListener(
+          'change',
+          function() {
 
-      label.appendChild(info);
+            label.classList.toggle(
+              'selecionada',
+              checkbox.checked
+            );
 
-      area.appendChild(label);
 
-    });
+            atualizarContadorRetirada();
+
+          }
+        );
+
+
+        const info =
+          document.createElement(
+            'div'
+          );
+
+
+        info.innerHTML =
+
+          '<div class="numero-chave">' +
+          '🔑 Chave ' +
+          chave.numero +
+          '</div>' +
+
+          '<div class="nome-chave">' +
+          escaparHtml(
+            chave.identificacao
+          ) +
+          '</div>' +
+
+          '<div class="setor-chave">' +
+          escaparHtml(
+            chave.setor
+          ) +
+          '</div>';
+
+
+        label.appendChild(
+          checkbox
+        );
+
+        label.appendChild(
+          info
+        );
+
+        area.appendChild(
+          label
+        );
+
+      }
+    );
 
 
     atualizarContadorRetirada();
@@ -1811,17 +2764,23 @@ function selecionarTodasRetirada() {
     .querySelectorAll(
       '.check-retirada'
     )
-    .forEach(function(check) {
+    .forEach(
+      function(check) {
 
-      check.checked = true;
+        check.checked =
+          true;
 
-      check
-        .closest('.item-chave')
-        .classList.add(
-          'selecionada'
-        );
 
-    });
+        check
+          .closest(
+            '.item-chave'
+          )
+          .classList.add(
+            'selecionada'
+          );
+
+      }
+    );
 
 
   atualizarContadorRetirada();
@@ -1835,17 +2794,23 @@ function limparSelecaoRetirada() {
     .querySelectorAll(
       '.check-retirada'
     )
-    .forEach(function(check) {
+    .forEach(
+      function(check) {
 
-      check.checked = false;
+        check.checked =
+          false;
 
-      check
-        .closest('.item-chave')
-        .classList.remove(
-          'selecionada'
-        );
 
-    });
+        check
+          .closest(
+            '.item-chave'
+          )
+          .classList.remove(
+            'selecionada'
+          );
+
+      }
+    );
 
 
   atualizarContadorRetirada();
@@ -1868,8 +2833,11 @@ function atualizarContadorRetirada() {
       'contadorRetirada'
     )
     .textContent =
+
       quantidade === 1
+
         ? '1 chave selecionada'
+
         : quantidade +
           ' chaves selecionadas';
 
@@ -1882,7 +2850,9 @@ function atualizarContadorRetirada() {
 
 function confirmarRetirada() {
 
-  if (!pessoaSelecionadaRetirada) {
+  if (
+    !pessoaSelecionadaRetirada
+  ) {
 
     mostrarMensagem(
       'Selecione a pessoa.',
@@ -1917,7 +2887,11 @@ function confirmarRetirada() {
   const numeros =
     selecionadas.map(
       function(check) {
-        return Number(check.value);
+
+        return Number(
+          check.value
+        );
+
       }
     );
 
@@ -1942,7 +2916,8 @@ function confirmarRetirada() {
     );
 
 
-  botao.disabled = true;
+  botao.disabled =
+    true;
 
 
   document
@@ -1953,69 +2928,124 @@ function confirmarRetirada() {
       'block';
 
 
-  enviarPost({
+  const enviado =
+    enviarPost({
 
-    acao:
-      'retirarChaves',
+      acao:
+        'retirarChaves',
 
-    numeroPessoa:
-      pessoaSelecionadaRetirada.numero,
+      numeroPessoa:
+        pessoaSelecionadaRetirada.numero,
 
-    numeroChaves:
-      JSON.stringify(numeros)
+      numeroChaves:
+        JSON.stringify(
+          numeros
+        )
 
-  });
+    });
+
+
+  if (!enviado) {
+    return;
+  }
 
 
   setTimeout(
     async function() {
 
-      botao.disabled = false;
+      try {
+
+        // VERIFICA SE REALMENTE FOI GRAVADO
+        const abertas =
+          await jsonp(
+            'listarMovimentacoesAbertas'
+          );
 
 
-      document
-        .getElementById(
-          'carregandoRetirada'
-        )
-        .style.display =
-          'none';
+        const confirmadas =
+          numeros.every(
+            numero =>
+              abertas.some(
+                item =>
+                  Number(
+                    item.chave
+                  ) ===
+                  Number(numero)
+              )
+          );
 
 
-      pessoaSelecionadaRetirada =
-        null;
+        if (!confirmadas) {
+
+          mostrarMensagem(
+            'Não foi possível confirmar toda a retirada. Verifique o painel.',
+            'erro'
+          );
+
+          return;
+
+        }
 
 
-      document
-        .getElementById(
-          'nomeBuscaRetirada'
-        )
-        .value =
-          '';
+        mostrarMensagem(
+          numeros.length +
+          ' chave(s) retiradas com sucesso!'
+        );
 
 
-      document
-        .getElementById(
-          'pessoaRetirada'
-        )
-        .style.display =
-          'none';
+        pessoaSelecionadaRetirada =
+          null;
 
 
-      document
-        .getElementById(
-          'areaEscolhaChave'
-        )
-        .style.display =
-          'none';
+        document
+          .getElementById(
+            'nomeBuscaRetirada'
+          )
+          .value =
+            '';
 
 
-      mostrarMensagem(
-        numeros.length +
-        ' chave(s) registradas!'
-      );
+        document
+          .getElementById(
+            'pessoaRetirada'
+          )
+          .style.display =
+            'none';
 
 
-      await atualizarPainel();
+        document
+          .getElementById(
+            'areaEscolhaChave'
+          )
+          .style.display =
+            'none';
+
+
+        await atualizarPainel();
+
+
+      } catch (erro) {
+
+        mostrarMensagem(
+          erro.message,
+          'erro'
+        );
+
+
+      } finally {
+
+        botao.disabled =
+          false;
+
+
+        document
+          .getElementById(
+            'carregandoRetirada'
+          )
+          .style.display =
+            'none';
+
+      }
 
     },
     2500
@@ -2025,7 +3055,7 @@ function confirmarRetirada() {
 
 
 // ============================================================
-// BUSCAR PESSOA - DEVOLUÇÃO
+// DEVOLUÇÃO - BUSCAR PESSOA
 // ============================================================
 
 async function buscarPessoaDevolucao() {
@@ -2096,7 +3126,8 @@ async function buscarPessoaDevolucao() {
       );
 
 
-    area.innerHTML = '';
+    area.innerHTML =
+      '';
 
 
     if (!pessoas.length) {
@@ -2109,23 +3140,24 @@ async function buscarPessoaDevolucao() {
     }
 
 
-    pessoas.forEach(function(pessoa) {
+    pessoas.forEach(
+      function(pessoa) {
 
-      area.appendChild(
+        area.appendChild(
+          criarResultadoPessoa(
+            pessoa,
+            selecionarPessoaDevolucao
+          )
+        );
 
-        criarResultadoPessoa(
-          pessoa,
-          selecionarPessoaDevolucao
-        )
-
-      );
-
-    });
+      }
+    );
 
 
   } catch (erro) {
 
-    area.innerHTML = '';
+    area.innerHTML =
+      '';
 
 
     mostrarMensagem(
@@ -2139,7 +3171,7 @@ async function buscarPessoaDevolucao() {
 
 
 // ============================================================
-// SELECIONAR PESSOA QUE ESTÁ DEVOLVENDO
+// DEVOLUÇÃO - SELECIONAR PESSOA
 // ============================================================
 
 async function selecionarPessoaDevolucao(
@@ -2204,7 +3236,7 @@ async function selecionarPessoaDevolucao(
 
 
 // ============================================================
-// CARREGAR TODAS AS CHAVES EM ABERTO
+// CARREGAR CHAVES EM ABERTO
 // ============================================================
 
 async function carregarChavesDevolucao() {
@@ -2227,13 +3259,14 @@ async function carregarChavesDevolucao() {
       );
 
 
-    area.innerHTML = '';
+    area.innerHTML =
+      '';
 
 
     if (!dados.length) {
 
       area.innerHTML =
-        '<p>✅ Não existe nenhuma chave aguardando devolução.</p>';
+        '<p>✅ Nenhuma chave aguardando devolução.</p>';
 
       atualizarContadorDevolucao();
 
@@ -2242,125 +3275,128 @@ async function carregarChavesDevolucao() {
     }
 
 
-    dados.forEach(function(item) {
+    dados.forEach(
+      function(item) {
 
-      const label =
-        document.createElement(
-          'label'
-        );
-
-
-      label.className =
-        'item-chave';
-
-
-      const checkbox =
-        document.createElement(
-          'input'
-        );
-
-
-      checkbox.type =
-        'checkbox';
-
-      checkbox.className =
-        'check-devolucao';
-
-      checkbox.value =
-        item.chave;
-
-
-      checkbox.addEventListener(
-        'change',
-        function() {
-
-          label.classList.toggle(
-            'selecionada',
-            checkbox.checked
+        const label =
+          document.createElement(
+            'label'
           );
 
 
-          atualizarContadorDevolucao();
-
-        }
-      );
+        label.className =
+          'item-chave';
 
 
-      const info =
-        document.createElement(
-          'div'
+        const checkbox =
+          document.createElement(
+            'input'
+          );
+
+
+        checkbox.type =
+          'checkbox';
+
+        checkbox.className =
+          'check-devolucao';
+
+        checkbox.value =
+          item.chave;
+
+
+        checkbox.addEventListener(
+          'change',
+          function() {
+
+            label.classList.toggle(
+              'selecionada',
+              checkbox.checked
+            );
+
+
+            atualizarContadorDevolucao();
+
+          }
         );
 
 
-      const statusTexto =
-        item.status === 'ATRASADA'
-          ? '⚠️ ATRASADA'
-          : '⏳ NÃO DEVOLVIDA';
+        const info =
+          document.createElement(
+            'div'
+          );
 
 
-      info.innerHTML =
+        const statusTexto =
+          item.status ===
+          'ATRASADA'
 
-        '<div class="numero-chave">' +
-        '🔑 Chave ' +
-        item.chave +
-        '</div>' +
+            ? '⚠️ ATRASADA'
 
-        '<div class="nome-chave">' +
-        escaparHtml(
-          item.identificacao
-        ) +
-        '</div>' +
-
-        '<div class="setor-chave">' +
-        escaparHtml(
-          item.setor
-        ) +
-        '</div>' +
-
-        '<div class="retirada-original">' +
-
-        '<strong>Retirada por:</strong> ' +
-        escaparHtml(
-          item.nome
-        ) +
-
-        ' — Cadastro Nº ' +
-        escaparHtml(
-          String(
-            item.numeroPessoa
-          )
-        ) +
-
-        '<br>' +
-
-        '<strong>Data:</strong> ' +
-        escaparHtml(
-          item.dataRetirada
-        ) +
-
-        '<br>' +
-
-        '<strong>Status:</strong> ' +
-        statusTexto +
-
-        '</div>';
+            : '⏳ NÃO DEVOLVIDA';
 
 
-      label.appendChild(
-        checkbox
-      );
+        info.innerHTML =
+
+          '<div class="numero-chave">' +
+          '🔑 Chave ' +
+          item.chave +
+          '</div>' +
+
+          '<div class="nome-chave">' +
+          escaparHtml(
+            item.identificacao
+          ) +
+          '</div>' +
+
+          '<div class="setor-chave">' +
+          escaparHtml(
+            item.setor
+          ) +
+          '</div>' +
+
+          '<div class="retirada-original">' +
+
+          '<strong>Retirada por:</strong> ' +
+          escaparHtml(
+            item.nome
+          ) +
+
+          ' — Cadastro Nº ' +
+          escaparHtml(
+            String(
+              item.numeroPessoa
+            )
+          ) +
+
+          '<br>' +
+
+          '<strong>Data:</strong> ' +
+          escaparHtml(
+            item.dataRetirada
+          ) +
+
+          '<br>' +
+
+          '<strong>Status:</strong> ' +
+          statusTexto +
+
+          '</div>';
 
 
-      label.appendChild(
-        info
-      );
+        label.appendChild(
+          checkbox
+        );
 
+        label.appendChild(
+          info
+        );
 
-      area.appendChild(
-        label
-      );
+        area.appendChild(
+          label
+        );
 
-    });
+      }
+    );
 
 
     atualizarContadorDevolucao();
@@ -2392,17 +3428,23 @@ function selecionarTodasDevolucao() {
     .querySelectorAll(
       '.check-devolucao'
     )
-    .forEach(function(check) {
+    .forEach(
+      function(check) {
 
-      check.checked = true;
+        check.checked =
+          true;
 
-      check
-        .closest('.item-chave')
-        .classList.add(
-          'selecionada'
-        );
 
-    });
+        check
+          .closest(
+            '.item-chave'
+          )
+          .classList.add(
+            'selecionada'
+          );
+
+      }
+    );
 
 
   atualizarContadorDevolucao();
@@ -2416,17 +3458,23 @@ function limparSelecaoDevolucao() {
     .querySelectorAll(
       '.check-devolucao'
     )
-    .forEach(function(check) {
+    .forEach(
+      function(check) {
 
-      check.checked = false;
+        check.checked =
+          false;
 
-      check
-        .closest('.item-chave')
-        .classList.remove(
-          'selecionada'
-        );
 
-    });
+        check
+          .closest(
+            '.item-chave'
+          )
+          .classList.remove(
+            'selecionada'
+          );
+
+      }
+    );
 
 
   atualizarContadorDevolucao();
@@ -2449,8 +3497,11 @@ function atualizarContadorDevolucao() {
       'contadorDevolucao'
     )
     .textContent =
+
       quantidade === 1
+
         ? '1 chave selecionada'
+
         : quantidade +
           ' chaves selecionadas';
 
@@ -2463,7 +3514,9 @@ function atualizarContadorDevolucao() {
 
 function confirmarDevolucao() {
 
-  if (!pessoaSelecionadaDevolucao) {
+  if (
+    !pessoaSelecionadaDevolucao
+  ) {
 
     mostrarMensagem(
       'Selecione quem está devolvendo.',
@@ -2499,28 +3552,23 @@ function confirmarDevolucao() {
     selecionadas.map(
       function(check) {
 
-        return Number(check.value);
+        return Number(
+          check.value
+        );
 
       }
     );
 
 
-  const texto =
-
-    'QUEM ESTÁ DEVOLVENDO:\n' +
-    pessoaSelecionadaDevolucao.nome +
-    '\n\n' +
-
-    'CHAVES:\n' +
-    numeros.join(', ') +
-    '\n\n' +
-
-    'Confirmar devolução de ' +
-    numeros.length +
-    ' chave(s)?';
-
-
-  if (!confirm(texto)) {
+  if (
+    !confirm(
+      'QUEM ESTÁ DEVOLVENDO:\n' +
+      pessoaSelecionadaDevolucao.nome +
+      '\n\nCHAVES:\n' +
+      numeros.join(', ') +
+      '\n\nConfirmar devolução?'
+    )
+  ) {
 
     return;
 
@@ -2564,55 +3612,107 @@ function confirmarDevolucao() {
   setTimeout(
     async function() {
 
-      botao.disabled =
-        false;
+      try {
+
+        // VERIFICAÇÃO REAL
+        const abertas =
+          await jsonp(
+            'listarMovimentacoesAbertas'
+          );
 
 
-      document
-        .getElementById(
-          'carregandoDevolucao'
-        )
-        .style.display =
-          'none';
+        const aindaAbertas =
+          numeros.filter(
+            numero =>
+              abertas.some(
+                item =>
+                  Number(
+                    item.chave
+                  ) ===
+                  Number(numero)
+              )
+          );
 
 
-      mostrarMensagem(
-        numeros.length +
-        ' chave(s) devolvidas por ' +
-        pessoaSelecionadaDevolucao.nome +
-        '!'
-      );
+        if (
+          aindaAbertas.length
+        ) {
+
+          mostrarMensagem(
+            'Não foi possível confirmar a devolução de todas as chaves.',
+            'erro'
+          );
+
+          return;
+
+        }
 
 
-      pessoaSelecionadaDevolucao =
-        null;
+        const nomeDevolvedor =
+          pessoaSelecionadaDevolucao.nome;
 
 
-      document
-        .getElementById(
-          'nomeBuscaDevolucao'
-        )
-        .value =
-          '';
+        pessoaSelecionadaDevolucao =
+          null;
 
 
-      document
-        .getElementById(
-          'pessoaDevolucao'
-        )
-        .style.display =
-          'none';
+        document
+          .getElementById(
+            'nomeBuscaDevolucao'
+          )
+          .value =
+            '';
 
 
-      document
-        .getElementById(
-          'areaDevolucao'
-        )
-        .style.display =
-          'none';
+        document
+          .getElementById(
+            'pessoaDevolucao'
+          )
+          .style.display =
+            'none';
 
 
-      await atualizarPainel();
+        document
+          .getElementById(
+            'areaDevolucao'
+          )
+          .style.display =
+            'none';
+
+
+        mostrarMensagem(
+          numeros.length +
+          ' chave(s) devolvidas por ' +
+          nomeDevolvedor +
+          '!'
+        );
+
+
+        await atualizarPainel();
+
+
+      } catch (erro) {
+
+        mostrarMensagem(
+          erro.message,
+          'erro'
+        );
+
+
+      } finally {
+
+        botao.disabled =
+          false;
+
+
+        document
+          .getElementById(
+            'carregandoDevolucao'
+          )
+          .style.display =
+            'none';
+
+      }
 
     },
     2500
@@ -2673,7 +3773,8 @@ async function atualizarPainel() {
       );
 
 
-    area.innerHTML = '';
+    area.innerHTML =
+      '';
 
 
     if (
@@ -2704,7 +3805,9 @@ async function atualizarPainel() {
 
   } catch (erro) {
 
-    console.error(erro);
+    console.error(
+      erro
+    );
 
 
     document
@@ -2720,10 +3823,12 @@ async function atualizarPainel() {
 
 
 // ============================================================
-// CARD DO PAINEL
+// CARD PAINEL
 // ============================================================
 
-function criarMovimentoPainel(item) {
+function criarMovimentoPainel(
+  item
+) {
 
   const div =
     document.createElement(
@@ -2804,10 +3909,10 @@ function criarMovimentoPainel(item) {
     (
       item.status ===
       'ATRASADA'
-        ?
-        'status-atrasada'
-        :
-        'status-aberta'
+
+        ? 'status-atrasada'
+
+        : 'status-aberta'
     );
 
 
@@ -2815,18 +3920,30 @@ function criarMovimentoPainel(item) {
     item.status;
 
 
-  info.appendChild(titulo);
+  info.appendChild(
+    titulo
+  );
 
-  info.appendChild(pessoa);
+  info.appendChild(
+    pessoa
+  );
 
-  info.appendChild(setor);
+  info.appendChild(
+    setor
+  );
 
-  info.appendChild(data);
+  info.appendChild(
+    data
+  );
 
-  info.appendChild(status);
+  info.appendChild(
+    status
+  );
 
 
-  div.appendChild(info);
+  div.appendChild(
+    info
+  );
 
 
   return div;
@@ -2841,11 +3958,11 @@ function criarMovimentoPainel(item) {
 function escaparHtml(texto) {
 
   return String(texto || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
 
 }
 
@@ -2856,29 +3973,22 @@ function escaparHtml(texto) {
 
 async function iniciarCamera() {
 
+  if (streamCamera) {
+    return;
+  }
+
+
   try {
 
     if (
       !navigator.mediaDevices ||
-      !navigator.mediaDevices.getUserMedia
+      !navigator.mediaDevices
+        .getUserMedia
     ) {
 
       throw new Error(
         'Câmera não suportada.'
       );
-
-    }
-
-
-    if (streamCamera) {
-
-      streamCamera
-        .getTracks()
-        .forEach(function(track) {
-
-          track.stop();
-
-        });
 
     }
 
@@ -2912,7 +4022,37 @@ async function iniciarCamera() {
 
   } catch (erro) {
 
-    console.error(erro);
+    mostrarMensagem(
+      'Não foi possível abrir a câmera.',
+      'erro'
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// PARAR CÂMERA
+// ============================================================
+
+function pararCamera() {
+
+  if (streamCamera) {
+
+    streamCamera
+      .getTracks()
+      .forEach(
+        function(track) {
+
+          track.stop();
+
+        }
+      );
+
+
+    streamCamera =
+      null;
 
   }
 
@@ -3017,7 +4157,8 @@ function tirarFoto() {
 
 function novaFoto() {
 
-  fotoBase64 = '';
+  fotoBase64 =
+    '';
 
 
   document
@@ -3099,7 +4240,8 @@ function cadastrarPessoa() {
     );
 
 
-  botao.disabled = true;
+  botao.disabled =
+    true;
 
 
   document
@@ -3125,37 +4267,81 @@ function cadastrarPessoa() {
 
 
   setTimeout(
-    function() {
+    async function() {
 
-      document
-        .getElementById(
-          'nomeCadastro'
-        )
-        .value =
-          '';
+      try {
 
-
-      novaFoto();
-
-
-      botao.disabled =
-        false;
+        const resultado =
+          await jsonp(
+            'buscarPessoasPorNome',
+            {
+              nome: nome
+            }
+          );
 
 
-      document
-        .getElementById(
-          'carregandoCadastro'
-        )
-        .style.display =
-          'none';
+        const encontrado =
+          resultado.some(
+            pessoa =>
+              pessoa.nome
+                .toLowerCase() ===
+              nome.toLowerCase()
+          );
 
 
-      mostrarMensagem(
-        'Cadastro enviado com sucesso!'
-      );
+        if (!encontrado) {
+
+          mostrarMensagem(
+            'Não foi possível confirmar o cadastro.',
+            'erro'
+          );
+
+          return;
+
+        }
+
+
+        document
+          .getElementById(
+            'nomeCadastro'
+          )
+          .value =
+            '';
+
+
+        novaFoto();
+
+
+        mostrarMensagem(
+          'Pessoa cadastrada com sucesso!'
+        );
+
+
+      } catch (erro) {
+
+        mostrarMensagem(
+          erro.message,
+          'erro'
+        );
+
+
+      } finally {
+
+        botao.disabled =
+          false;
+
+
+        document
+          .getElementById(
+            'carregandoCadastro'
+          )
+          .style.display =
+            'none';
+
+      }
 
     },
-    2200
+    2500
   );
 
 }
