@@ -3,414 +3,370 @@
 
 <head>
 
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Controle de Portaria</title>
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f3f4f6;
-      color: #222;
-    }
-
-    /* ======================================================
-       CABEÇALHO
-    ====================================================== */
-
-    header {
-      background: #8b0000;
-      color: white;
-      padding: 18px 25px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 8px rgba(0,0,0,.2);
-    }
-
-    header h1 {
-      font-size: 25px;
-    }
-
-    .relogio {
-      font-size: 15px;
-      text-align: right;
-    }
-
-
-    /* ======================================================
-       MENU
-    ====================================================== */
-
-    nav {
-      background: white;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,.08);
-      flex-wrap: wrap;
-    }
-
-    nav button {
-      border: none;
-      background: #eee;
-      padding: 13px 20px;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: .2s;
-    }
-
-    nav button:hover {
-      background: #ddd;
-    }
-
-    nav button.ativo {
-      background: #8b0000;
-      color: white;
-    }
-
-
-    /* ======================================================
-       CONTEÚDO
-    ====================================================== */
-
-    main {
-      max-width: 1150px;
-      margin: 25px auto;
-      padding: 0 18px;
-    }
-
-    .pagina {
-      display: none;
-    }
-
-    .pagina.ativa {
-      display: block;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
-    }
-
-    .card h2 {
-      color: #8b0000;
-      margin-bottom: 20px;
-    }
-
-    .card h3 {
-      margin-bottom: 12px;
-    }
-
-
-    /* ======================================================
-       FORMULÁRIOS
-    ====================================================== */
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-      margin-top: 15px;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 17px;
-      background: white;
-    }
-
-    input:focus,
-    select:focus {
-      outline: none;
-      border-color: #8b0000;
-      box-shadow: 0 0 0 2px rgba(139,0,0,.1);
-    }
-
-    .botao {
-      border: none;
-      background: #8b0000;
-      color: white;
-      padding: 14px 22px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 18px;
-    }
-
-    .botao:hover {
-      background: #a00000;
-    }
-
-    .botao:disabled {
-      background: #999;
-      cursor: not-allowed;
-    }
-
-    .botao-verde {
-      background: #19713a;
-    }
-
-    .botao-verde:hover {
-      background: #145b2f;
-    }
-
-    .botao-cinza {
-      background: #555;
-    }
-
-
-    /* ======================================================
-       CADASTRO / CÂMERA
-    ====================================================== */
-
-    .camera-area {
-      max-width: 560px;
-      margin: 20px auto;
-      text-align: center;
-    }
-
-    video,
-    #fotoCapturada {
-      width: 100%;
-      max-height: 400px;
-      background: #111;
-      border-radius: 12px;
-      object-fit: cover;
-    }
-
-    #fotoCapturada {
-      display: none;
-    }
-
-    canvas {
-      display: none;
-    }
-
-    .camera-botoes {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-
-    /* ======================================================
-       PESSOA
-    ====================================================== */
-
-    .pessoa-encontrada {
-      margin-top: 20px;
-      display: none;
-      align-items: center;
-      gap: 20px;
-      background: #f7f7f7;
-      padding: 18px;
-      border-radius: 10px;
-    }
-
-    .pessoa-encontrada img {
-      width: 110px;
-      height: 110px;
-      border-radius: 10px;
-      object-fit: cover;
-      background: #ddd;
-    }
-
-    .pessoa-encontrada h3 {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-
-    /* ======================================================
-       PAINEL
-    ====================================================== */
-
-    .cards-resumo {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .resumo {
-      background: white;
-      padding: 22px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    }
-
-    .resumo .numero {
-      font-size: 36px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .resumo .titulo {
-      font-size: 14px;
-      color: #666;
-      font-weight: bold;
-    }
-
-    .disponivel {
-      color: #19713a;
-    }
-
-    .retirada {
-      color: #b36b00;
-    }
-
-    .atrasada {
-      color: #b00020;
-    }
-
-
-    /* ======================================================
-       MOVIMENTAÇÕES
-    ====================================================== */
-
-    .movimento {
-      background: #f8f8f8;
-      border-left: 5px solid #8b0000;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .movimento-info {
-      flex: 1;
-    }
-
-    .movimento-info strong {
-      font-size: 18px;
-    }
-
-    .movimento-info p {
-      margin-top: 5px;
-      color: #555;
-    }
-
-    .status {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      margin-top: 7px;
-    }
-
-    .status-aberta {
-      background: #fff0cc;
-      color: #805300;
-    }
-
-    .status-atrasada {
-      background: #ffd9df;
-      color: #a00020;
-    }
-
-
-    /* ======================================================
-       MENSAGENS
-    ====================================================== */
-
-    .mensagem {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 15px 25px;
-      border-radius: 8px;
-      color: white;
-      font-weight: bold;
-      display: none;
-      z-index: 9999;
-      box-shadow: 0 3px 15px rgba(0,0,0,.25);
-      max-width: 90%;
-      text-align: center;
-    }
-
-    .mensagem.sucesso {
-      background: #19713a;
-    }
-
-    .mensagem.erro {
-      background: #b00020;
-    }
-
-    .carregando {
-      display: none;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #555;
-    }
-
-
-    /* ======================================================
-       RESPONSIVO
-    ====================================================== */
-
-    @media (max-width: 800px) {
-
-      .cards-resumo {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      header {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-      }
-
-      .relogio {
-        text-align: center;
-      }
-
-    }
-
-    @media (max-width: 500px) {
-
-      .cards-resumo {
-        grid-template-columns: 1fr;
-      }
-
-      .movimento {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Controle de Portaria</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f4f6;
+  color: #222;
+}
+
+header {
+  background: #8b0000;
+  color: white;
+  padding: 18px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,.20);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.relogio {
+  text-align: right;
+}
+
+nav {
+  background: white;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+nav button {
+  border: 0;
+  background: #eee;
+  padding: 13px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+nav button.ativo {
+  background: #8b0000;
+  color: white;
+}
+
+main {
+  max-width: 1150px;
+  margin: 25px auto;
+  padding: 0 18px;
+}
+
+.pagina {
+  display: none;
+}
+
+.pagina.ativa {
+  display: block;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+.card h2 {
+  color: #8b0000;
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 14px;
+  font-size: 17px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #8b0000;
+}
+
+.botao {
+  border: 0;
+  background: #8b0000;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.botao:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.botao-verde {
+  background: #19713a;
+}
+
+.botao-cinza {
+  background: #555;
+}
+
+.cards-resumo {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.resumo {
+  background: white;
+  border-radius: 12px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.resumo-numero {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.resumo-titulo {
+  color: #666;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.verde {
+  color: #19713a;
+}
+
+.laranja {
+  color: #b36b00;
+}
+
+.vermelho {
+  color: #b00020;
+}
+
+.camera-area {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+video,
+#fotoCapturada {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #111;
+}
+
+#fotoCapturada {
+  display: none;
+}
+
+canvas {
+  display: none;
+}
+
+.camera-botoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pessoa-selecionada {
+  display: none;
+  margin-top: 20px;
+  padding: 18px;
+  background: #f7f7f7;
+  border-radius: 10px;
+  align-items: center;
+  gap: 18px;
+  border: 2px solid #19713a;
+}
+
+.pessoa-selecionada img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.pessoa-selecionada h3 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.resultado-pessoa {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 13px;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.resultado-pessoa:hover {
+  border-color: #8b0000;
+  background: #fff;
+}
+
+.resultado-pessoa img {
+  width: 75px;
+  height: 75px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.resultado-info {
+  flex: 1;
+}
+
+.resultado-info strong {
+  font-size: 18px;
+}
+
+.numero-cadastro {
+  color: #666;
+  margin-top: 5px;
+}
+
+.movimento {
+  background: #f8f8f8;
+  border-left: 5px solid #8b0000;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.movimento-info {
+  flex: 1;
+}
+
+.movimento-info strong {
+  font-size: 18px;
+}
+
+.movimento-info p {
+  color: #555;
+  margin: 6px 0;
+}
+
+.status {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-aberta {
+  background: #fff0cc;
+  color: #805300;
+}
+
+.status-atrasada {
+  background: #ffd9df;
+  color: #a00020;
+}
+
+.mensagem {
+  position: fixed;
+  z-index: 99999;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 3px 15px rgba(0,0,0,.25);
+  text-align: center;
+}
+
+.mensagem.sucesso {
+  background: #19713a;
+}
+
+.mensagem.erro {
+  background: #b00020;
+}
+
+.carregando {
+  display: none;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+@media(max-width:800px) {
+
+  .cards-resumo {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:550px) {
+
+  .cards-resumo {
+    grid-template-columns: 1fr;
+  }
+
+  .movimento {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+}
+
+</style>
 
 </head>
 
@@ -418,70 +374,59 @@
 <body>
 
 
-<!-- ========================================================
-     MENSAGEM
-========================================================= -->
+<div
+  id="mensagem"
+  class="mensagem"
+></div>
 
-<div id="mensagem" class="mensagem"></div>
-
-
-<!-- ========================================================
-     IFRAME INVISÍVEL PARA ENVIAR POST
-========================================================= -->
 
 <iframe
-  name="frameEnvio"
   id="frameEnvio"
+  name="frameEnvio"
   style="display:none"
 ></iframe>
 
 
-<!-- ========================================================
-     CABEÇALHO
-========================================================= -->
-
 <header>
 
-  <div>
-    <h1>🔑 CONTROLE DE PORTARIA</h1>
-  </div>
+  <h1>
+    🔑 CONTROLE DE PORTARIA
+  </h1>
 
   <div class="relogio">
+
     <div id="dataAtual"></div>
+
     <div id="horaAtual"></div>
+
   </div>
 
 </header>
 
 
-<!-- ========================================================
-     MENU
-========================================================= -->
-
 <nav>
 
   <button
-    id="menuPainel"
     class="ativo"
-    onclick="abrirPagina('painel', this)"
+    onclick="abrirPagina('painel',this)"
   >
     📊 Painel
   </button>
 
   <button
-    onclick="abrirPagina('retirada', this)"
+    onclick="abrirPagina('retirada',this)"
   >
     🔑 Retirar Chave
   </button>
 
   <button
-    onclick="abrirPagina('devolucao', this)"
+    onclick="abrirPagina('devolucao',this)"
   >
     ↩️ Devolver
   </button>
 
   <button
-    onclick="abrirPagina('cadastro', this)"
+    onclick="abrirPagina('cadastro',this)"
   >
     👤 Cadastro
   </button>
@@ -492,9 +437,9 @@
 <main>
 
 
-<!-- ========================================================
+<!-- ======================================================
      PAINEL
-========================================================= -->
+======================================================= -->
 
 <section
   id="painel"
@@ -507,12 +452,12 @@
 
       <div
         id="totalChaves"
-        class="numero"
+        class="resumo-numero"
       >
-        87
+        -
       </div>
 
-      <div class="titulo">
+      <div class="resumo-titulo">
         TOTAL DE CHAVES
       </div>
 
@@ -523,12 +468,12 @@
 
       <div
         id="totalDisponiveis"
-        class="numero disponivel"
+        class="resumo-numero verde"
       >
         -
       </div>
 
-      <div class="titulo">
+      <div class="resumo-titulo">
         DISPONÍVEIS
       </div>
 
@@ -539,12 +484,12 @@
 
       <div
         id="totalRetiradas"
-        class="numero retirada"
+        class="resumo-numero laranja"
       >
         -
       </div>
 
-      <div class="titulo">
+      <div class="resumo-titulo">
         RETIRADAS
       </div>
 
@@ -555,12 +500,12 @@
 
       <div
         id="totalAtrasadas"
-        class="numero atrasada"
+        class="resumo-numero vermelho"
       >
         -
       </div>
 
-      <div class="titulo">
+      <div class="resumo-titulo">
         ATRASADAS
       </div>
 
@@ -576,9 +521,7 @@
     </h2>
 
     <div id="listaAbertas">
-
       Carregando...
-
     </div>
 
   </div>
@@ -586,9 +529,9 @@
 </section>
 
 
-<!-- ========================================================
+<!-- ======================================================
      RETIRADA
-========================================================= -->
+======================================================= -->
 
 <section
   id="retirada"
@@ -603,14 +546,16 @@
 
 
     <label>
-      Número da pessoa
+      Nome da pessoa
     </label>
 
+
     <input
-      type="number"
-      id="numeroPessoaRetirada"
-      placeholder="Digite o número"
-      min="1"
+      type="text"
+      id="nomeBuscaRetirada"
+      placeholder="Digite o nome da pessoa"
+      autocomplete="off"
+      onkeydown="if(event.key === 'Enter') buscarPessoaRetirada()"
     >
 
 
@@ -623,22 +568,33 @@
 
 
     <div
+      id="resultadosPessoas"
+      style="display:none;margin-top:20px"
+    ></div>
+
+
+    <div
       id="pessoaRetirada"
-      class="pessoa-encontrada"
+      class="pessoa-selecionada"
     >
 
       <img
         id="fotoPessoaRetirada"
-        alt="Foto"
+        alt="Foto da pessoa"
       >
+
 
       <div>
 
-        <h3 id="nomePessoaRetirada"></h3>
+        <h3
+          id="nomePessoaRetirada"
+        ></h3>
 
         <div>
-          Número:
-          <strong id="codigoPessoaRetirada"></strong>
+          Cadastro Nº
+          <strong
+            id="codigoPessoaRetirada"
+          ></strong>
         </div>
 
       </div>
@@ -655,10 +611,13 @@
         Chave
       </label>
 
-      <select id="chaveRetirada">
+
+      <select
+        id="chaveRetirada"
+      >
 
         <option value="">
-          Carregando chaves...
+          Selecione a chave
         </option>
 
       </select>
@@ -671,6 +630,7 @@
       >
         🔑 Confirmar Retirada
       </button>
+
 
       <div
         id="carregandoRetirada"
@@ -686,9 +646,9 @@
 </section>
 
 
-<!-- ========================================================
+<!-- ======================================================
      DEVOLUÇÃO
-========================================================= -->
+======================================================= -->
 
 <section
   id="devolucao"
@@ -701,15 +661,12 @@
       ↩️ Devolução de Chave
     </h2>
 
-    <p style="margin-bottom:20px;color:#666">
-      Selecione abaixo a chave que está sendo devolvida.
+    <p>
+      Selecione a chave que está sendo devolvida.
     </p>
 
-
     <div id="listaDevolucao">
-
       Carregando...
-
     </div>
 
   </div>
@@ -717,9 +674,9 @@
 </section>
 
 
-<!-- ========================================================
+<!-- ======================================================
      CADASTRO
-========================================================= -->
+======================================================= -->
 
 <section
   id="cadastro"
@@ -736,6 +693,7 @@
     <label>
       Nome completo
     </label>
+
 
     <input
       type="text"
@@ -760,7 +718,9 @@
       >
 
 
-      <canvas id="canvas"></canvas>
+      <canvas
+        id="canvas"
+      ></canvas>
 
 
       <div class="camera-botoes">
@@ -816,7 +776,7 @@
 
 
 // ============================================================
-// URL DO GOOGLE APPS SCRIPT
+// URL DO APPS SCRIPT
 // ============================================================
 
 const URL_SCRIPT =
@@ -827,20 +787,23 @@ const URL_SCRIPT =
 // VARIÁVEIS
 // ============================================================
 
-let streamCamera = null;
+let streamCamera =
+  null;
 
-let fotoBase64 = '';
+let fotoBase64 =
+  '';
 
-let pessoaSelecionada = null;
+let pessoaSelecionada =
+  null;
 
 
 // ============================================================
-// INICIAR SISTEMA
+// INICIAR
 // ============================================================
 
 window.addEventListener(
   'load',
-  function () {
+  function() {
 
     atualizarRelogio();
 
@@ -867,20 +830,24 @@ function atualizarRelogio() {
     new Date();
 
 
-  document.getElementById(
-    'dataAtual'
-  ).textContent =
-    agora.toLocaleDateString(
-      'pt-BR'
-    );
+  document
+    .getElementById(
+      'dataAtual'
+    )
+    .textContent =
+      agora.toLocaleDateString(
+        'pt-BR'
+      );
 
 
-  document.getElementById(
-    'horaAtual'
-  ).textContent =
-    agora.toLocaleTimeString(
-      'pt-BR'
-    );
+  document
+    .getElementById(
+      'horaAtual'
+    )
+    .textContent =
+      agora.toLocaleTimeString(
+        'pt-BR'
+      );
 
 }
 
@@ -899,7 +866,7 @@ function abrirPagina(
       '.pagina'
     )
     .forEach(
-      function (item) {
+      function(item) {
 
         item.classList.remove(
           'ativa'
@@ -923,7 +890,7 @@ function abrirPagina(
       'nav button'
     )
     .forEach(
-      function (item) {
+      function(item) {
 
         item.classList.remove(
           'ativo'
@@ -943,7 +910,8 @@ function abrirPagina(
 
 
   if (
-    pagina === 'painel'
+    pagina ===
+    'painel'
   ) {
 
     atualizarPainel();
@@ -952,7 +920,8 @@ function abrirPagina(
 
 
   if (
-    pagina === 'devolucao'
+    pagina ===
+    'devolucao'
   ) {
 
     carregarDevolucoes();
@@ -964,7 +933,6 @@ function abrirPagina(
 
 // ============================================================
 // JSONP
-// LEITURA DO APPS SCRIPT
 // ============================================================
 
 function jsonp(
@@ -973,17 +941,18 @@ function jsonp(
 ) {
 
   return new Promise(
-    function (
+    function(
       resolve,
       reject
     ) {
 
       const callback =
-        'callback_' +
+        'cb_' +
         Date.now() +
         '_' +
         Math.floor(
-          Math.random() * 100000
+          Math.random() *
+          100000
         );
 
 
@@ -1012,7 +981,7 @@ function jsonp(
       Object.keys(
         parametros
       ).forEach(
-        function (chave) {
+        function(chave) {
 
           params.set(
             chave,
@@ -1027,7 +996,7 @@ function jsonp(
 
 
       window[callback] =
-        function (dados) {
+        function(dados) {
 
           clearTimeout(
             timeout
@@ -1050,7 +1019,6 @@ function jsonp(
             reject(
               new Error(
                 dados.erro ||
-                dados.mensagem ||
                 'Erro no servidor.'
               )
             );
@@ -1068,7 +1036,7 @@ function jsonp(
 
 
       script.onerror =
-        function () {
+        function() {
 
           clearTimeout(
             timeout
@@ -1085,7 +1053,7 @@ function jsonp(
 
           reject(
             new Error(
-              'Não foi possível comunicar com o servidor.'
+              'Falha na comunicação com o servidor.'
             )
           );
 
@@ -1105,11 +1073,17 @@ function jsonp(
 
       timeout =
         setTimeout(
-          function () {
+          function() {
 
-            delete window[
-              callback
-            ];
+            if (
+              window[callback]
+            ) {
+
+              delete window[
+                callback
+              ];
+
+            }
 
 
             script.remove();
@@ -1132,7 +1106,7 @@ function jsonp(
 
 
 // ============================================================
-// ENVIAR POST
+// POST
 // ============================================================
 
 function enviarPost(
@@ -1164,7 +1138,7 @@ function enviarPost(
   Object.keys(
     dados
   ).forEach(
-    function (chave) {
+    function(chave) {
 
       const input =
         document.createElement(
@@ -1201,7 +1175,7 @@ function enviarPost(
 
 
   setTimeout(
-    function () {
+    function() {
 
       form.remove();
 
@@ -1241,7 +1215,7 @@ function mostrarMensagem(
 
 
   setTimeout(
-    function () {
+    function() {
 
       caixa.style.display =
         'none';
@@ -1262,13 +1236,25 @@ async function iniciarCamera() {
   try {
 
     if (
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ) {
+
+      throw new Error(
+        'Câmera não suportada.'
+      );
+
+    }
+
+
+    if (
       streamCamera
     ) {
 
       streamCamera
         .getTracks()
         .forEach(
-          function (track) {
+          function(track) {
 
             track.stop();
 
@@ -1287,7 +1273,6 @@ async function iniciarCamera() {
             width: {
               ideal: 1280
             },
-
             height: {
               ideal: 720
             }
@@ -1298,10 +1283,12 @@ async function iniciarCamera() {
         });
 
 
-    document.getElementById(
-      'video'
-    ).srcObject =
-      streamCamera;
+    document
+      .getElementById(
+        'video'
+      )
+      .srcObject =
+        streamCamera;
 
 
   } catch (erro) {
@@ -1333,12 +1320,6 @@ function tirarFoto() {
     );
 
 
-  const canvas =
-    document.getElementById(
-      'canvas'
-    );
-
-
   if (
     !video.videoWidth
   ) {
@@ -1353,6 +1334,12 @@ function tirarFoto() {
   }
 
 
+  const canvas =
+    document.getElementById(
+      'canvas'
+    );
+
+
   canvas.width =
     video.videoWidth;
 
@@ -1361,25 +1348,23 @@ function tirarFoto() {
     video.videoHeight;
 
 
-  const contexto =
-    canvas.getContext(
+  canvas
+    .getContext(
       '2d'
+    )
+    .drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
     );
-
-
-  contexto.drawImage(
-    video,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
 
 
   fotoBase64 =
     canvas.toDataURL(
       'image/jpeg',
-      0.80
+      0.78
     );
 
 
@@ -1401,16 +1386,20 @@ function tirarFoto() {
     'none';
 
 
-  document.getElementById(
-    'btnFoto'
-  ).style.display =
-    'none';
+  document
+    .getElementById(
+      'btnFoto'
+    )
+    .style.display =
+      'none';
 
 
-  document.getElementById(
-    'btnNovaFoto'
-  ).style.display =
-    'inline-block';
+  document
+    .getElementById(
+      'btnNovaFoto'
+    )
+    .style.display =
+      'inline-block';
 
 }
 
@@ -1421,45 +1410,57 @@ function tirarFoto() {
 
 function novaFoto() {
 
-  fotoBase64 = '';
+  fotoBase64 =
+    '';
 
 
-  document.getElementById(
-    'fotoCapturada'
-  ).style.display =
-    'none';
+  document
+    .getElementById(
+      'fotoCapturada'
+    )
+    .style.display =
+      'none';
 
 
-  document.getElementById(
-    'video'
-  ).style.display =
-    'block';
+  document
+    .getElementById(
+      'video'
+    )
+    .style.display =
+      'block';
 
 
-  document.getElementById(
-    'btnFoto'
-  ).style.display =
-    'inline-block';
+  document
+    .getElementById(
+      'btnFoto'
+    )
+    .style.display =
+      'inline-block';
 
 
-  document.getElementById(
-    'btnNovaFoto'
-  ).style.display =
-    'none';
+  document
+    .getElementById(
+      'btnNovaFoto'
+    )
+    .style.display =
+      'none';
 
 }
 
 
 // ============================================================
-// CADASTRAR PESSOA
+// CADASTRAR
 // ============================================================
 
 function cadastrarPessoa() {
 
   const nome =
-    document.getElementById(
-      'nomeCadastro'
-    ).value.trim();
+    document
+      .getElementById(
+        'nomeCadastro'
+      )
+      .value
+      .trim();
 
 
   if (!nome) {
@@ -1496,10 +1497,12 @@ function cadastrarPessoa() {
     true;
 
 
-  document.getElementById(
-    'carregandoCadastro'
-  ).style.display =
-    'block';
+  document
+    .getElementById(
+      'carregandoCadastro'
+    )
+    .style.display =
+      'block';
 
 
   enviarPost({
@@ -1517,17 +1520,14 @@ function cadastrarPessoa() {
 
 
   setTimeout(
-    function () {
+    function() {
 
-      mostrarMensagem(
-        'Cadastro enviado com sucesso!'
-      );
-
-
-      document.getElementById(
-        'nomeCadastro'
-      ).value =
-        '';
+      document
+        .getElementById(
+          'nomeCadastro'
+        )
+        .value =
+          '';
 
 
       novaFoto();
@@ -1537,10 +1537,17 @@ function cadastrarPessoa() {
         false;
 
 
-      document.getElementById(
-        'carregandoCadastro'
-      ).style.display =
-        'none';
+      document
+        .getElementById(
+          'carregandoCadastro'
+        )
+        .style.display =
+          'none';
+
+
+      mostrarMensagem(
+        'Cadastro enviado com sucesso!'
+      );
 
     },
     2200
@@ -1550,21 +1557,24 @@ function cadastrarPessoa() {
 
 
 // ============================================================
-// BUSCAR PESSOA PARA RETIRADA
+// BUSCAR PESSOA PELO NOME
 // ============================================================
 
 async function buscarPessoaRetirada() {
 
-  const numero =
-    document.getElementById(
-      'numeroPessoaRetirada'
-    ).value.trim();
+  const nome =
+    document
+      .getElementById(
+        'nomeBuscaRetirada'
+      )
+      .value
+      .trim();
 
 
-  if (!numero) {
+  if (!nome) {
 
     mostrarMensagem(
-      'Digite o número da pessoa.',
+      'Digite o nome da pessoa.',
       'erro'
     );
 
@@ -1573,77 +1583,207 @@ async function buscarPessoaRetirada() {
   }
 
 
+  pessoaSelecionada =
+    null;
+
+
+  document
+    .getElementById(
+      'pessoaRetirada'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'areaEscolhaChave'
+    )
+    .style.display =
+      'none';
+
+
+  const area =
+    document.getElementById(
+      'resultadosPessoas'
+    );
+
+
+  area.style.display =
+    'block';
+
+
+  area.innerHTML =
+    '<p>🔎 Procurando...</p>';
+
+
   try {
 
-    pessoaSelecionada =
+    const pessoas =
       await jsonp(
-        'buscarPessoa',
+        'buscarPessoasPorNome',
         {
-          numero:
-            numero
+          nome: nome
         }
       );
 
 
-    document.getElementById(
-      'nomePessoaRetirada'
-    ).textContent =
-      pessoaSelecionada.nome;
-
-
-    document.getElementById(
-      'codigoPessoaRetirada'
-    ).textContent =
-      pessoaSelecionada.numero;
-
-
-    const foto =
-      document.getElementById(
-        'fotoPessoaRetirada'
-      );
+    area.innerHTML =
+      '';
 
 
     if (
-      pessoaSelecionada.foto
+      !pessoas ||
+      pessoas.length === 0
     ) {
 
-      foto.src =
-        pessoaSelecionada.foto;
+      area.innerHTML =
+        '<p>Nenhuma pessoa encontrada.</p>';
+
+      return;
 
     }
 
 
-    document.getElementById(
-      'pessoaRetirada'
-    ).style.display =
-      'flex';
+    pessoas.forEach(
+      function(pessoa) {
+
+        const item =
+          document.createElement(
+            'div'
+          );
 
 
-    document.getElementById(
-      'areaEscolhaChave'
-    ).style.display =
-      'block';
+        item.className =
+          'resultado-pessoa';
 
 
-    await carregarChavesDisponiveis();
+        const foto =
+          document.createElement(
+            'img'
+          );
+
+
+        foto.src =
+          pessoa.foto || '';
+
+
+        foto.alt =
+          'Foto';
+
+
+        const info =
+          document.createElement(
+            'div'
+          );
+
+
+        info.className =
+          'resultado-info';
+
+
+        const nomeEl =
+          document.createElement(
+            'strong'
+          );
+
+
+        nomeEl.textContent =
+          pessoa.nome;
+
+
+        const numero =
+          document.createElement(
+            'div'
+          );
+
+
+        numero.className =
+          'numero-cadastro';
+
+
+        numero.textContent =
+          'Cadastro Nº ' +
+          pessoa.numero;
+
+
+        info.appendChild(
+          nomeEl
+        );
+
+
+        info.appendChild(
+          numero
+        );
+
+
+        const botao =
+          document.createElement(
+            'button'
+          );
+
+
+        botao.className =
+          'botao botao-verde';
+
+
+        botao.style.marginTop =
+          '0';
+
+
+        botao.textContent =
+          'Selecionar';
+
+
+        botao.onclick =
+          function(evento) {
+
+            evento.stopPropagation();
+
+            selecionarPessoaRetirada(
+              pessoa
+            );
+
+          };
+
+
+        item.onclick =
+          function() {
+
+            selecionarPessoaRetirada(
+              pessoa
+            );
+
+          };
+
+
+        item.appendChild(
+          foto
+        );
+
+
+        item.appendChild(
+          info
+        );
+
+
+        item.appendChild(
+          botao
+        );
+
+
+        area.appendChild(
+          item
+        );
+
+      }
+    );
 
 
   } catch (erro) {
 
-    pessoaSelecionada =
-      null;
-
-
-    document.getElementById(
-      'pessoaRetirada'
-    ).style.display =
-      'none';
-
-
-    document.getElementById(
-      'areaEscolhaChave'
-    ).style.display =
-      'none';
+    area.innerHTML =
+      '<p>Erro ao buscar pessoa.</p>';
 
 
     mostrarMensagem(
@@ -1652,6 +1792,71 @@ async function buscarPessoaRetirada() {
     );
 
   }
+
+}
+
+
+// ============================================================
+// SELECIONAR PESSOA
+// ============================================================
+
+async function selecionarPessoaRetirada(
+  pessoa
+) {
+
+  pessoaSelecionada =
+    pessoa;
+
+
+  document
+    .getElementById(
+      'nomePessoaRetirada'
+    )
+    .textContent =
+      pessoa.nome;
+
+
+  document
+    .getElementById(
+      'codigoPessoaRetirada'
+    )
+    .textContent =
+      pessoa.numero;
+
+
+  document
+    .getElementById(
+      'fotoPessoaRetirada'
+    )
+    .src =
+      pessoa.foto || '';
+
+
+  document
+    .getElementById(
+      'resultadosPessoas'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'pessoaRetirada'
+    )
+    .style.display =
+      'flex';
+
+
+  document
+    .getElementById(
+      'areaEscolhaChave'
+    )
+    .style.display =
+      'block';
+
+
+  await carregarChavesDisponiveis();
 
 }
 
@@ -1685,7 +1890,7 @@ async function carregarChavesDisponiveis() {
 
 
     chaves.forEach(
-      function (chave) {
+      function(chave) {
 
         const option =
           document.createElement(
@@ -1694,10 +1899,13 @@ async function carregarChavesDisponiveis() {
 
 
         option.value =
-          chave.numero;
+          String(
+            chave.numero
+          );
 
 
         option.textContent =
+          'Chave ' +
           chave.numero +
           ' — ' +
           chave.identificacao +
@@ -1750,7 +1958,7 @@ function confirmarRetirada() {
   ) {
 
     mostrarMensagem(
-      'Primeiro busque a pessoa.',
+      'Selecione a pessoa.',
       'erro'
     );
 
@@ -1760,15 +1968,17 @@ function confirmarRetirada() {
 
 
   const chave =
-    document.getElementById(
-      'chaveRetirada'
-    ).value;
+    document
+      .getElementById(
+        'chaveRetirada'
+      )
+      .value;
 
 
   if (!chave) {
 
     mostrarMensagem(
-      'Selecione uma chave.',
+      'Selecione a chave.',
       'erro'
     );
 
@@ -1787,10 +1997,12 @@ function confirmarRetirada() {
     true;
 
 
-  document.getElementById(
-    'carregandoRetirada'
-  ).style.display =
-    'block';
+  document
+    .getElementById(
+      'carregandoRetirada'
+    )
+    .style.display =
+      'block';
 
 
   enviarPost({
@@ -1808,38 +2020,46 @@ function confirmarRetirada() {
 
 
   setTimeout(
-    async function () {
+    async function() {
 
       botao.disabled =
         false;
 
 
-      document.getElementById(
-        'carregandoRetirada'
-      ).style.display =
-        'none';
+      document
+        .getElementById(
+          'carregandoRetirada'
+        )
+        .style.display =
+          'none';
+
+
+      document
+        .getElementById(
+          'nomeBuscaRetirada'
+        )
+        .value =
+          '';
+
+
+      document
+        .getElementById(
+          'pessoaRetirada'
+        )
+        .style.display =
+          'none';
+
+
+      document
+        .getElementById(
+          'areaEscolhaChave'
+        )
+        .style.display =
+          'none';
 
 
       pessoaSelecionada =
         null;
-
-
-      document.getElementById(
-        'numeroPessoaRetirada'
-      ).value =
-        '';
-
-
-      document.getElementById(
-        'pessoaRetirada'
-      ).style.display =
-        'none';
-
-
-      document.getElementById(
-        'areaEscolhaChave'
-      ).style.display =
-        'none';
 
 
       mostrarMensagem(
@@ -1850,7 +2070,7 @@ function confirmarRetirada() {
       await atualizarPainel();
 
     },
-    1800
+    2000
   );
 
 }
@@ -1897,117 +2117,13 @@ async function carregarDevolucoes() {
 
 
     dados.forEach(
-      function (item) {
+      function(item) {
 
         const div =
-          document.createElement(
-            'div'
+          criarMovimento(
+            item,
+            true
           );
-
-
-        div.className =
-          'movimento';
-
-
-        const info =
-          document.createElement(
-            'div'
-          );
-
-
-        info.className =
-          'movimento-info';
-
-
-        const statusClasse =
-          item.status ===
-          'ATRASADA'
-            ?
-            'status-atrasada'
-            :
-            'status-aberta';
-
-
-        info.innerHTML =
-
-          '<strong>' +
-          '🔑 Chave ' +
-          escaparHtml(
-            item.chave
-          ) +
-          ' — ' +
-          escaparHtml(
-            item.identificacao
-          ) +
-          '</strong>' +
-
-          '<p>' +
-          '👤 ' +
-          escaparHtml(
-            item.nome
-          ) +
-          ' — Nº ' +
-          escaparHtml(
-            item.numeroPessoa
-          ) +
-          '</p>' +
-
-          '<p>' +
-          '📍 ' +
-          escaparHtml(
-            item.setor
-          ) +
-          '</p>' +
-
-          '<p>' +
-          '🕒 ' +
-          escaparHtml(
-            item.dataRetirada
-          ) +
-          '</p>' +
-
-          '<span class="status ' +
-          statusClasse +
-          '">' +
-          escaparHtml(
-            item.status
-          ) +
-          '</span>';
-
-
-        const botao =
-          document.createElement(
-            'button'
-          );
-
-
-        botao.className =
-          'botao botao-verde';
-
-
-        botao.textContent =
-          '↩️ Devolver';
-
-
-        botao.onclick =
-          function () {
-
-            devolverChave(
-              item.chave,
-              botao
-            );
-
-          };
-
-
-        div.appendChild(
-          info
-        );
-
-
-        div.appendChild(
-          botao
-        );
 
 
         area.appendChild(
@@ -2021,7 +2137,7 @@ async function carregarDevolucoes() {
   } catch (erro) {
 
     area.innerHTML =
-      '<p>Erro ao carregar as devoluções.</p>';
+      '<p>Erro ao carregar.</p>';
 
 
     mostrarMensagem(
@@ -2035,7 +2151,177 @@ async function carregarDevolucoes() {
 
 
 // ============================================================
-// DEVOLVER CHAVE
+// CRIAR MOVIMENTO
+// ============================================================
+
+function criarMovimento(
+  item,
+  mostrarBotao
+) {
+
+  const div =
+    document.createElement(
+      'div'
+    );
+
+
+  div.className =
+    'movimento';
+
+
+  const info =
+    document.createElement(
+      'div'
+    );
+
+
+  info.className =
+    'movimento-info';
+
+
+  const titulo =
+    document.createElement(
+      'strong'
+    );
+
+
+  titulo.textContent =
+    '🔑 Chave ' +
+    item.chave +
+    ' — ' +
+    item.identificacao;
+
+
+  const pessoa =
+    document.createElement(
+      'p'
+    );
+
+
+  pessoa.textContent =
+    '👤 ' +
+    item.nome +
+    ' — Cadastro Nº ' +
+    item.numeroPessoa;
+
+
+  const setor =
+    document.createElement(
+      'p'
+    );
+
+
+  setor.textContent =
+    '📍 ' +
+    item.setor;
+
+
+  const data =
+    document.createElement(
+      'p'
+    );
+
+
+  data.textContent =
+    '🕒 Retirada: ' +
+    item.dataRetirada;
+
+
+  const status =
+    document.createElement(
+      'span'
+    );
+
+
+  status.className =
+    'status ' +
+    (
+      item.status ===
+      'ATRASADA'
+        ?
+        'status-atrasada'
+        :
+        'status-aberta'
+    );
+
+
+  status.textContent =
+    item.status;
+
+
+  info.appendChild(
+    titulo
+  );
+
+
+  info.appendChild(
+    pessoa
+  );
+
+
+  info.appendChild(
+    setor
+  );
+
+
+  info.appendChild(
+    data
+  );
+
+
+  info.appendChild(
+    status
+  );
+
+
+  div.appendChild(
+    info
+  );
+
+
+  if (
+    mostrarBotao
+  ) {
+
+    const botao =
+      document.createElement(
+        'button'
+      );
+
+
+    botao.className =
+      'botao botao-verde';
+
+
+    botao.textContent =
+      '↩️ Devolver';
+
+
+    botao.onclick =
+      function() {
+
+        devolverChave(
+          item.chave,
+          botao
+        );
+
+      };
+
+
+    div.appendChild(
+      botao
+    );
+
+  }
+
+
+  return div;
+
+}
+
+
+// ============================================================
+// DEVOLVER
 // ============================================================
 
 function devolverChave(
@@ -2076,7 +2362,7 @@ function devolverChave(
 
 
   setTimeout(
-    async function () {
+    async function() {
 
       mostrarMensagem(
         'Chave ' +
@@ -2090,14 +2376,14 @@ function devolverChave(
       await atualizarPainel();
 
     },
-    1800
+    2000
   );
 
 }
 
 
 // ============================================================
-// ATUALIZAR PAINEL
+// PAINEL
 // ============================================================
 
 async function atualizarPainel() {
@@ -2110,32 +2396,72 @@ async function atualizarPainel() {
       );
 
 
-    document.getElementById(
-      'totalChaves'
-    ).textContent =
-      resumo.total;
+    document
+      .getElementById(
+        'totalChaves'
+      )
+      .textContent =
+        resumo.total;
 
 
-    document.getElementById(
-      'totalDisponiveis'
-    ).textContent =
-      resumo.disponiveis;
+    document
+      .getElementById(
+        'totalDisponiveis'
+      )
+      .textContent =
+        resumo.disponiveis;
 
 
-    document.getElementById(
-      'totalRetiradas'
-    ).textContent =
-      resumo.retiradas;
+    document
+      .getElementById(
+        'totalRetiradas'
+      )
+      .textContent =
+        resumo.retiradas;
 
 
-    document.getElementById(
-      'totalAtrasadas'
-    ).textContent =
-      resumo.atrasadas;
+    document
+      .getElementById(
+        'totalAtrasadas'
+      )
+      .textContent =
+        resumo.atrasadas;
 
 
-    montarListaPainel(
-      resumo.abertas || []
+    const area =
+      document.getElementById(
+        'listaAbertas'
+      );
+
+
+    area.innerHTML =
+      '';
+
+
+    if (
+      !resumo.abertas ||
+      resumo.abertas.length === 0
+    ) {
+
+      area.innerHTML =
+        '<p>✅ Todas as chaves estão disponíveis.</p>';
+
+      return;
+
+    }
+
+
+    resumo.abertas.forEach(
+      function(item) {
+
+        area.appendChild(
+          criarMovimento(
+            item,
+            false
+          )
+        );
+
+      }
     );
 
 
@@ -2146,170 +2472,18 @@ async function atualizarPainel() {
     );
 
 
-    document.getElementById(
-      'listaAbertas'
-    ).innerHTML =
-      '<p>Não foi possível carregar o painel.</p>';
+    document
+      .getElementById(
+        'listaAbertas'
+      )
+      .innerHTML =
+        '<p>Não foi possível carregar o painel.</p>';
 
   }
-
-}
-
-
-// ============================================================
-// MONTAR LISTA DO PAINEL
-// ============================================================
-
-function montarListaPainel(
-  dados
-) {
-
-  const area =
-    document.getElementById(
-      'listaAbertas'
-    );
-
-
-  area.innerHTML =
-    '';
-
-
-  if (
-    dados.length === 0
-  ) {
-
-    area.innerHTML =
-      '<p>✅ Todas as chaves estão disponíveis.</p>';
-
-    return;
-
-  }
-
-
-  dados.forEach(
-    function (item) {
-
-      const div =
-        document.createElement(
-          'div'
-        );
-
-
-      div.className =
-        'movimento';
-
-
-      const statusClasse =
-        item.status ===
-        'ATRASADA'
-          ?
-          'status-atrasada'
-          :
-          'status-aberta';
-
-
-      div.innerHTML =
-
-        '<div class="movimento-info">' +
-
-          '<strong>' +
-          '🔑 Chave ' +
-          escaparHtml(
-            item.chave
-          ) +
-          ' — ' +
-          escaparHtml(
-            item.identificacao
-          ) +
-          '</strong>' +
-
-          '<p>' +
-          '👤 ' +
-          escaparHtml(
-            item.nome
-          ) +
-          ' — Nº ' +
-          escaparHtml(
-            item.numeroPessoa
-          ) +
-          '</p>' +
-
-          '<p>' +
-          '📍 ' +
-          escaparHtml(
-            item.setor
-          ) +
-          '</p>' +
-
-          '<p>' +
-          '🕒 Retirada: ' +
-          escaparHtml(
-            item.dataRetirada
-          ) +
-          '</p>' +
-
-          '<span class="status ' +
-          statusClasse +
-          '">' +
-          escaparHtml(
-            item.status
-          ) +
-          '</span>' +
-
-        '</div>';
-
-
-      area.appendChild(
-        div
-      );
-
-    }
-  );
-
-}
-
-
-// ============================================================
-// ESCAPAR HTML
-// ============================================================
-
-function escaparHtml(
-  texto
-) {
-
-  return String(
-    texto ?? ''
-  )
-
-    .replace(
-      /&/g,
-      '&amp;'
-    )
-
-    .replace(
-      /</g,
-      '&lt;'
-    )
-
-    .replace(
-      />/g,
-      '&gt;'
-    )
-
-    .replace(
-      /"/g,
-      '&quot;'
-    )
-
-    .replace(
-      /'/g,
-      '&#039;'
-    );
 
 }
 
 </script>
-
 
 </body>
 </html>
