@@ -103,8 +103,7 @@ label {
   margin-bottom: 7px;
 }
 
-input,
-select {
+input[type="text"] {
   width: 100%;
   padding: 14px;
   font-size: 17px;
@@ -112,8 +111,7 @@ select {
   border-radius: 8px;
 }
 
-input:focus,
-select:focus {
+input[type="text"]:focus {
   outline: none;
   border-color: #8b0000;
 }
@@ -182,35 +180,10 @@ select:focus {
   color: #b00020;
 }
 
-.camera-area {
-  max-width: 600px;
-  margin: 20px auto;
-  text-align: center;
-}
 
-video,
-#fotoCapturada {
-  width: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 12px;
-  background: #111;
-}
-
-#fotoCapturada {
-  display: none;
-}
-
-canvas {
-  display: none;
-}
-
-.camera-botoes {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+/* ==========================================================
+   PESSOA
+========================================================== */
 
 .pessoa-selecionada {
   display: none;
@@ -250,7 +223,6 @@ canvas {
 
 .resultado-pessoa:hover {
   border-color: #8b0000;
-  background: #fff;
 }
 
 .resultado-pessoa img {
@@ -265,14 +237,87 @@ canvas {
   flex: 1;
 }
 
-.resultado-info strong {
+
+/* ==========================================================
+   LISTA DE CHAVES
+========================================================== */
+
+.area-chaves {
+  margin-top: 25px;
+}
+
+.barra-chaves {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.contador-chaves {
+  font-weight: bold;
+  color: #8b0000;
+  font-size: 17px;
+}
+
+.lista-chaves {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.item-chave {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.item-chave:hover {
+  border-color: #8b0000;
+  background: white;
+}
+
+.item-chave.selecionada {
+  border-color: #19713a;
+  background: #edf8f0;
+}
+
+.item-chave input {
+  width: 22px;
+  height: 22px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.numero-chave {
+  color: #8b0000;
+  font-weight: bold;
   font-size: 18px;
 }
 
-.numero-cadastro {
-  color: #666;
-  margin-top: 5px;
+.nome-chave {
+  font-weight: bold;
 }
+
+.setor-chave {
+  margin-top: 5px;
+  color: #666;
+  font-size: 13px;
+}
+
+
+/* ==========================================================
+   MOVIMENTAÇÕES
+========================================================== */
 
 .movimento {
   background: #f8f8f8;
@@ -316,6 +361,45 @@ canvas {
   color: #a00020;
 }
 
+
+/* ==========================================================
+   CAMERA
+========================================================== */
+
+.camera-area {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+video,
+#fotoCapturada {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #111;
+}
+
+#fotoCapturada {
+  display: none;
+}
+
+canvas {
+  display: none;
+}
+
+.camera-botoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+
+/* ==========================================================
+   MENSAGEM
+========================================================== */
+
 .mensagem {
   position: fixed;
   z-index: 99999;
@@ -328,7 +412,6 @@ canvas {
   border-radius: 8px;
   display: none;
   box-shadow: 0 3px 15px rgba(0,0,0,.25);
-  text-align: center;
 }
 
 .mensagem.sucesso {
@@ -345,23 +428,19 @@ canvas {
   font-weight: bold;
 }
 
+
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+
 @media(max-width:800px) {
 
   .cards-resumo {
     grid-template-columns: repeat(2,1fr);
   }
 
-}
-
-@media(max-width:550px) {
-
-  .cards-resumo {
+  .lista-chaves {
     grid-template-columns: 1fr;
-  }
-
-  .movimento {
-    flex-direction: column;
-    align-items: stretch;
   }
 
 }
@@ -437,9 +516,9 @@ canvas {
 <main>
 
 
-<!-- ======================================================
+<!-- ========================================================
      PAINEL
-======================================================= -->
+========================================================= -->
 
 <section
   id="painel"
@@ -529,9 +608,9 @@ canvas {
 </section>
 
 
-<!-- ======================================================
+<!-- ========================================================
      RETIRADA
-======================================================= -->
+========================================================= -->
 
 <section
   id="retirada"
@@ -541,8 +620,12 @@ canvas {
   <div class="card">
 
     <h2>
-      🔑 Retirada de Chave
+      🔑 Retirada de Chaves
     </h2>
+
+    <p>
+      Busque a pessoa e selecione uma ou várias chaves.
+    </p>
 
 
     <label>
@@ -555,7 +638,11 @@ canvas {
       id="nomeBuscaRetirada"
       placeholder="Digite o nome da pessoa"
       autocomplete="off"
-      onkeydown="if(event.key === 'Enter') buscarPessoaRetirada()"
+      onkeydown="
+        if(event.key === 'Enter') {
+          buscarPessoaRetirada();
+        }
+      "
     >
 
 
@@ -580,7 +667,7 @@ canvas {
 
       <img
         id="fotoPessoaRetirada"
-        alt="Foto da pessoa"
+        alt="Foto"
       >
 
 
@@ -602,25 +689,52 @@ canvas {
     </div>
 
 
+    <!-- LISTA DE CHAVES -->
+
     <div
       id="areaEscolhaChave"
+      class="area-chaves"
       style="display:none"
     >
 
-      <label>
-        Chave
-      </label>
+      <h3>
+        Selecione as chaves
+      </h3>
 
 
-      <select
-        id="chaveRetirada"
+      <div class="barra-chaves">
+
+        <button
+          class="botao botao-cinza"
+          onclick="selecionarTodasChaves()"
+        >
+          ☑ Selecionar todas
+        </button>
+
+
+        <button
+          class="botao botao-cinza"
+          onclick="limparSelecaoChaves()"
+        >
+          ⬜ Limpar seleção
+        </button>
+
+
+        <div
+          id="contadorChaves"
+          class="contador-chaves"
+        >
+          0 chaves selecionadas
+        </div>
+
+      </div>
+
+
+      <div
+        id="listaChavesDisponiveis"
+        class="lista-chaves"
       >
-
-        <option value="">
-          Selecione a chave
-        </option>
-
-      </select>
+      </div>
 
 
       <button
@@ -646,9 +760,9 @@ canvas {
 </section>
 
 
-<!-- ======================================================
+<!-- ========================================================
      DEVOLUÇÃO
-======================================================= -->
+========================================================= -->
 
 <section
   id="devolucao"
@@ -674,9 +788,9 @@ canvas {
 </section>
 
 
-<!-- ======================================================
+<!-- ========================================================
      CADASTRO
-======================================================= -->
+========================================================= -->
 
 <section
   id="cadastro"
@@ -776,7 +890,7 @@ canvas {
 
 
 // ============================================================
-// URL DO APPS SCRIPT
+// APPS SCRIPT
 // ============================================================
 
 const URL_SCRIPT =
@@ -787,14 +901,11 @@ const URL_SCRIPT =
 // VARIÁVEIS
 // ============================================================
 
-let streamCamera =
-  null;
+let streamCamera = null;
 
-let fotoBase64 =
-  '';
+let fotoBase64 = '';
 
-let pessoaSelecionada =
-  null;
+let pessoaSelecionada = null;
 
 
 // ============================================================
@@ -853,7 +964,7 @@ function atualizarRelogio() {
 
 
 // ============================================================
-// ABRIR PÁGINA
+// NAVEGAÇÃO
 // ============================================================
 
 function abrirPagina(
@@ -862,24 +973,18 @@ function abrirPagina(
 ) {
 
   document
-    .querySelectorAll(
-      '.pagina'
-    )
-    .forEach(
-      function(item) {
+    .querySelectorAll('.pagina')
+    .forEach(function(item) {
 
-        item.classList.remove(
-          'ativa'
-        );
+      item.classList.remove(
+        'ativa'
+      );
 
-      }
-    );
+    });
 
 
   document
-    .getElementById(
-      pagina
-    )
+    .getElementById(pagina)
     .classList.add(
       'ativa'
     );
@@ -889,15 +994,13 @@ function abrirPagina(
     .querySelectorAll(
       'nav button'
     )
-    .forEach(
-      function(item) {
+    .forEach(function(item) {
 
-        item.classList.remove(
-          'ativo'
-        );
+      item.classList.remove(
+        'ativo'
+      );
 
-      }
-    );
+    });
 
 
   if (botao) {
@@ -909,20 +1012,14 @@ function abrirPagina(
   }
 
 
-  if (
-    pagina ===
-    'painel'
-  ) {
+  if (pagina === 'painel') {
 
     atualizarPainel();
 
   }
 
 
-  if (
-    pagina ===
-    'devolucao'
-  ) {
+  if (pagina === 'devolucao') {
 
     carregarDevolucoes();
 
@@ -941,10 +1038,7 @@ function jsonp(
 ) {
 
   return new Promise(
-    function(
-      resolve,
-      reject
-    ) {
+    function(resolve, reject) {
 
       const callback =
         'cb_' +
@@ -978,18 +1072,15 @@ function jsonp(
       );
 
 
-      Object.keys(
-        parametros
-      ).forEach(
-        function(chave) {
+      Object.keys(parametros)
+        .forEach(function(chave) {
 
           params.set(
             chave,
             parametros[chave]
           );
 
-        }
-      );
+        });
 
 
       let timeout;
@@ -998,15 +1089,9 @@ function jsonp(
       window[callback] =
         function(dados) {
 
-          clearTimeout(
-            timeout
-          );
+          clearTimeout(timeout);
 
-
-          delete window[
-            callback
-          ];
-
+          delete window[callback];
 
           script.remove();
 
@@ -1028,9 +1113,7 @@ function jsonp(
           }
 
 
-          resolve(
-            dados
-          );
+          resolve(dados);
 
         };
 
@@ -1038,22 +1121,16 @@ function jsonp(
       script.onerror =
         function() {
 
-          clearTimeout(
-            timeout
-          );
+          clearTimeout(timeout);
 
-
-          delete window[
-            callback
-          ];
-
+          delete window[callback];
 
           script.remove();
 
 
           reject(
             new Error(
-              'Falha na comunicação com o servidor.'
+              'Falha na comunicação.'
             )
           );
 
@@ -1066,22 +1143,17 @@ function jsonp(
         params.toString();
 
 
-      document.body.appendChild(
-        script
-      );
+      document.body
+        .appendChild(script);
 
 
       timeout =
         setTimeout(
           function() {
 
-            if (
-              window[callback]
-            ) {
+            if (window[callback]) {
 
-              delete window[
-                callback
-              ];
+              delete window[callback];
 
             }
 
@@ -1091,7 +1163,7 @@ function jsonp(
 
             reject(
               new Error(
-                'O servidor demorou para responder.'
+                'Servidor demorou para responder.'
               )
             );
 
@@ -1109,9 +1181,7 @@ function jsonp(
 // POST
 // ============================================================
 
-function enviarPost(
-  dados
-) {
+function enviarPost(dados) {
 
   const form =
     document.createElement(
@@ -1119,26 +1189,17 @@ function enviarPost(
     );
 
 
-  form.method =
-    'POST';
+  form.method = 'POST';
+
+  form.action = URL_SCRIPT;
+
+  form.target = 'frameEnvio';
+
+  form.style.display = 'none';
 
 
-  form.action =
-    URL_SCRIPT;
-
-
-  form.target =
-    'frameEnvio';
-
-
-  form.style.display =
-    'none';
-
-
-  Object.keys(
-    dados
-  ).forEach(
-    function(chave) {
+  Object.keys(dados)
+    .forEach(function(chave) {
 
       const input =
         document.createElement(
@@ -1146,42 +1207,30 @@ function enviarPost(
         );
 
 
-      input.type =
-        'hidden';
+      input.type = 'hidden';
+
+      input.name = chave;
+
+      input.value = dados[chave];
 
 
-      input.name =
-        chave;
+      form.appendChild(input);
+
+    });
 
 
-      input.value =
-        dados[chave];
-
-
-      form.appendChild(
-        input
-      );
-
-    }
-  );
-
-
-  document.body.appendChild(
-    form
-  );
+  document.body
+    .appendChild(form);
 
 
   form.submit();
 
 
-  setTimeout(
-    function() {
+  setTimeout(function() {
 
-      form.remove();
+    form.remove();
 
-    },
-    3000
-  );
+  }, 3000);
 
 }
 
@@ -1201,363 +1250,27 @@ function mostrarMensagem(
     );
 
 
-  caixa.textContent =
-    texto;
-
+  caixa.textContent = texto;
 
   caixa.className =
-    'mensagem ' +
-    tipo;
-
+    'mensagem ' + tipo;
 
   caixa.style.display =
     'block';
 
 
-  setTimeout(
-    function() {
+  setTimeout(function() {
 
-      caixa.style.display =
-        'none';
-
-    },
-    4000
-  );
-
-}
-
-
-// ============================================================
-// CÂMERA
-// ============================================================
-
-async function iniciarCamera() {
-
-  try {
-
-    if (
-      !navigator.mediaDevices ||
-      !navigator.mediaDevices.getUserMedia
-    ) {
-
-      throw new Error(
-        'Câmera não suportada.'
-      );
-
-    }
-
-
-    if (
-      streamCamera
-    ) {
-
-      streamCamera
-        .getTracks()
-        .forEach(
-          function(track) {
-
-            track.stop();
-
-          }
-        );
-
-    }
-
-
-    streamCamera =
-      await navigator
-        .mediaDevices
-        .getUserMedia({
-
-          video: {
-            width: {
-              ideal: 1280
-            },
-            height: {
-              ideal: 720
-            }
-          },
-
-          audio: false
-
-        });
-
-
-    document
-      .getElementById(
-        'video'
-      )
-      .srcObject =
-        streamCamera;
-
-
-  } catch (erro) {
-
-    console.error(
-      erro
-    );
-
-
-    mostrarMensagem(
-      'Não foi possível abrir a câmera.',
-      'erro'
-    );
-
-  }
-
-}
-
-
-// ============================================================
-// TIRAR FOTO
-// ============================================================
-
-function tirarFoto() {
-
-  const video =
-    document.getElementById(
-      'video'
-    );
-
-
-  if (
-    !video.videoWidth
-  ) {
-
-    mostrarMensagem(
-      'A câmera ainda não está pronta.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  const canvas =
-    document.getElementById(
-      'canvas'
-    );
-
-
-  canvas.width =
-    video.videoWidth;
-
-
-  canvas.height =
-    video.videoHeight;
-
-
-  canvas
-    .getContext(
-      '2d'
-    )
-    .drawImage(
-      video,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-
-  fotoBase64 =
-    canvas.toDataURL(
-      'image/jpeg',
-      0.78
-    );
-
-
-  const imagem =
-    document.getElementById(
-      'fotoCapturada'
-    );
-
-
-  imagem.src =
-    fotoBase64;
-
-
-  imagem.style.display =
-    'block';
-
-
-  video.style.display =
-    'none';
-
-
-  document
-    .getElementById(
-      'btnFoto'
-    )
-    .style.display =
+    caixa.style.display =
       'none';
 
-
-  document
-    .getElementById(
-      'btnNovaFoto'
-    )
-    .style.display =
-      'inline-block';
+  }, 4000);
 
 }
 
 
 // ============================================================
-// NOVA FOTO
-// ============================================================
-
-function novaFoto() {
-
-  fotoBase64 =
-    '';
-
-
-  document
-    .getElementById(
-      'fotoCapturada'
-    )
-    .style.display =
-      'none';
-
-
-  document
-    .getElementById(
-      'video'
-    )
-    .style.display =
-      'block';
-
-
-  document
-    .getElementById(
-      'btnFoto'
-    )
-    .style.display =
-      'inline-block';
-
-
-  document
-    .getElementById(
-      'btnNovaFoto'
-    )
-    .style.display =
-      'none';
-
-}
-
-
-// ============================================================
-// CADASTRAR
-// ============================================================
-
-function cadastrarPessoa() {
-
-  const nome =
-    document
-      .getElementById(
-        'nomeCadastro'
-      )
-      .value
-      .trim();
-
-
-  if (!nome) {
-
-    mostrarMensagem(
-      'Digite o nome da pessoa.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  if (!fotoBase64) {
-
-    mostrarMensagem(
-      'Tire a foto da pessoa.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  const botao =
-    document.getElementById(
-      'btnCadastrar'
-    );
-
-
-  botao.disabled =
-    true;
-
-
-  document
-    .getElementById(
-      'carregandoCadastro'
-    )
-    .style.display =
-      'block';
-
-
-  enviarPost({
-
-    acao:
-      'cadastrarPessoa',
-
-    nome:
-      nome,
-
-    foto:
-      fotoBase64
-
-  });
-
-
-  setTimeout(
-    function() {
-
-      document
-        .getElementById(
-          'nomeCadastro'
-        )
-        .value =
-          '';
-
-
-      novaFoto();
-
-
-      botao.disabled =
-        false;
-
-
-      document
-        .getElementById(
-          'carregandoCadastro'
-        )
-        .style.display =
-          'none';
-
-
-      mostrarMensagem(
-        'Cadastro enviado com sucesso!'
-      );
-
-    },
-    2200
-  );
-
-}
-
-
-// ============================================================
-// BUSCAR PESSOA PELO NOME
+// BUSCAR PESSOA
 // ============================================================
 
 async function buscarPessoaRetirada() {
@@ -1583,8 +1296,7 @@ async function buscarPessoaRetirada() {
   }
 
 
-  pessoaSelecionada =
-    null;
+  pessoaSelecionada = null;
 
 
   document
@@ -1609,9 +1321,7 @@ async function buscarPessoaRetirada() {
     );
 
 
-  area.style.display =
-    'block';
-
+  area.style.display = 'block';
 
   area.innerHTML =
     '<p>🔎 Procurando...</p>';
@@ -1628,14 +1338,10 @@ async function buscarPessoaRetirada() {
       );
 
 
-    area.innerHTML =
-      '';
+    area.innerHTML = '';
 
 
-    if (
-      !pessoas ||
-      pessoas.length === 0
-    ) {
+    if (!pessoas.length) {
 
       area.innerHTML =
         '<p>Nenhuma pessoa encontrada.</p>';
@@ -1668,10 +1374,6 @@ async function buscarPessoaRetirada() {
           pessoa.foto || '';
 
 
-        foto.alt =
-          'Foto';
-
-
         const info =
           document.createElement(
             'div'
@@ -1698,10 +1400,6 @@ async function buscarPessoaRetirada() {
           );
 
 
-        numero.className =
-          'numero-cadastro';
-
-
         numero.textContent =
           'Cadastro Nº ' +
           pessoa.numero;
@@ -1725,10 +1423,6 @@ async function buscarPessoaRetirada() {
 
         botao.className =
           'botao botao-verde';
-
-
-        botao.style.marginTop =
-          '0';
 
 
         botao.textContent =
@@ -1757,34 +1451,19 @@ async function buscarPessoaRetirada() {
           };
 
 
-        item.appendChild(
-          foto
-        );
+        item.appendChild(foto);
 
+        item.appendChild(info);
 
-        item.appendChild(
-          info
-        );
+        item.appendChild(botao);
 
-
-        item.appendChild(
-          botao
-        );
-
-
-        area.appendChild(
-          item
-        );
+        area.appendChild(item);
 
       }
     );
 
 
   } catch (erro) {
-
-    area.innerHTML =
-      '<p>Erro ao buscar pessoa.</p>';
-
 
     mostrarMensagem(
       erro.message,
@@ -1867,14 +1546,14 @@ async function selecionarPessoaRetirada(
 
 async function carregarChavesDisponiveis() {
 
-  const select =
+  const area =
     document.getElementById(
-      'chaveRetirada'
+      'listaChavesDisponiveis'
     );
 
 
-  select.innerHTML =
-    '<option value="">Carregando...</option>';
+  area.innerHTML =
+    '<p>Carregando chaves...</p>';
 
 
   try {
@@ -1885,56 +1564,162 @@ async function carregarChavesDisponiveis() {
       );
 
 
-    select.innerHTML =
-      '<option value="">Selecione a chave</option>';
+    area.innerHTML = '';
+
+
+    if (!chaves.length) {
+
+      area.innerHTML =
+        '<p>Nenhuma chave disponível.</p>';
+
+      atualizarContadorChaves();
+
+      return;
+
+    }
 
 
     chaves.forEach(
       function(chave) {
 
-        const option =
+        const label =
           document.createElement(
-            'option'
+            'label'
           );
 
 
-        option.value =
-          String(
-            chave.numero
+        label.className =
+          'item-chave';
+
+
+        label.style.margin =
+          '0';
+
+
+        const checkbox =
+          document.createElement(
+            'input'
           );
 
 
-        option.textContent =
-          'Chave ' +
-          chave.numero +
-          ' — ' +
-          chave.identificacao +
-          ' — ' +
+        checkbox.type =
+          'checkbox';
+
+
+        checkbox.className =
+          'check-chave';
+
+
+        checkbox.value =
+          chave.numero;
+
+
+        checkbox.addEventListener(
+          'change',
+          function() {
+
+            if (checkbox.checked) {
+
+              label.classList.add(
+                'selecionada'
+              );
+
+            } else {
+
+              label.classList.remove(
+                'selecionada'
+              );
+
+            }
+
+
+            atualizarContadorChaves();
+
+          }
+        );
+
+
+        const info =
+          document.createElement(
+            'div'
+          );
+
+
+        const numero =
+          document.createElement(
+            'div'
+          );
+
+
+        numero.className =
+          'numero-chave';
+
+
+        numero.textContent =
+          '🔑 Chave ' +
+          chave.numero;
+
+
+        const nome =
+          document.createElement(
+            'div'
+          );
+
+
+        nome.className =
+          'nome-chave';
+
+
+        nome.textContent =
+          chave.identificacao;
+
+
+        const setor =
+          document.createElement(
+            'div'
+          );
+
+
+        setor.className =
+          'setor-chave';
+
+
+        setor.textContent =
           chave.setor;
 
 
-        select.appendChild(
-          option
+        info.appendChild(numero);
+
+        info.appendChild(nome);
+
+        info.appendChild(setor);
+
+
+        label.appendChild(
+          checkbox
+        );
+
+
+        label.appendChild(
+          info
+        );
+
+
+        area.appendChild(
+          label
         );
 
       }
     );
 
 
-    if (
-      chaves.length === 0
-    ) {
-
-      select.innerHTML =
-        '<option value="">Nenhuma chave disponível</option>';
-
-    }
+    atualizarContadorChaves();
 
 
   } catch (erro) {
 
-    select.innerHTML =
-      '<option value="">Erro ao carregar</option>';
+    area.innerHTML =
+      '<p>Erro ao carregar as chaves.</p>';
 
 
     mostrarMensagem(
@@ -1948,14 +1733,95 @@ async function carregarChavesDisponiveis() {
 
 
 // ============================================================
-// CONFIRMAR RETIRADA
+// SELECIONAR TODAS
+// ============================================================
+
+function selecionarTodasChaves() {
+
+  document
+    .querySelectorAll(
+      '.check-chave'
+    )
+    .forEach(function(check) {
+
+      check.checked = true;
+
+      check
+        .closest('.item-chave')
+        .classList.add(
+          'selecionada'
+        );
+
+    });
+
+
+  atualizarContadorChaves();
+
+}
+
+
+// ============================================================
+// LIMPAR SELEÇÃO
+// ============================================================
+
+function limparSelecaoChaves() {
+
+  document
+    .querySelectorAll(
+      '.check-chave'
+    )
+    .forEach(function(check) {
+
+      check.checked = false;
+
+      check
+        .closest('.item-chave')
+        .classList.remove(
+          'selecionada'
+        );
+
+    });
+
+
+  atualizarContadorChaves();
+
+}
+
+
+// ============================================================
+// CONTADOR
+// ============================================================
+
+function atualizarContadorChaves() {
+
+  const quantidade =
+    document
+      .querySelectorAll(
+        '.check-chave:checked'
+      )
+      .length;
+
+
+  document
+    .getElementById(
+      'contadorChaves'
+    )
+    .textContent =
+      quantidade === 1
+        ? '1 chave selecionada'
+        : quantidade +
+          ' chaves selecionadas';
+
+}
+
+
+// ============================================================
+// CONFIRMAR RETIRADA MÚLTIPLA
 // ============================================================
 
 function confirmarRetirada() {
 
-  if (
-    !pessoaSelecionada
-  ) {
+  if (!pessoaSelecionada) {
 
     mostrarMensagem(
       'Selecione a pessoa.',
@@ -1967,20 +1833,56 @@ function confirmarRetirada() {
   }
 
 
-  const chave =
-    document
-      .getElementById(
-        'chaveRetirada'
+  const selecionadas =
+    Array.from(
+      document.querySelectorAll(
+        '.check-chave:checked'
       )
-      .value;
+    );
 
 
-  if (!chave) {
+  if (!selecionadas.length) {
 
     mostrarMensagem(
-      'Selecione a chave.',
+      'Selecione pelo menos uma chave.',
       'erro'
     );
+
+    return;
+
+  }
+
+
+  const numeros =
+    selecionadas.map(
+      function(check) {
+
+        return Number(
+          check.value
+        );
+
+      }
+    );
+
+
+  const textoChaves =
+    numeros.join(', ');
+
+
+  const confirmar =
+    confirm(
+      pessoaSelecionada.nome +
+      '\n\n' +
+      'Chaves: ' +
+      textoChaves +
+      '\n\n' +
+      'Confirmar retirada de ' +
+      numeros.length +
+      ' chave(s)?'
+    );
+
+
+  if (!confirmar) {
 
     return;
 
@@ -1993,8 +1895,7 @@ function confirmarRetirada() {
     );
 
 
-  botao.disabled =
-    true;
+  botao.disabled = true;
 
 
   document
@@ -2008,13 +1909,15 @@ function confirmarRetirada() {
   enviarPost({
 
     acao:
-      'retirarChave',
+      'retirarChaves',
 
     numeroPessoa:
       pessoaSelecionada.numero,
 
-    numeroChave:
-      chave
+    numeroChaves:
+      JSON.stringify(
+        numeros
+      )
 
   });
 
@@ -2022,8 +1925,7 @@ function confirmarRetirada() {
   setTimeout(
     async function() {
 
-      botao.disabled =
-        false;
+      botao.disabled = false;
 
 
       document
@@ -2063,21 +1965,22 @@ function confirmarRetirada() {
 
 
       mostrarMensagem(
-        'Retirada registrada!'
+        numeros.length +
+        ' chave(s) registradas!'
       );
 
 
       await atualizarPainel();
 
     },
-    2000
+    2500
   );
 
 }
 
 
 // ============================================================
-// CARREGAR DEVOLUÇÕES
+// DEVOLUÇÕES
 // ============================================================
 
 async function carregarDevolucoes() {
@@ -2100,13 +2003,10 @@ async function carregarDevolucoes() {
       );
 
 
-    area.innerHTML =
-      '';
+    area.innerHTML = '';
 
 
-    if (
-      dados.length === 0
-    ) {
+    if (!dados.length) {
 
       area.innerHTML =
         '<p>✅ Nenhuma chave aguardando devolução.</p>';
@@ -2119,15 +2019,11 @@ async function carregarDevolucoes() {
     dados.forEach(
       function(item) {
 
-        const div =
+        area.appendChild(
           criarMovimento(
             item,
             true
-          );
-
-
-        area.appendChild(
-          div
+          )
         );
 
       }
@@ -2236,12 +2132,9 @@ function criarMovimento(
   status.className =
     'status ' +
     (
-      item.status ===
-      'ATRASADA'
-        ?
-        'status-atrasada'
-        :
-        'status-aberta'
+      item.status === 'ATRASADA'
+        ? 'status-atrasada'
+        : 'status-aberta'
     );
 
 
@@ -2249,39 +2142,21 @@ function criarMovimento(
     item.status;
 
 
-  info.appendChild(
-    titulo
-  );
+  info.appendChild(titulo);
+
+  info.appendChild(pessoa);
+
+  info.appendChild(setor);
+
+  info.appendChild(data);
+
+  info.appendChild(status);
 
 
-  info.appendChild(
-    pessoa
-  );
+  div.appendChild(info);
 
 
-  info.appendChild(
-    setor
-  );
-
-
-  info.appendChild(
-    data
-  );
-
-
-  info.appendChild(
-    status
-  );
-
-
-  div.appendChild(
-    info
-  );
-
-
-  if (
-    mostrarBotao
-  ) {
+  if (mostrarBotao) {
 
     const botao =
       document.createElement(
@@ -2308,9 +2183,7 @@ function criarMovimento(
       };
 
 
-    div.appendChild(
-      botao
-    );
+    div.appendChild(botao);
 
   }
 
@@ -2342,9 +2215,7 @@ function devolverChave(
   }
 
 
-  botao.disabled =
-    true;
-
+  botao.disabled = true;
 
   botao.textContent =
     'Devolvendo...';
@@ -2434,13 +2305,12 @@ async function atualizarPainel() {
       );
 
 
-    area.innerHTML =
-      '';
+    area.innerHTML = '';
 
 
     if (
       !resumo.abertas ||
-      resumo.abertas.length === 0
+      !resumo.abertas.length
     ) {
 
       area.innerHTML =
@@ -2467,9 +2337,7 @@ async function atualizarPainel() {
 
   } catch (erro) {
 
-    console.error(
-      erro
-    );
+    console.error(erro);
 
 
     document
@@ -2483,7 +2351,299 @@ async function atualizarPainel() {
 
 }
 
+
+// ============================================================
+// CÂMERA
+// ============================================================
+
+async function iniciarCamera() {
+
+  try {
+
+    if (
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ) {
+
+      throw new Error(
+        'Câmera não suportada.'
+      );
+
+    }
+
+
+    streamCamera =
+      await navigator
+        .mediaDevices
+        .getUserMedia({
+
+          video: true,
+
+          audio: false
+
+        });
+
+
+    document
+      .getElementById(
+        'video'
+      )
+      .srcObject =
+        streamCamera;
+
+
+  } catch (erro) {
+
+    console.error(erro);
+
+  }
+
+}
+
+
+// ============================================================
+// TIRAR FOTO
+// ============================================================
+
+function tirarFoto() {
+
+  const video =
+    document.getElementById(
+      'video'
+    );
+
+
+  if (!video.videoWidth) {
+
+    mostrarMensagem(
+      'A câmera ainda não está pronta.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  const canvas =
+    document.getElementById(
+      'canvas'
+    );
+
+
+  canvas.width =
+    video.videoWidth;
+
+
+  canvas.height =
+    video.videoHeight;
+
+
+  canvas
+    .getContext('2d')
+    .drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+
+  fotoBase64 =
+    canvas.toDataURL(
+      'image/jpeg',
+      0.78
+    );
+
+
+  const imagem =
+    document.getElementById(
+      'fotoCapturada'
+    );
+
+
+  imagem.src =
+    fotoBase64;
+
+
+  imagem.style.display =
+    'block';
+
+
+  video.style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'btnFoto'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'btnNovaFoto'
+    )
+    .style.display =
+      'inline-block';
+
+}
+
+
+// ============================================================
+// NOVA FOTO
+// ============================================================
+
+function novaFoto() {
+
+  fotoBase64 = '';
+
+
+  document
+    .getElementById(
+      'fotoCapturada'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'video'
+    )
+    .style.display =
+      'block';
+
+
+  document
+    .getElementById(
+      'btnFoto'
+    )
+    .style.display =
+      'inline-block';
+
+
+  document
+    .getElementById(
+      'btnNovaFoto'
+    )
+    .style.display =
+      'none';
+
+}
+
+
+// ============================================================
+// CADASTRAR
+// ============================================================
+
+function cadastrarPessoa() {
+
+  const nome =
+    document
+      .getElementById(
+        'nomeCadastro'
+      )
+      .value
+      .trim();
+
+
+  if (!nome) {
+
+    mostrarMensagem(
+      'Digite o nome.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if (!fotoBase64) {
+
+    mostrarMensagem(
+      'Tire a foto.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  const botao =
+    document.getElementById(
+      'btnCadastrar'
+    );
+
+
+  botao.disabled = true;
+
+
+  document
+    .getElementById(
+      'carregandoCadastro'
+    )
+    .style.display =
+      'block';
+
+
+  enviarPost({
+
+    acao:
+      'cadastrarPessoa',
+
+    nome:
+      nome,
+
+    foto:
+      fotoBase64
+
+  });
+
+
+  setTimeout(
+    function() {
+
+      document
+        .getElementById(
+          'nomeCadastro'
+        )
+        .value =
+          '';
+
+
+      novaFoto();
+
+
+      botao.disabled =
+        false;
+
+
+      document
+        .getElementById(
+          'carregandoCadastro'
+        )
+        .style.display =
+          'none';
+
+
+      mostrarMensagem(
+        'Cadastro enviado!'
+      );
+
+    },
+    2200
+  );
+
+}
+
 </script>
 
 </body>
+
 </html>
