@@ -70,7 +70,7 @@ nav button.ativo {
 }
 
 main {
-  max-width: 1150px;
+  max-width: 1200px;
   margin: 25px auto;
   padding: 0 18px;
 }
@@ -141,6 +141,10 @@ input[type="text"]:focus {
   background: #555;
 }
 
+.botao-azul {
+  background: #245c8f;
+}
+
 .cards-resumo {
   display: grid;
   grid-template-columns: repeat(4,1fr);
@@ -182,7 +186,7 @@ input[type="text"]:focus {
 
 
 /* ==========================================================
-   PESSOA
+   PESSOAS
 ========================================================== */
 
 .pessoa-selecionada {
@@ -223,6 +227,7 @@ input[type="text"]:focus {
 
 .resultado-pessoa:hover {
   border-color: #8b0000;
+  background: white;
 }
 
 .resultado-pessoa img {
@@ -237,9 +242,13 @@ input[type="text"]:focus {
   flex: 1;
 }
 
+.resultado-info strong {
+  font-size: 18px;
+}
+
 
 /* ==========================================================
-   LISTA DE CHAVES
+   LISTAS DE CHAVES
 ========================================================== */
 
 .area-chaves {
@@ -264,7 +273,7 @@ input[type="text"]:focus {
   display: grid;
   grid-template-columns: repeat(2,1fr);
   gap: 10px;
-  max-height: 500px;
+  max-height: 520px;
   overflow-y: auto;
   padding: 5px;
 }
@@ -279,6 +288,7 @@ input[type="text"]:focus {
   background: #fafafa;
   cursor: pointer;
   transition: .15s;
+  margin: 0;
 }
 
 .item-chave:hover {
@@ -314,9 +324,18 @@ input[type="text"]:focus {
   font-size: 13px;
 }
 
+.retirada-original {
+  background: #fff4d6;
+  color: #694700;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
 
 /* ==========================================================
-   MOVIMENTAÇÕES
+   MOVIMENTAÇÕES DO PAINEL
 ========================================================== */
 
 .movimento {
@@ -363,7 +382,7 @@ input[type="text"]:focus {
 
 
 /* ==========================================================
-   CAMERA
+   CÂMERA
 ========================================================== */
 
 .camera-area {
@@ -412,6 +431,7 @@ canvas {
   border-radius: 8px;
   display: none;
   box-shadow: 0 3px 15px rgba(0,0,0,.25);
+  text-align: center;
 }
 
 .mensagem.sucesso {
@@ -440,6 +460,14 @@ canvas {
   }
 
   .lista-chaves {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media(max-width:550px) {
+
+  .cards-resumo {
     grid-template-columns: 1fr;
   }
 
@@ -495,13 +523,13 @@ canvas {
   <button
     onclick="abrirPagina('retirada',this)"
   >
-    🔑 Retirar Chave
+    🔑 Retirar Chaves
   </button>
 
   <button
     onclick="abrirPagina('devolucao',this)"
   >
-    ↩️ Devolver
+    ↩️ Devolver Chaves
   </button>
 
   <button
@@ -655,7 +683,7 @@ canvas {
 
 
     <div
-      id="resultadosPessoas"
+      id="resultadosPessoasRetirada"
       style="display:none;margin-top:20px"
     ></div>
 
@@ -689,8 +717,6 @@ canvas {
     </div>
 
 
-    <!-- LISTA DE CHAVES -->
-
     <div
       id="areaEscolhaChave"
       class="area-chaves"
@@ -706,7 +732,7 @@ canvas {
 
         <button
           class="botao botao-cinza"
-          onclick="selecionarTodasChaves()"
+          onclick="selecionarTodasRetirada()"
         >
           ☑ Selecionar todas
         </button>
@@ -714,14 +740,14 @@ canvas {
 
         <button
           class="botao botao-cinza"
-          onclick="limparSelecaoChaves()"
+          onclick="limparSelecaoRetirada()"
         >
           ⬜ Limpar seleção
         </button>
 
 
         <div
-          id="contadorChaves"
+          id="contadorRetirada"
           class="contador-chaves"
         >
           0 chaves selecionadas
@@ -733,8 +759,7 @@ canvas {
       <div
         id="listaChavesDisponiveis"
         class="lista-chaves"
-      >
-      </div>
+      ></div>
 
 
       <button
@@ -772,15 +797,147 @@ canvas {
   <div class="card">
 
     <h2>
-      ↩️ Devolução de Chave
+      ↩️ Devolução de Chaves
     </h2>
 
     <p>
-      Selecione a chave que está sendo devolvida.
+      Primeiro informe quem está entregando as chaves.
+      Essa pessoa pode ser diferente de quem fez a retirada.
     </p>
 
-    <div id="listaDevolucao">
-      Carregando...
+
+    <label>
+      Nome de quem está devolvendo
+    </label>
+
+
+    <input
+      type="text"
+      id="nomeBuscaDevolucao"
+      placeholder="Digite o nome de quem está devolvendo"
+      autocomplete="off"
+      onkeydown="
+        if(event.key === 'Enter') {
+          buscarPessoaDevolucao();
+        }
+      "
+    >
+
+
+    <button
+      class="botao"
+      onclick="buscarPessoaDevolucao()"
+    >
+      🔎 Buscar Pessoa
+    </button>
+
+
+    <div
+      id="resultadosPessoasDevolucao"
+      style="display:none;margin-top:20px"
+    ></div>
+
+
+    <div
+      id="pessoaDevolucao"
+      class="pessoa-selecionada"
+    >
+
+      <img
+        id="fotoPessoaDevolucao"
+        alt="Foto"
+      >
+
+
+      <div>
+
+        <h3
+          id="nomePessoaDevolucao"
+        ></h3>
+
+        <div>
+          Cadastro Nº
+          <strong
+            id="codigoPessoaDevolucao"
+          ></strong>
+        </div>
+
+        <div style="margin-top:5px;color:#19713a;font-weight:bold">
+          Pessoa que está entregando
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="areaDevolucao"
+      class="area-chaves"
+      style="display:none"
+    >
+
+      <h3>
+        Chaves atualmente retiradas
+      </h3>
+
+
+      <p>
+        Você pode selecionar qualquer chave abaixo,
+        mesmo que tenha sido retirada por outra pessoa.
+      </p>
+
+
+      <div class="barra-chaves">
+
+        <button
+          class="botao botao-cinza"
+          onclick="selecionarTodasDevolucao()"
+        >
+          ☑ Selecionar todas
+        </button>
+
+
+        <button
+          class="botao botao-cinza"
+          onclick="limparSelecaoDevolucao()"
+        >
+          ⬜ Limpar seleção
+        </button>
+
+
+        <div
+          id="contadorDevolucao"
+          class="contador-chaves"
+        >
+          0 chaves selecionadas
+        </div>
+
+      </div>
+
+
+      <div
+        id="listaChavesDevolucao"
+        class="lista-chaves"
+      ></div>
+
+
+      <button
+        id="btnDevolver"
+        class="botao botao-verde"
+        onclick="confirmarDevolucao()"
+      >
+        ↩️ Devolver Selecionadas
+      </button>
+
+
+      <div
+        id="carregandoDevolucao"
+        class="carregando"
+      >
+        Registrando devolução...
+      </div>
+
     </div>
 
   </div>
@@ -888,9 +1045,8 @@ canvas {
 
 <script>
 
-
 // ============================================================
-// APPS SCRIPT
+// URL APPS SCRIPT
 // ============================================================
 
 const URL_SCRIPT =
@@ -905,11 +1061,13 @@ let streamCamera = null;
 
 let fotoBase64 = '';
 
-let pessoaSelecionada = null;
+let pessoaSelecionadaRetirada = null;
+
+let pessoaSelecionadaDevolucao = null;
 
 
 // ============================================================
-// INICIAR
+// INICIALIZAÇÃO
 // ============================================================
 
 window.addEventListener(
@@ -942,9 +1100,7 @@ function atualizarRelogio() {
 
 
   document
-    .getElementById(
-      'dataAtual'
-    )
+    .getElementById('dataAtual')
     .textContent =
       agora.toLocaleDateString(
         'pt-BR'
@@ -952,9 +1108,7 @@ function atualizarRelogio() {
 
 
   document
-    .getElementById(
-      'horaAtual'
-    )
+    .getElementById('horaAtual')
     .textContent =
       agora.toLocaleTimeString(
         'pt-BR'
@@ -967,47 +1121,34 @@ function atualizarRelogio() {
 // NAVEGAÇÃO
 // ============================================================
 
-function abrirPagina(
-  pagina,
-  botao
-) {
+function abrirPagina(pagina, botao) {
 
   document
     .querySelectorAll('.pagina')
     .forEach(function(item) {
 
-      item.classList.remove(
-        'ativa'
-      );
+      item.classList.remove('ativa');
 
     });
 
 
   document
     .getElementById(pagina)
-    .classList.add(
-      'ativa'
-    );
+    .classList.add('ativa');
 
 
   document
-    .querySelectorAll(
-      'nav button'
-    )
+    .querySelectorAll('nav button')
     .forEach(function(item) {
 
-      item.classList.remove(
-        'ativo'
-      );
+      item.classList.remove('ativo');
 
     });
 
 
   if (botao) {
 
-    botao.classList.add(
-      'ativo'
-    );
+    botao.classList.add('ativo');
 
   }
 
@@ -1018,13 +1159,6 @@ function abrirPagina(
 
   }
 
-
-  if (pagina === 'devolucao') {
-
-    carregarDevolucoes();
-
-  }
-
 }
 
 
@@ -1032,10 +1166,7 @@ function abrirPagina(
 // JSONP
 // ============================================================
 
-function jsonp(
-  acao,
-  parametros = {}
-) {
+function jsonp(acao, parametros = {}) {
 
   return new Promise(
     function(resolve, reject) {
@@ -1045,8 +1176,7 @@ function jsonp(
         Date.now() +
         '_' +
         Math.floor(
-          Math.random() *
-          100000
+          Math.random() * 100000
         );
 
 
@@ -1060,16 +1190,9 @@ function jsonp(
         new URLSearchParams();
 
 
-      params.set(
-        'acao',
-        acao
-      );
+      params.set('acao', acao);
 
-
-      params.set(
-        'callback',
-        callback
-      );
+      params.set('callback', callback);
 
 
       Object.keys(parametros)
@@ -1143,8 +1266,9 @@ function jsonp(
         params.toString();
 
 
-      document.body
-        .appendChild(script);
+      document.body.appendChild(
+        script
+      );
 
 
       timeout =
@@ -1219,9 +1343,7 @@ function enviarPost(dados) {
     });
 
 
-  document.body
-    .appendChild(form);
-
+  document.body.appendChild(form);
 
   form.submit();
 
@@ -1264,13 +1386,115 @@ function mostrarMensagem(
     caixa.style.display =
       'none';
 
-  }, 4000);
+  }, 4500);
 
 }
 
 
 // ============================================================
-// BUSCAR PESSOA
+// CRIAR RESULTADO DE PESSOA
+// ============================================================
+
+function criarResultadoPessoa(
+  pessoa,
+  aoSelecionar
+) {
+
+  const item =
+    document.createElement('div');
+
+
+  item.className =
+    'resultado-pessoa';
+
+
+  const foto =
+    document.createElement('img');
+
+
+  foto.src =
+    pessoa.foto || '';
+
+  foto.alt =
+    'Foto';
+
+
+  const info =
+    document.createElement('div');
+
+
+  info.className =
+    'resultado-info';
+
+
+  const nome =
+    document.createElement('strong');
+
+
+  nome.textContent =
+    pessoa.nome;
+
+
+  const numero =
+    document.createElement('div');
+
+
+  numero.textContent =
+    'Cadastro Nº ' +
+    pessoa.numero;
+
+
+  info.appendChild(nome);
+
+  info.appendChild(numero);
+
+
+  const botao =
+    document.createElement('button');
+
+
+  botao.className =
+    'botao botao-verde';
+
+  botao.textContent =
+    'Selecionar';
+
+  botao.style.marginTop =
+    '0';
+
+
+  botao.onclick =
+    function(evento) {
+
+      evento.stopPropagation();
+
+      aoSelecionar(pessoa);
+
+    };
+
+
+  item.onclick =
+    function() {
+
+      aoSelecionar(pessoa);
+
+    };
+
+
+  item.appendChild(foto);
+
+  item.appendChild(info);
+
+  item.appendChild(botao);
+
+
+  return item;
+
+}
+
+
+// ============================================================
+// BUSCAR PESSOA - RETIRADA
 // ============================================================
 
 async function buscarPessoaRetirada() {
@@ -1296,7 +1520,8 @@ async function buscarPessoaRetirada() {
   }
 
 
-  pessoaSelecionada = null;
+  pessoaSelecionadaRetirada =
+    null;
 
 
   document
@@ -1317,11 +1542,13 @@ async function buscarPessoaRetirada() {
 
   const area =
     document.getElementById(
-      'resultadosPessoas'
+      'resultadosPessoasRetirada'
     );
 
 
-  area.style.display = 'block';
+  area.style.display =
+    'block';
+
 
   area.innerHTML =
     '<p>🔎 Procurando...</p>';
@@ -1351,119 +1578,23 @@ async function buscarPessoaRetirada() {
     }
 
 
-    pessoas.forEach(
-      function(pessoa) {
+    pessoas.forEach(function(pessoa) {
 
-        const item =
-          document.createElement(
-            'div'
-          );
+      area.appendChild(
 
+        criarResultadoPessoa(
+          pessoa,
+          selecionarPessoaRetirada
+        )
 
-        item.className =
-          'resultado-pessoa';
+      );
 
-
-        const foto =
-          document.createElement(
-            'img'
-          );
-
-
-        foto.src =
-          pessoa.foto || '';
-
-
-        const info =
-          document.createElement(
-            'div'
-          );
-
-
-        info.className =
-          'resultado-info';
-
-
-        const nomeEl =
-          document.createElement(
-            'strong'
-          );
-
-
-        nomeEl.textContent =
-          pessoa.nome;
-
-
-        const numero =
-          document.createElement(
-            'div'
-          );
-
-
-        numero.textContent =
-          'Cadastro Nº ' +
-          pessoa.numero;
-
-
-        info.appendChild(
-          nomeEl
-        );
-
-
-        info.appendChild(
-          numero
-        );
-
-
-        const botao =
-          document.createElement(
-            'button'
-          );
-
-
-        botao.className =
-          'botao botao-verde';
-
-
-        botao.textContent =
-          'Selecionar';
-
-
-        botao.onclick =
-          function(evento) {
-
-            evento.stopPropagation();
-
-            selecionarPessoaRetirada(
-              pessoa
-            );
-
-          };
-
-
-        item.onclick =
-          function() {
-
-            selecionarPessoaRetirada(
-              pessoa
-            );
-
-          };
-
-
-        item.appendChild(foto);
-
-        item.appendChild(info);
-
-        item.appendChild(botao);
-
-        area.appendChild(item);
-
-      }
-    );
+    });
 
 
   } catch (erro) {
+
+    area.innerHTML = '';
 
     mostrarMensagem(
       erro.message,
@@ -1476,14 +1607,14 @@ async function buscarPessoaRetirada() {
 
 
 // ============================================================
-// SELECIONAR PESSOA
+// SELECIONAR PESSOA - RETIRADA
 // ============================================================
 
 async function selecionarPessoaRetirada(
   pessoa
 ) {
 
-  pessoaSelecionada =
+  pessoaSelecionadaRetirada =
     pessoa;
 
 
@@ -1513,7 +1644,7 @@ async function selecionarPessoaRetirada(
 
   document
     .getElementById(
-      'resultadosPessoas'
+      'resultadosPessoasRetirada'
     )
     .style.display =
       'none';
@@ -1572,154 +1703,92 @@ async function carregarChavesDisponiveis() {
       area.innerHTML =
         '<p>Nenhuma chave disponível.</p>';
 
-      atualizarContadorChaves();
+      atualizarContadorRetirada();
 
       return;
 
     }
 
 
-    chaves.forEach(
-      function(chave) {
+    chaves.forEach(function(chave) {
 
-        const label =
-          document.createElement(
-            'label'
+      const label =
+        document.createElement('label');
+
+
+      label.className =
+        'item-chave';
+
+
+      const checkbox =
+        document.createElement('input');
+
+
+      checkbox.type =
+        'checkbox';
+
+      checkbox.className =
+        'check-retirada';
+
+      checkbox.value =
+        chave.numero;
+
+
+      checkbox.addEventListener(
+        'change',
+        function() {
+
+          label.classList.toggle(
+            'selecionada',
+            checkbox.checked
           );
 
 
-        label.className =
-          'item-chave';
+          atualizarContadorRetirada();
+
+        }
+      );
 
 
-        label.style.margin =
-          '0';
+      const info =
+        document.createElement('div');
 
 
-        const checkbox =
-          document.createElement(
-            'input'
-          );
+      info.innerHTML =
+        '<div class="numero-chave">' +
+        '🔑 Chave ' +
+        chave.numero +
+        '</div>' +
+
+        '<div class="nome-chave">' +
+        escaparHtml(
+          chave.identificacao
+        ) +
+        '</div>' +
+
+        '<div class="setor-chave">' +
+        escaparHtml(
+          chave.setor
+        ) +
+        '</div>';
 
 
-        checkbox.type =
-          'checkbox';
+      label.appendChild(checkbox);
+
+      label.appendChild(info);
+
+      area.appendChild(label);
+
+    });
 
 
-        checkbox.className =
-          'check-chave';
-
-
-        checkbox.value =
-          chave.numero;
-
-
-        checkbox.addEventListener(
-          'change',
-          function() {
-
-            if (checkbox.checked) {
-
-              label.classList.add(
-                'selecionada'
-              );
-
-            } else {
-
-              label.classList.remove(
-                'selecionada'
-              );
-
-            }
-
-
-            atualizarContadorChaves();
-
-          }
-        );
-
-
-        const info =
-          document.createElement(
-            'div'
-          );
-
-
-        const numero =
-          document.createElement(
-            'div'
-          );
-
-
-        numero.className =
-          'numero-chave';
-
-
-        numero.textContent =
-          '🔑 Chave ' +
-          chave.numero;
-
-
-        const nome =
-          document.createElement(
-            'div'
-          );
-
-
-        nome.className =
-          'nome-chave';
-
-
-        nome.textContent =
-          chave.identificacao;
-
-
-        const setor =
-          document.createElement(
-            'div'
-          );
-
-
-        setor.className =
-          'setor-chave';
-
-
-        setor.textContent =
-          chave.setor;
-
-
-        info.appendChild(numero);
-
-        info.appendChild(nome);
-
-        info.appendChild(setor);
-
-
-        label.appendChild(
-          checkbox
-        );
-
-
-        label.appendChild(
-          info
-        );
-
-
-        area.appendChild(
-          label
-        );
-
-      }
-    );
-
-
-    atualizarContadorChaves();
+    atualizarContadorRetirada();
 
 
   } catch (erro) {
 
     area.innerHTML =
-      '<p>Erro ao carregar as chaves.</p>';
+      '<p>Erro ao carregar chaves.</p>';
 
 
     mostrarMensagem(
@@ -1733,14 +1802,14 @@ async function carregarChavesDisponiveis() {
 
 
 // ============================================================
-// SELECIONAR TODAS
+// RETIRADA - SELEÇÃO
 // ============================================================
 
-function selecionarTodasChaves() {
+function selecionarTodasRetirada() {
 
   document
     .querySelectorAll(
-      '.check-chave'
+      '.check-retirada'
     )
     .forEach(function(check) {
 
@@ -1755,20 +1824,16 @@ function selecionarTodasChaves() {
     });
 
 
-  atualizarContadorChaves();
+  atualizarContadorRetirada();
 
 }
 
 
-// ============================================================
-// LIMPAR SELEÇÃO
-// ============================================================
-
-function limparSelecaoChaves() {
+function limparSelecaoRetirada() {
 
   document
     .querySelectorAll(
-      '.check-chave'
+      '.check-retirada'
     )
     .forEach(function(check) {
 
@@ -1783,28 +1848,24 @@ function limparSelecaoChaves() {
     });
 
 
-  atualizarContadorChaves();
+  atualizarContadorRetirada();
 
 }
 
 
-// ============================================================
-// CONTADOR
-// ============================================================
-
-function atualizarContadorChaves() {
+function atualizarContadorRetirada() {
 
   const quantidade =
     document
       .querySelectorAll(
-        '.check-chave:checked'
+        '.check-retirada:checked'
       )
       .length;
 
 
   document
     .getElementById(
-      'contadorChaves'
+      'contadorRetirada'
     )
     .textContent =
       quantidade === 1
@@ -1816,12 +1877,12 @@ function atualizarContadorChaves() {
 
 
 // ============================================================
-// CONFIRMAR RETIRADA MÚLTIPLA
+// CONFIRMAR RETIRADA
 // ============================================================
 
 function confirmarRetirada() {
 
-  if (!pessoaSelecionada) {
+  if (!pessoaSelecionadaRetirada) {
 
     mostrarMensagem(
       'Selecione a pessoa.',
@@ -1836,7 +1897,7 @@ function confirmarRetirada() {
   const selecionadas =
     Array.from(
       document.querySelectorAll(
-        '.check-chave:checked'
+        '.check-retirada:checked'
       )
     );
 
@@ -1856,33 +1917,19 @@ function confirmarRetirada() {
   const numeros =
     selecionadas.map(
       function(check) {
-
-        return Number(
-          check.value
-        );
-
+        return Number(check.value);
       }
     );
 
 
-  const textoChaves =
-    numeros.join(', ');
-
-
-  const confirmar =
-    confirm(
-      pessoaSelecionada.nome +
-      '\n\n' +
-      'Chaves: ' +
-      textoChaves +
-      '\n\n' +
-      'Confirmar retirada de ' +
-      numeros.length +
-      ' chave(s)?'
-    );
-
-
-  if (!confirmar) {
+  if (
+    !confirm(
+      pessoaSelecionadaRetirada.nome +
+      '\n\nChaves: ' +
+      numeros.join(', ') +
+      '\n\nConfirmar retirada?'
+    )
+  ) {
 
     return;
 
@@ -1912,12 +1959,10 @@ function confirmarRetirada() {
       'retirarChaves',
 
     numeroPessoa:
-      pessoaSelecionada.numero,
+      pessoaSelecionadaRetirada.numero,
 
     numeroChaves:
-      JSON.stringify(
-        numeros
-      )
+      JSON.stringify(numeros)
 
   });
 
@@ -1934,6 +1979,10 @@ function confirmarRetirada() {
         )
         .style.display =
           'none';
+
+
+      pessoaSelecionadaRetirada =
+        null;
 
 
       document
@@ -1960,10 +2009,6 @@ function confirmarRetirada() {
           'none';
 
 
-      pessoaSelecionada =
-        null;
-
-
       mostrarMensagem(
         numeros.length +
         ' chave(s) registradas!'
@@ -1980,19 +2025,198 @@ function confirmarRetirada() {
 
 
 // ============================================================
-// DEVOLUÇÕES
+// BUSCAR PESSOA - DEVOLUÇÃO
 // ============================================================
 
-async function carregarDevolucoes() {
+async function buscarPessoaDevolucao() {
+
+  const nome =
+    document
+      .getElementById(
+        'nomeBuscaDevolucao'
+      )
+      .value
+      .trim();
+
+
+  if (!nome) {
+
+    mostrarMensagem(
+      'Digite o nome de quem está devolvendo.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  pessoaSelecionadaDevolucao =
+    null;
+
+
+  document
+    .getElementById(
+      'pessoaDevolucao'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'areaDevolucao'
+    )
+    .style.display =
+      'none';
+
 
   const area =
     document.getElementById(
-      'listaDevolucao'
+      'resultadosPessoasDevolucao'
+    );
+
+
+  area.style.display =
+    'block';
+
+
+  area.innerHTML =
+    '<p>🔎 Procurando...</p>';
+
+
+  try {
+
+    const pessoas =
+      await jsonp(
+        'buscarPessoasPorNome',
+        {
+          nome: nome
+        }
+      );
+
+
+    area.innerHTML = '';
+
+
+    if (!pessoas.length) {
+
+      area.innerHTML =
+        '<p>Nenhuma pessoa encontrada.</p>';
+
+      return;
+
+    }
+
+
+    pessoas.forEach(function(pessoa) {
+
+      area.appendChild(
+
+        criarResultadoPessoa(
+          pessoa,
+          selecionarPessoaDevolucao
+        )
+
+      );
+
+    });
+
+
+  } catch (erro) {
+
+    area.innerHTML = '';
+
+
+    mostrarMensagem(
+      erro.message,
+      'erro'
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// SELECIONAR PESSOA QUE ESTÁ DEVOLVENDO
+// ============================================================
+
+async function selecionarPessoaDevolucao(
+  pessoa
+) {
+
+  pessoaSelecionadaDevolucao =
+    pessoa;
+
+
+  document
+    .getElementById(
+      'nomePessoaDevolucao'
+    )
+    .textContent =
+      pessoa.nome;
+
+
+  document
+    .getElementById(
+      'codigoPessoaDevolucao'
+    )
+    .textContent =
+      pessoa.numero;
+
+
+  document
+    .getElementById(
+      'fotoPessoaDevolucao'
+    )
+    .src =
+      pessoa.foto || '';
+
+
+  document
+    .getElementById(
+      'resultadosPessoasDevolucao'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'pessoaDevolucao'
+    )
+    .style.display =
+      'flex';
+
+
+  document
+    .getElementById(
+      'areaDevolucao'
+    )
+    .style.display =
+      'block';
+
+
+  await carregarChavesDevolucao();
+
+}
+
+
+// ============================================================
+// CARREGAR TODAS AS CHAVES EM ABERTO
+// ============================================================
+
+async function carregarChavesDevolucao() {
+
+  const area =
+    document.getElementById(
+      'listaChavesDevolucao'
     );
 
 
   area.innerHTML =
-    'Carregando...';
+    '<p>Carregando chaves retiradas...</p>';
 
 
   try {
@@ -2009,31 +2233,143 @@ async function carregarDevolucoes() {
     if (!dados.length) {
 
       area.innerHTML =
-        '<p>✅ Nenhuma chave aguardando devolução.</p>';
+        '<p>✅ Não existe nenhuma chave aguardando devolução.</p>';
+
+      atualizarContadorDevolucao();
 
       return;
 
     }
 
 
-    dados.forEach(
-      function(item) {
+    dados.forEach(function(item) {
 
-        area.appendChild(
-          criarMovimento(
-            item,
-            true
-          )
+      const label =
+        document.createElement(
+          'label'
         );
 
-      }
-    );
+
+      label.className =
+        'item-chave';
+
+
+      const checkbox =
+        document.createElement(
+          'input'
+        );
+
+
+      checkbox.type =
+        'checkbox';
+
+      checkbox.className =
+        'check-devolucao';
+
+      checkbox.value =
+        item.chave;
+
+
+      checkbox.addEventListener(
+        'change',
+        function() {
+
+          label.classList.toggle(
+            'selecionada',
+            checkbox.checked
+          );
+
+
+          atualizarContadorDevolucao();
+
+        }
+      );
+
+
+      const info =
+        document.createElement(
+          'div'
+        );
+
+
+      const statusTexto =
+        item.status === 'ATRASADA'
+          ? '⚠️ ATRASADA'
+          : '⏳ NÃO DEVOLVIDA';
+
+
+      info.innerHTML =
+
+        '<div class="numero-chave">' +
+        '🔑 Chave ' +
+        item.chave +
+        '</div>' +
+
+        '<div class="nome-chave">' +
+        escaparHtml(
+          item.identificacao
+        ) +
+        '</div>' +
+
+        '<div class="setor-chave">' +
+        escaparHtml(
+          item.setor
+        ) +
+        '</div>' +
+
+        '<div class="retirada-original">' +
+
+        '<strong>Retirada por:</strong> ' +
+        escaparHtml(
+          item.nome
+        ) +
+
+        ' — Cadastro Nº ' +
+        escaparHtml(
+          String(
+            item.numeroPessoa
+          )
+        ) +
+
+        '<br>' +
+
+        '<strong>Data:</strong> ' +
+        escaparHtml(
+          item.dataRetirada
+        ) +
+
+        '<br>' +
+
+        '<strong>Status:</strong> ' +
+        statusTexto +
+
+        '</div>';
+
+
+      label.appendChild(
+        checkbox
+      );
+
+
+      label.appendChild(
+        info
+      );
+
+
+      area.appendChild(
+        label
+      );
+
+    });
+
+
+    atualizarContadorDevolucao();
 
 
   } catch (erro) {
 
     area.innerHTML =
-      '<p>Erro ao carregar.</p>';
+      '<p>Erro ao carregar chaves.</p>';
 
 
     mostrarMensagem(
@@ -2047,187 +2383,180 @@ async function carregarDevolucoes() {
 
 
 // ============================================================
-// CRIAR MOVIMENTO
+// DEVOLUÇÃO - SELEÇÕES
 // ============================================================
 
-function criarMovimento(
-  item,
-  mostrarBotao
-) {
+function selecionarTodasDevolucao() {
 
-  const div =
-    document.createElement(
-      'div'
-    );
+  document
+    .querySelectorAll(
+      '.check-devolucao'
+    )
+    .forEach(function(check) {
 
+      check.checked = true;
 
-  div.className =
-    'movimento';
-
-
-  const info =
-    document.createElement(
-      'div'
-    );
-
-
-  info.className =
-    'movimento-info';
-
-
-  const titulo =
-    document.createElement(
-      'strong'
-    );
-
-
-  titulo.textContent =
-    '🔑 Chave ' +
-    item.chave +
-    ' — ' +
-    item.identificacao;
-
-
-  const pessoa =
-    document.createElement(
-      'p'
-    );
-
-
-  pessoa.textContent =
-    '👤 ' +
-    item.nome +
-    ' — Cadastro Nº ' +
-    item.numeroPessoa;
-
-
-  const setor =
-    document.createElement(
-      'p'
-    );
-
-
-  setor.textContent =
-    '📍 ' +
-    item.setor;
-
-
-  const data =
-    document.createElement(
-      'p'
-    );
-
-
-  data.textContent =
-    '🕒 Retirada: ' +
-    item.dataRetirada;
-
-
-  const status =
-    document.createElement(
-      'span'
-    );
-
-
-  status.className =
-    'status ' +
-    (
-      item.status === 'ATRASADA'
-        ? 'status-atrasada'
-        : 'status-aberta'
-    );
-
-
-  status.textContent =
-    item.status;
-
-
-  info.appendChild(titulo);
-
-  info.appendChild(pessoa);
-
-  info.appendChild(setor);
-
-  info.appendChild(data);
-
-  info.appendChild(status);
-
-
-  div.appendChild(info);
-
-
-  if (mostrarBotao) {
-
-    const botao =
-      document.createElement(
-        'button'
-      );
-
-
-    botao.className =
-      'botao botao-verde';
-
-
-    botao.textContent =
-      '↩️ Devolver';
-
-
-    botao.onclick =
-      function() {
-
-        devolverChave(
-          item.chave,
-          botao
+      check
+        .closest('.item-chave')
+        .classList.add(
+          'selecionada'
         );
 
-      };
+    });
 
 
-    div.appendChild(botao);
+  atualizarContadorDevolucao();
 
-  }
+}
 
 
-  return div;
+function limparSelecaoDevolucao() {
+
+  document
+    .querySelectorAll(
+      '.check-devolucao'
+    )
+    .forEach(function(check) {
+
+      check.checked = false;
+
+      check
+        .closest('.item-chave')
+        .classList.remove(
+          'selecionada'
+        );
+
+    });
+
+
+  atualizarContadorDevolucao();
+
+}
+
+
+function atualizarContadorDevolucao() {
+
+  const quantidade =
+    document
+      .querySelectorAll(
+        '.check-devolucao:checked'
+      )
+      .length;
+
+
+  document
+    .getElementById(
+      'contadorDevolucao'
+    )
+    .textContent =
+      quantidade === 1
+        ? '1 chave selecionada'
+        : quantidade +
+          ' chaves selecionadas';
 
 }
 
 
 // ============================================================
-// DEVOLVER
+// CONFIRMAR DEVOLUÇÃO
 // ============================================================
 
-function devolverChave(
-  numeroChave,
-  botao
-) {
+function confirmarDevolucao() {
 
-  if (
-    !confirm(
-      'Confirmar devolução da chave ' +
-      numeroChave +
-      '?'
-    )
-  ) {
+  if (!pessoaSelecionadaDevolucao) {
+
+    mostrarMensagem(
+      'Selecione quem está devolvendo.',
+      'erro'
+    );
 
     return;
 
   }
 
 
-  botao.disabled = true;
+  const selecionadas =
+    Array.from(
+      document.querySelectorAll(
+        '.check-devolucao:checked'
+      )
+    );
 
-  botao.textContent =
-    'Devolvendo...';
+
+  if (!selecionadas.length) {
+
+    mostrarMensagem(
+      'Selecione pelo menos uma chave.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  const numeros =
+    selecionadas.map(
+      function(check) {
+
+        return Number(check.value);
+
+      }
+    );
+
+
+  const texto =
+
+    'QUEM ESTÁ DEVOLVENDO:\n' +
+    pessoaSelecionadaDevolucao.nome +
+    '\n\n' +
+
+    'CHAVES:\n' +
+    numeros.join(', ') +
+    '\n\n' +
+
+    'Confirmar devolução de ' +
+    numeros.length +
+    ' chave(s)?';
+
+
+  if (!confirm(texto)) {
+
+    return;
+
+  }
+
+
+  const botao =
+    document.getElementById(
+      'btnDevolver'
+    );
+
+
+  botao.disabled =
+    true;
+
+
+  document
+    .getElementById(
+      'carregandoDevolucao'
+    )
+    .style.display =
+      'block';
 
 
   enviarPost({
 
     acao:
-      'devolverChave',
+      'devolverChaves',
 
-    numeroChave:
-      numeroChave
+    numeroDevolvedor:
+      pessoaSelecionadaDevolucao.numero,
+
+    numeroChaves:
+      JSON.stringify(
+        numeros
+      )
 
   });
 
@@ -2235,19 +2564,58 @@ function devolverChave(
   setTimeout(
     async function() {
 
+      botao.disabled =
+        false;
+
+
+      document
+        .getElementById(
+          'carregandoDevolucao'
+        )
+        .style.display =
+          'none';
+
+
       mostrarMensagem(
-        'Chave ' +
-        numeroChave +
-        ' devolvida!'
+        numeros.length +
+        ' chave(s) devolvidas por ' +
+        pessoaSelecionadaDevolucao.nome +
+        '!'
       );
 
 
-      await carregarDevolucoes();
+      pessoaSelecionadaDevolucao =
+        null;
+
+
+      document
+        .getElementById(
+          'nomeBuscaDevolucao'
+        )
+        .value =
+          '';
+
+
+      document
+        .getElementById(
+          'pessoaDevolucao'
+        )
+        .style.display =
+          'none';
+
+
+      document
+        .getElementById(
+          'areaDevolucao'
+        )
+        .style.display =
+          'none';
+
 
       await atualizarPainel();
 
     },
-    2000
+    2500
   );
 
 }
@@ -2325,9 +2693,8 @@ async function atualizarPainel() {
       function(item) {
 
         area.appendChild(
-          criarMovimento(
-            item,
-            false
+          criarMovimentoPainel(
+            item
           )
         );
 
@@ -2353,6 +2720,137 @@ async function atualizarPainel() {
 
 
 // ============================================================
+// CARD DO PAINEL
+// ============================================================
+
+function criarMovimentoPainel(item) {
+
+  const div =
+    document.createElement(
+      'div'
+    );
+
+
+  div.className =
+    'movimento';
+
+
+  const info =
+    document.createElement(
+      'div'
+    );
+
+
+  info.className =
+    'movimento-info';
+
+
+  const titulo =
+    document.createElement(
+      'strong'
+    );
+
+
+  titulo.textContent =
+    '🔑 Chave ' +
+    item.chave +
+    ' — ' +
+    item.identificacao;
+
+
+  const pessoa =
+    document.createElement(
+      'p'
+    );
+
+
+  pessoa.textContent =
+    '👤 Retirada por: ' +
+    item.nome +
+    ' — Cadastro Nº ' +
+    item.numeroPessoa;
+
+
+  const setor =
+    document.createElement(
+      'p'
+    );
+
+
+  setor.textContent =
+    '📍 ' +
+    item.setor;
+
+
+  const data =
+    document.createElement(
+      'p'
+    );
+
+
+  data.textContent =
+    '🕒 Retirada: ' +
+    item.dataRetirada;
+
+
+  const status =
+    document.createElement(
+      'span'
+    );
+
+
+  status.className =
+    'status ' +
+    (
+      item.status ===
+      'ATRASADA'
+        ?
+        'status-atrasada'
+        :
+        'status-aberta'
+    );
+
+
+  status.textContent =
+    item.status;
+
+
+  info.appendChild(titulo);
+
+  info.appendChild(pessoa);
+
+  info.appendChild(setor);
+
+  info.appendChild(data);
+
+  info.appendChild(status);
+
+
+  div.appendChild(info);
+
+
+  return div;
+
+}
+
+
+// ============================================================
+// ESCAPAR HTML
+// ============================================================
+
+function escaparHtml(texto) {
+
+  return String(texto || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
+}
+
+
+// ============================================================
 // CÂMERA
 // ============================================================
 
@@ -2372,12 +2870,32 @@ async function iniciarCamera() {
     }
 
 
+    if (streamCamera) {
+
+      streamCamera
+        .getTracks()
+        .forEach(function(track) {
+
+          track.stop();
+
+        });
+
+    }
+
+
     streamCamera =
       await navigator
         .mediaDevices
         .getUserMedia({
 
-          video: true,
+          video: {
+            width: {
+              ideal: 1280
+            },
+            height: {
+              ideal: 720
+            }
+          },
 
           audio: false
 
@@ -2537,7 +3055,7 @@ function novaFoto() {
 
 
 // ============================================================
-// CADASTRAR
+// CADASTRAR PESSOA
 // ============================================================
 
 function cadastrarPessoa() {
@@ -2566,7 +3084,7 @@ function cadastrarPessoa() {
   if (!fotoBase64) {
 
     mostrarMensagem(
-      'Tire a foto.',
+      'Tire a foto da pessoa.',
       'erro'
     );
 
@@ -2633,7 +3151,7 @@ function cadastrarPessoa() {
 
 
       mostrarMensagem(
-        'Cadastro enviado!'
+        'Cadastro enviado com sucesso!'
       );
 
     },
