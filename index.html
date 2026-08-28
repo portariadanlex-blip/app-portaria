@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -13,6 +12,10 @@
 <title>Controle de Portaria</title>
 
 <style>
+
+/* ==========================================================
+   GERAL
+========================================================== */
 
 * {
   box-sizing: border-box;
@@ -68,9 +71,7 @@ body.bloqueado {
 
 .login-logo {
   text-align: center;
-
   font-size: 55px;
-
   margin-bottom: 10px;
 }
 
@@ -169,27 +170,22 @@ header {
 
 header h1 {
   margin: 0;
-
   font-size: 24px;
 }
 
 .header-direita {
   display: flex;
-
   gap: 22px;
-
   align-items: center;
 }
 
 .usuario-logado {
   text-align: right;
-
   font-size: 13px;
 }
 
 .usuario-logado strong {
   display: block;
-
   font-size: 15px;
 }
 
@@ -214,6 +210,11 @@ header h1 {
 .relogio {
   text-align: right;
 }
+
+
+/* ==========================================================
+   MENU
+========================================================== */
 
 nav {
   background: white;
@@ -248,11 +249,19 @@ nav button {
   font-size: 15px;
 }
 
+nav button:hover {
+  background: #e0e0e0;
+}
+
 nav button.ativo {
   background: #8b0000;
-
   color: white;
 }
+
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
 
 main {
   max-width: 1200px;
@@ -285,9 +294,13 @@ main {
 
 .card h2 {
   color: #8b0000;
-
   margin-top: 0;
 }
+
+
+/* ==========================================================
+   FORMULÁRIOS
+========================================================== */
 
 label {
   display: block;
@@ -314,9 +327,13 @@ input[type="password"] {
 
 input:focus {
   outline: none;
-
   border-color: #8b0000;
 }
+
+
+/* ==========================================================
+   BOTÕES
+========================================================== */
 
 .botao {
   border: 0;
@@ -336,15 +353,16 @@ input:focus {
   cursor: pointer;
 
   margin-top: 15px;
+
+  transition: .15s;
 }
 
 .botao:hover {
-  filter: brightness(1.07);
+  filter: brightness(1.08);
 }
 
 .botao:disabled {
   background: #999;
-
   cursor: not-allowed;
 }
 
@@ -373,7 +391,7 @@ input:focus {
   display: grid;
 
   grid-template-columns:
-    repeat(4,1fr);
+    repeat(4, 1fr);
 
   gap: 15px;
 
@@ -395,7 +413,6 @@ input:focus {
 
 .resumo-numero {
   font-size: 36px;
-
   font-weight: bold;
 }
 
@@ -446,7 +463,6 @@ input:focus {
 
 .pessoa-selecionada img {
   width: 100px;
-
   height: 100px;
 
   border-radius: 10px;
@@ -458,7 +474,6 @@ input:focus {
 
 .pessoa-selecionada h3 {
   margin: 0 0 6px;
-
   font-size: 22px;
 }
 
@@ -484,13 +499,11 @@ input:focus {
 
 .resultado-pessoa:hover {
   border-color: #8b0000;
-
   background: white;
 }
 
 .resultado-pessoa img {
   width: 75px;
-
   height: 75px;
 
   border-radius: 8px;
@@ -576,19 +589,16 @@ input:focus {
 
 .item-chave:hover {
   border-color: #8b0000;
-
   background: white;
 }
 
 .item-chave.selecionada {
   border-color: #19713a;
-
   background: #edf8f0;
 }
 
 .item-chave input {
   width: 22px;
-
   height: 22px;
 
   margin-top: 3px;
@@ -661,7 +671,6 @@ input:focus {
 
 .movimento-info p {
   color: #555;
-
   margin: 6px 0;
 }
 
@@ -679,13 +688,11 @@ input:focus {
 
 .status-aberta {
   background: #fff0cc;
-
   color: #805300;
 }
 
 .status-atrasada {
   background: #ffd9df;
-
   color: #a00020;
 }
 
@@ -733,55 +740,7 @@ canvas {
 
 
 /* ==========================================================
-   MENSAGEM
-========================================================== */
-
-.mensagem {
-  position: fixed;
-
-  z-index: 99999999;
-
-  top: 20px;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  padding: 15px 25px;
-
-  color: white;
-
-  font-weight: bold;
-
-  border-radius: 8px;
-
-  display: none;
-
-  box-shadow:
-    0 3px 15px rgba(0,0,0,.25);
-
-  text-align: center;
-}
-
-.mensagem.sucesso {
-  background: #19713a;
-}
-
-.mensagem.erro {
-  background: #b00020;
-}
-
-.carregando {
-  display: none;
-
-  margin-top: 15px;
-
-  font-weight: bold;
-}
-
-
-/* ==========================================================
-   NOVO MODAL DE CONFIRMAÇÃO
+   MODAL CONFIRMAÇÃO
 ========================================================== */
 
 .modal-overlay {
@@ -789,14 +748,11 @@ canvas {
 
   inset: 0;
 
-  background:
-    rgba(0,0,0,.60);
+  background: rgba(0,0,0,.62);
 
-  backdrop-filter:
-    blur(4px);
+  backdrop-filter: blur(4px);
 
-  -webkit-backdrop-filter:
-    blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 
   z-index: 9999999;
 
@@ -815,7 +771,6 @@ canvas {
 
 .modal-confirmacao {
   width: 100%;
-
   max-width: 570px;
 
   background: white;
@@ -825,17 +780,17 @@ canvas {
   overflow: hidden;
 
   box-shadow:
-    0 30px 80px
-    rgba(0,0,0,.42);
+    0 30px 80px rgba(0,0,0,.42);
 
   animation:
-    animacaoModal .20s ease;
+    abrirModal .20s ease;
 }
 
-@keyframes animacaoModal {
+@keyframes abrirModal {
 
   from {
     opacity: 0;
+
     transform:
       scale(.93)
       translateY(15px);
@@ -843,6 +798,7 @@ canvas {
 
   to {
     opacity: 1;
+
     transform:
       scale(1)
       translateY(0);
@@ -857,8 +813,7 @@ canvas {
 
   padding: 22px 25px;
 
-  border-bottom:
-    1px solid #eee;
+  border-bottom: 1px solid #eee;
 
   background:
     linear-gradient(
@@ -870,7 +825,6 @@ canvas {
 
 .modal-icone {
   width: 58px;
-
   height: 58px;
 
   min-width: 58px;
@@ -884,8 +838,6 @@ canvas {
   border-radius: 14px;
 
   background: #fbe9e9;
-
-  color: #8b0000;
 
   font-size: 29px;
 
@@ -914,7 +866,6 @@ canvas {
   cursor: pointer;
 
   width: 42px;
-
   height: 42px;
 
   display: flex;
@@ -946,7 +897,6 @@ canvas {
 
 .modal-mini-icone {
   width: 50px;
-
   height: 50px;
 
   min-width: 50px;
@@ -993,8 +943,7 @@ canvas {
 
   background: #fff3f3;
 
-  border:
-    1px solid #edc8c8;
+  border: 1px solid #edc8c8;
 
   border-radius: 11px;
 
@@ -1007,7 +956,6 @@ canvas {
 
 .modal-pergunta-icone {
   width: 37px;
-
   height: 37px;
 
   min-width: 37px;
@@ -1018,8 +966,7 @@ canvas {
 
   justify-content: center;
 
-  border:
-    2px solid #8b0000;
+  border: 2px solid #8b0000;
 
   color: #8b0000;
 
@@ -1041,8 +988,7 @@ canvas {
 
   background: #fafafa;
 
-  border-top:
-    1px solid #eee;
+  border-top: 1px solid #eee;
 }
 
 .modal-btn {
@@ -1066,8 +1012,7 @@ canvas {
 
   color: #555;
 
-  border:
-    1px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 .modal-cancelar:hover {
@@ -1085,17 +1030,180 @@ canvas {
   color: white;
 
   box-shadow:
-    0 5px 14px
-    rgba(139,0,0,.20);
+    0 5px 14px rgba(139,0,0,.20);
 }
 
 .modal-confirmar:hover {
-  transform:
-    translateY(-1px);
+  transform: translateY(-1px);
 
   box-shadow:
-    0 7px 18px
-    rgba(139,0,0,.30);
+    0 7px 18px rgba(139,0,0,.30);
+}
+
+
+/* ==========================================================
+   MODAL DE SUCESSO / ERRO
+========================================================== */
+
+.aviso-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0,0,0,.62);
+
+  backdrop-filter: blur(4px);
+
+  -webkit-backdrop-filter: blur(4px);
+
+  z-index: 99999999;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.aviso-overlay.ativo {
+  display: flex;
+}
+
+.aviso-card {
+  width: 100%;
+  max-width: 430px;
+
+  background: white;
+
+  border-radius: 22px;
+
+  padding: 35px 30px 28px;
+
+  text-align: center;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.42);
+
+  animation:
+    abrirAviso .22s ease;
+}
+
+@keyframes abrirAviso {
+
+  from {
+    opacity: 0;
+
+    transform:
+      scale(.88)
+      translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+  }
+
+}
+
+.aviso-circulo {
+  width: 90px;
+  height: 90px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 44px;
+}
+
+.aviso-card.sucesso .aviso-circulo {
+  background: #e8f7ed;
+
+  border: 3px solid #19713a;
+}
+
+.aviso-card.erro .aviso-circulo {
+  background: #fff0f1;
+
+  border: 3px solid #b00020;
+}
+
+.aviso-card h2 {
+  margin: 0 0 12px;
+
+  font-size: 25px;
+}
+
+.aviso-card.sucesso h2 {
+  color: #19713a;
+}
+
+.aviso-card.erro h2 {
+  color: #b00020;
+}
+
+.aviso-texto {
+  color: #555;
+
+  font-size: 16px;
+
+  line-height: 1.55;
+
+  margin-bottom: 25px;
+}
+
+.aviso-botao {
+  width: 100%;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.aviso-card.sucesso .aviso-botao {
+  background: #19713a;
+}
+
+.aviso-card.erro .aviso-botao {
+  background: #8b0000;
+}
+
+.aviso-botao:hover {
+  filter: brightness(1.08);
+}
+
+
+/* ==========================================================
+   CARREGANDO
+========================================================== */
+
+.carregando {
+  display: none;
+
+  margin-top: 15px;
+
+  font-weight: bold;
 }
 
 
@@ -1116,8 +1224,7 @@ canvas {
   }
 
   header {
-    align-items:
-      flex-start;
+    align-items: flex-start;
   }
 
 }
@@ -1150,8 +1257,7 @@ canvas {
   }
 
   .modal-rodape {
-    flex-direction:
-      column-reverse;
+    flex-direction: column-reverse;
 
     padding: 17px;
   }
@@ -1163,18 +1269,15 @@ canvas {
 }
 
 </style>
-
 </head>
 
 
 <body class="bloqueado">
 
 
-<div
-  id="mensagem"
-  class="mensagem"
-></div>
-
+<!-- ========================================================
+     IFRAME PARA POST
+========================================================= -->
 
 <iframe
   id="frameEnvio"
@@ -1184,7 +1287,7 @@ canvas {
 
 
 <!-- ========================================================
-     NOVO MODAL DE CONFIRMAÇÃO
+     MODAL DE CONFIRMAÇÃO
 ========================================================= -->
 
 <div
@@ -1192,13 +1295,9 @@ canvas {
   class="modal-overlay"
 >
 
-  <div
-    class="modal-confirmacao"
-  >
+  <div class="modal-confirmacao">
 
-    <div
-      class="modal-topo"
-    >
+    <div class="modal-topo">
 
       <div
         id="modalIconePrincipal"
@@ -1208,9 +1307,7 @@ canvas {
       </div>
 
 
-      <h2
-        id="modalTitulo"
-      >
+      <h2 id="modalTitulo">
         Confirmar operação
       </h2>
 
@@ -1218,7 +1315,6 @@ canvas {
       <button
         class="modal-fechar"
         onclick="fecharModalConfirmacao(false)"
-        title="Fechar"
       >
         ×
       </button>
@@ -1226,18 +1322,11 @@ canvas {
     </div>
 
 
-    <div
-      class="modal-corpo"
-    >
+    <div class="modal-corpo">
 
+      <div class="modal-linha">
 
-      <div
-        class="modal-linha"
-      >
-
-        <div
-          class="modal-mini-icone"
-        >
+        <div class="modal-mini-icone">
           👤
         </div>
 
@@ -1263,22 +1352,16 @@ canvas {
       </div>
 
 
-      <div
-        class="modal-linha"
-      >
+      <div class="modal-linha">
 
-        <div
-          class="modal-mini-icone"
-        >
+        <div class="modal-mini-icone">
           🔑
         </div>
 
 
         <div>
 
-          <div
-            class="modal-label"
-          >
+          <div class="modal-label">
             Chaves
           </div>
 
@@ -1297,21 +1380,16 @@ canvas {
       <div
         id="modalDetalhes"
         class="modal-linha"
-        style="display:none"
       >
 
-        <div
-          class="modal-mini-icone"
-        >
+        <div class="modal-mini-icone">
           📋
         </div>
 
 
         <div>
 
-          <div
-            class="modal-label"
-          >
+          <div class="modal-label">
             Quantidade
           </div>
 
@@ -1327,20 +1405,13 @@ canvas {
       </div>
 
 
-      <div
-        class="modal-pergunta"
-      >
+      <div class="modal-pergunta">
 
-        <div
-          class="modal-pergunta-icone"
-        >
+        <div class="modal-pergunta-icone">
           ?
         </div>
 
-
-        <div
-          id="modalTextoPergunta"
-        >
+        <div id="modalTextoPergunta">
           Deseja confirmar esta operação?
         </div>
 
@@ -1349,15 +1420,10 @@ canvas {
     </div>
 
 
-    <div
-      class="modal-rodape"
-    >
+    <div class="modal-rodape">
 
       <button
-        class="
-          modal-btn
-          modal-cancelar
-        "
+        class="modal-btn modal-cancelar"
         onclick="fecharModalConfirmacao(false)"
       >
         ✕ Cancelar
@@ -1366,16 +1432,60 @@ canvas {
 
       <button
         id="modalBotaoConfirmar"
-        class="
-          modal-btn
-          modal-confirmar
-        "
+        class="modal-btn modal-confirmar"
         onclick="fecharModalConfirmacao(true)"
       >
         ✓ Confirmar
       </button>
 
     </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================
+     MODAL SUCESSO / ERRO
+========================================================= -->
+
+<div
+  id="modalAviso"
+  class="aviso-overlay"
+>
+
+  <div
+    id="avisoCard"
+    class="aviso-card sucesso"
+  >
+
+    <div
+      id="avisoIcone"
+      class="aviso-circulo"
+    >
+      ✅
+    </div>
+
+
+    <h2 id="avisoTitulo">
+      Operação realizada!
+    </h2>
+
+
+    <div
+      id="avisoTexto"
+      class="aviso-texto"
+    >
+      Operação realizada com sucesso.
+    </div>
+
+
+    <button
+      class="aviso-botao"
+      onclick="fecharAviso()"
+    >
+      OK
+    </button>
 
   </div>
 
@@ -1441,14 +1551,10 @@ canvas {
     </button>
 
 
-    <div
-      id="erroLogin"
-    ></div>
+    <div id="erroLogin"></div>
 
 
-    <div
-      id="carregandoLogin"
-    >
+    <div id="carregandoLogin">
       Verificando acesso...
     </div>
 
@@ -1477,9 +1583,7 @@ canvas {
 
       Acesso:
 
-      <strong
-        id="nomeUsuarioLogado"
-      >
+      <strong id="nomeUsuarioLogado">
         -
       </strong>
 
@@ -1496,13 +1600,9 @@ canvas {
 
     <div class="relogio">
 
-      <div
-        id="dataAtual"
-      ></div>
+      <div id="dataAtual"></div>
 
-      <div
-        id="horaAtual"
-      ></div>
+      <div id="horaAtual"></div>
 
     </div>
 
@@ -1556,13 +1656,9 @@ canvas {
   class="pagina ativa"
 >
 
-  <div
-    class="cards-resumo"
-  >
+  <div class="cards-resumo">
 
-    <div
-      class="resumo"
-    >
+    <div class="resumo">
 
       <div
         id="totalChaves"
@@ -1571,78 +1667,55 @@ canvas {
         -
       </div>
 
-      <div
-        class="resumo-titulo"
-      >
+      <div class="resumo-titulo">
         TOTAL DE CHAVES
       </div>
 
     </div>
 
 
-    <div
-      class="resumo"
-    >
+    <div class="resumo">
 
       <div
         id="totalDisponiveis"
-        class="
-          resumo-numero
-          verde
-        "
+        class="resumo-numero verde"
       >
         -
       </div>
 
-      <div
-        class="resumo-titulo"
-      >
+      <div class="resumo-titulo">
         DISPONÍVEIS
       </div>
 
     </div>
 
 
-    <div
-      class="resumo"
-    >
+    <div class="resumo">
 
       <div
         id="totalRetiradas"
-        class="
-          resumo-numero
-          laranja
-        "
+        class="resumo-numero laranja"
       >
         -
       </div>
 
-      <div
-        class="resumo-titulo"
-      >
+      <div class="resumo-titulo">
         RETIRADAS
       </div>
 
     </div>
 
 
-    <div
-      class="resumo"
-    >
+    <div class="resumo">
 
       <div
         id="totalAtrasadas"
-        class="
-          resumo-numero
-          vermelho
-        "
+        class="resumo-numero vermelho"
       >
         -
       </div>
 
-      <div
-        class="resumo-titulo"
-      >
+      <div class="resumo-titulo">
         ATRASADAS
       </div>
 
@@ -1651,18 +1724,13 @@ canvas {
   </div>
 
 
-  <div
-    class="card"
-  >
+  <div class="card">
 
     <h2>
       🔑 Chaves não devolvidas
     </h2>
 
-
-    <div
-      id="listaAbertas"
-    >
+    <div id="listaAbertas">
       Carregando...
     </div>
 
@@ -1680,9 +1748,7 @@ canvas {
   class="pagina"
 >
 
-  <div
-    class="card"
-  >
+  <div class="card">
 
     <h2>
       🔑 Retirada de Chaves
@@ -1721,10 +1787,7 @@ canvas {
 
     <div
       id="resultadosPessoasRetirada"
-      style="
-        display:none;
-        margin-top:20px
-      "
+      style="display:none;margin-top:20px"
     ></div>
 
 
@@ -1741,15 +1804,11 @@ canvas {
 
       <div>
 
-        <h3
-          id="nomePessoaRetirada"
-        ></h3>
+        <h3 id="nomePessoaRetirada"></h3>
 
         <div>
           Cadastro Nº
-          <strong
-            id="codigoPessoaRetirada"
-          ></strong>
+          <strong id="codigoPessoaRetirada"></strong>
         </div>
 
       </div>
@@ -1768,15 +1827,10 @@ canvas {
       </h3>
 
 
-      <div
-        class="barra-chaves"
-      >
+      <div class="barra-chaves">
 
         <button
-          class="
-            botao
-            botao-cinza
-          "
+          class="botao botao-cinza"
           onclick="selecionarTodasRetirada()"
         >
           ☑ Selecionar todas
@@ -1784,10 +1838,7 @@ canvas {
 
 
         <button
-          class="
-            botao
-            botao-cinza
-          "
+          class="botao botao-cinza"
           onclick="limparSelecaoRetirada()"
         >
           ⬜ Limpar seleção
@@ -1812,10 +1863,7 @@ canvas {
 
       <button
         id="btnRetirar"
-        class="
-          botao
-          botao-verde
-        "
+        class="botao botao-verde"
         onclick="confirmarRetirada()"
       >
         🔑 Confirmar Retirada
@@ -1826,7 +1874,7 @@ canvas {
         id="carregandoRetirada"
         class="carregando"
       >
-        Registrando retirada...
+        ⏳ Registrando retirada...
       </div>
 
     </div>
@@ -1845,9 +1893,7 @@ canvas {
   class="pagina"
 >
 
-  <div
-    class="card"
-  >
+  <div class="card">
 
     <h2>
       ↩️ Devolução de Chaves
@@ -1888,10 +1934,7 @@ canvas {
 
     <div
       id="resultadosPessoasDevolucao"
-      style="
-        display:none;
-        margin-top:20px
-      "
+      style="display:none;margin-top:20px"
     ></div>
 
 
@@ -1908,16 +1951,11 @@ canvas {
 
       <div>
 
-        <h3
-          id="nomePessoaDevolucao"
-        ></h3>
-
+        <h3 id="nomePessoaDevolucao"></h3>
 
         <div>
           Cadastro Nº
-          <strong
-            id="codigoPessoaDevolucao"
-          ></strong>
+          <strong id="codigoPessoaDevolucao"></strong>
         </div>
 
 
@@ -1951,15 +1989,10 @@ canvas {
       </p>
 
 
-      <div
-        class="barra-chaves"
-      >
+      <div class="barra-chaves">
 
         <button
-          class="
-            botao
-            botao-cinza
-          "
+          class="botao botao-cinza"
           onclick="selecionarTodasDevolucao()"
         >
           ☑ Selecionar todas
@@ -1967,10 +2000,7 @@ canvas {
 
 
         <button
-          class="
-            botao
-            botao-cinza
-          "
+          class="botao botao-cinza"
           onclick="limparSelecaoDevolucao()"
         >
           ⬜ Limpar seleção
@@ -1995,10 +2025,7 @@ canvas {
 
       <button
         id="btnDevolver"
-        class="
-          botao
-          botao-verde
-        "
+        class="botao botao-verde"
         onclick="confirmarDevolucao()"
       >
         ↩️ Devolver Selecionadas
@@ -2009,7 +2036,7 @@ canvas {
         id="carregandoDevolucao"
         class="carregando"
       >
-        Registrando devolução...
+        ⏳ Registrando devolução...
       </div>
 
     </div>
@@ -2028,9 +2055,7 @@ canvas {
   class="pagina"
 >
 
-  <div
-    class="card"
-  >
+  <div class="card">
 
     <h2>
       👤 Cadastro de Pessoa
@@ -2050,9 +2075,7 @@ canvas {
     >
 
 
-    <div
-      class="camera-area"
-    >
+    <div class="camera-area">
 
       <video
         id="video"
@@ -2067,14 +2090,10 @@ canvas {
       >
 
 
-      <canvas
-        id="canvas"
-      ></canvas>
+      <canvas id="canvas"></canvas>
 
 
-      <div
-        class="camera-botoes"
-      >
+      <div class="camera-botoes">
 
         <button
           id="btnFoto"
@@ -2087,10 +2106,7 @@ canvas {
 
         <button
           id="btnNovaFoto"
-          class="
-            botao
-            botao-cinza
-          "
+          class="botao botao-cinza"
           onclick="novaFoto()"
           style="display:none"
         >
@@ -2104,10 +2120,7 @@ canvas {
 
     <button
       id="btnCadastrar"
-      class="
-        botao
-        botao-verde
-      "
+      class="botao botao-verde"
       onclick="cadastrarPessoa()"
     >
       💾 Cadastrar Pessoa
@@ -2118,7 +2131,7 @@ canvas {
       id="carregandoCadastro"
       class="carregando"
     >
-      Salvando cadastro...
+      ⏳ Salvando cadastro...
     </div>
 
   </div>
@@ -2127,23 +2140,22 @@ canvas {
 
 
 </main>
-
 </div>
 
 
 <script>
 
-// ============================================================
-// URL DO APPS SCRIPT
-// ============================================================
+/* ==========================================================
+   URL DO APPS SCRIPT
+========================================================== */
 
 const URL_SCRIPT =
 'https://script.google.com/macros/s/AKfycbzytM6CncsFj_1nqd4w_LIGyjOgeUIzkOK8o6pP-mYvgCito0Zrh7jeIJZsLGYQpHbr/exec';
 
 
-// ============================================================
-// VARIÁVEIS
-// ============================================================
+/* ==========================================================
+   VARIÁVEIS
+========================================================== */
 
 let TOKEN =
   localStorage.getItem(
@@ -2154,19 +2166,16 @@ let streamCamera = null;
 
 let fotoBase64 = '';
 
-let pessoaSelecionadaRetirada =
-  null;
+let pessoaSelecionadaRetirada = null;
 
-let pessoaSelecionadaDevolucao =
-  null;
+let pessoaSelecionadaDevolucao = null;
 
-let resolverModalConfirmacao =
-  null;
+let resolverModalConfirmacao = null;
 
 
-// ============================================================
-// INICIALIZAÇÃO
-// ============================================================
+/* ==========================================================
+   INICIALIZAÇÃO
+========================================================== */
 
 window.addEventListener(
   'load',
@@ -2194,9 +2203,112 @@ window.addEventListener(
 );
 
 
-// ============================================================
-// NOVO MODAL
-// ============================================================
+/* ==========================================================
+   MODAL DE AVISO / SUCESSO / ERRO
+========================================================== */
+
+function mostrarMensagem(
+  texto,
+  tipo = 'sucesso',
+  tituloPersonalizado = ''
+) {
+
+  const card =
+    document.getElementById(
+      'avisoCard'
+    );
+
+  const icone =
+    document.getElementById(
+      'avisoIcone'
+    );
+
+  const titulo =
+    document.getElementById(
+      'avisoTitulo'
+    );
+
+  const mensagem =
+    document.getElementById(
+      'avisoTexto'
+    );
+
+
+  card.className =
+    'aviso-card ' + tipo;
+
+
+  if (tipo === 'erro') {
+
+    icone.textContent =
+      '⚠️';
+
+    titulo.textContent =
+      tituloPersonalizado ||
+      'Atenção!';
+
+  } else {
+
+    icone.textContent =
+      '✅';
+
+    titulo.textContent =
+      tituloPersonalizado ||
+      'Operação realizada!';
+
+  }
+
+
+  mensagem.textContent =
+    texto;
+
+
+  document
+    .getElementById(
+      'modalAviso'
+    )
+    .classList.add(
+      'ativo'
+    );
+
+
+  document.body.style.overflow =
+    'hidden';
+
+}
+
+
+function fecharAviso() {
+
+  document
+    .getElementById(
+      'modalAviso'
+    )
+    .classList.remove(
+      'ativo'
+    );
+
+
+  if (
+    document
+      .getElementById(
+        'telaLogin'
+      )
+      .style.display !==
+      'flex'
+  ) {
+
+    document.body.style.overflow =
+      '';
+
+  }
+
+}
+
+
+/* ==========================================================
+   MODAL DE CONFIRMAÇÃO
+========================================================== */
 
 function abrirModalConfirmacao(
   configuracao
@@ -2272,38 +2384,18 @@ function abrirModalConfirmacao(
     configuracao.quantidade;
 
 
-  const detalhes =
-    document.getElementById(
-      'modalDetalhes'
-    );
+  document
+    .getElementById(
+      'modalQuantidade'
+    )
+    .textContent =
 
+      quantidade === 1
 
-  if (
-    quantidade !== undefined &&
-    quantidade !== null
-  ) {
+      ? '1 chave'
 
-    detalhes.style.display =
-      'flex';
-
-
-    document
-      .getElementById(
-        'modalQuantidade'
-      )
-      .textContent =
-
-        quantidade === 1
-          ? '1 chave'
-          : quantidade +
-            ' chaves';
-
-  } else {
-
-    detalhes.style.display =
-      'none';
-
-  }
+      : quantidade +
+        ' chaves';
 
 
   document
@@ -2344,19 +2436,8 @@ function fecharModalConfirmacao(
     );
 
 
-  if (
-    document
-      .getElementById(
-        'telaLogin'
-      )
-      .style.display !==
-      'flex'
-  ) {
-
-    document.body.style.overflow =
-      '';
-
-  }
+  document.body.style.overflow =
+    '';
 
 
   if (
@@ -2367,7 +2448,6 @@ function fecharModalConfirmacao(
       resultado
     );
 
-
     resolverModalConfirmacao =
       null;
 
@@ -2376,14 +2456,43 @@ function fecharModalConfirmacao(
 }
 
 
-// ESC PARA CANCELAR
+/* ==========================================================
+   ESC FECHA MODAIS
+========================================================== */
+
 document.addEventListener(
   'keydown',
   function(evento) {
 
     if (
-      evento.key ===
-        'Escape' &&
+      evento.key !==
+      'Escape'
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      document
+        .getElementById(
+          'modalAviso'
+        )
+        .classList
+        .contains(
+          'ativo'
+        )
+    ) {
+
+      fecharAviso();
+
+      return;
+
+    }
+
+
+    if (
       document
         .getElementById(
           'modalConfirmacao'
@@ -2404,32 +2513,9 @@ document.addEventListener(
 );
 
 
-// CLIQUE NO FUNDO CANCELA
-document
-  .getElementById(
-    'modalConfirmacao'
-  )
-  .addEventListener(
-    'click',
-    function(evento) {
-
-      if (
-        evento.target === this
-      ) {
-
-        fecharModalConfirmacao(
-          false
-        );
-
-      }
-
-    }
-  );
-
-
-// ============================================================
-// LOGIN
-// ============================================================
+/* ==========================================================
+   LOGIN
+========================================================== */
 
 async function entrar() {
 
@@ -2587,13 +2673,11 @@ async function entrar() {
 }
 
 
-// ============================================================
-// SHA256
-// ============================================================
+/* ==========================================================
+   SHA256
+========================================================== */
 
-async function sha256Hex(
-  texto
-) {
+async function sha256Hex(texto) {
 
   const dados =
     new TextEncoder()
@@ -2610,14 +2694,11 @@ async function sha256Hex(
 
 
   return Array.from(
-    new Uint8Array(
-      hash
-    )
+    new Uint8Array(hash)
   )
   .map(
     b =>
-      b
-        .toString(16)
+      b.toString(16)
         .padStart(
           2,
           '0'
@@ -2628,9 +2709,9 @@ async function sha256Hex(
 }
 
 
-// ============================================================
-// HMAC
-// ============================================================
+/* ==========================================================
+   HMAC
+========================================================== */
 
 async function hmacSha256Hex(
   mensagem,
@@ -2683,8 +2764,7 @@ async function hmacSha256Hex(
   )
   .map(
     b =>
-      b
-        .toString(16)
+      b.toString(16)
         .padStart(
           2,
           '0'
@@ -2695,9 +2775,9 @@ async function hmacSha256Hex(
 }
 
 
-// ============================================================
-// VERIFICAR SESSÃO
-// ============================================================
+/* ==========================================================
+   SESSÃO
+========================================================== */
 
 async function verificarSessao() {
 
@@ -2732,10 +2812,6 @@ async function verificarSessao() {
 
 }
 
-
-// ============================================================
-// LOGIN / SISTEMA
-// ============================================================
 
 function mostrarLogin() {
 
@@ -2801,9 +2877,9 @@ function mostrarSistema() {
 }
 
 
-// ============================================================
-// LOGOUT
-// ============================================================
+/* ==========================================================
+   SAIR
+========================================================== */
 
 async function sair() {
 
@@ -2845,7 +2921,6 @@ async function sair() {
 
   pararCamera();
 
-
   mostrarLogin();
 
 }
@@ -2864,7 +2939,6 @@ function expirarSessao() {
 
   pararCamera();
 
-
   mostrarLogin();
 
 
@@ -2875,9 +2949,9 @@ function expirarSessao() {
 }
 
 
-// ============================================================
-// ERRO LOGIN
-// ============================================================
+/* ==========================================================
+   ERRO LOGIN
+========================================================== */
 
 function mostrarErroLogin(
   texto
@@ -2911,9 +2985,9 @@ function esconderErroLogin() {
 }
 
 
-// ============================================================
-// JSONP
-// ============================================================
+/* ==========================================================
+   JSONP
+========================================================== */
 
 function jsonpPublico(
   acao,
@@ -2934,7 +3008,9 @@ function jsonp(
   parametros = {}
 ) {
 
-  if (!TOKEN) {
+  if (
+    !TOKEN
+  ) {
 
     return Promise.reject(
       new Error(
@@ -3033,9 +3109,7 @@ function executarJsonp(
 
           params.set(
             chave,
-            parametros[
-              chave
-            ]
+            parametros[chave]
           );
 
         }
@@ -3048,9 +3122,7 @@ function executarJsonp(
       window[
         callback
       ] =
-        function(
-          dados
-        ) {
+        function(dados) {
 
           clearTimeout(
             timeout
@@ -3067,8 +3139,7 @@ function executarJsonp(
 
           if (
             dados &&
-            dados.sucesso ===
-              false
+            dados.sucesso === false
           ) {
 
             if (
@@ -3173,9 +3244,9 @@ function executarJsonp(
 }
 
 
-// ============================================================
-// POST
-// ============================================================
+/* ==========================================================
+   POST
+========================================================== */
 
 function enviarPost(
   dados
@@ -3222,9 +3293,7 @@ function enviarPost(
     dados
   )
   .forEach(
-    function(
-      chave
-    ) {
+    function(chave) {
 
       const input =
         document.createElement(
@@ -3241,9 +3310,7 @@ function enviarPost(
 
 
       input.value =
-        dados[
-          chave
-        ];
+        dados[chave];
 
 
       form.appendChild(
@@ -3277,9 +3344,9 @@ function enviarPost(
 }
 
 
-// ============================================================
-// RELÓGIO
-// ============================================================
+/* ==========================================================
+   RELÓGIO
+========================================================== */
 
 function atualizarRelogio() {
 
@@ -3325,9 +3392,9 @@ function atualizarRelogio() {
 }
 
 
-// ============================================================
-// NAVEGAÇÃO
-// ============================================================
+/* ==========================================================
+   NAVEGAÇÃO
+========================================================== */
 
 function abrirPagina(
   pagina,
@@ -3406,51 +3473,9 @@ function abrirPagina(
 }
 
 
-// ============================================================
-// MENSAGEM
-// ============================================================
-
-function mostrarMensagem(
-  texto,
-  tipo =
-    'sucesso'
-) {
-
-  const caixa =
-    document.getElementById(
-      'mensagem'
-    );
-
-
-  caixa.textContent =
-    texto;
-
-
-  caixa.className =
-    'mensagem ' +
-    tipo;
-
-
-  caixa.style.display =
-    'block';
-
-
-  setTimeout(
-    function() {
-
-      caixa.style.display =
-        'none';
-
-    },
-    4500
-  );
-
-}
-
-
-// ============================================================
-// PESSOA RESULTADO
-// ============================================================
+/* ==========================================================
+   CRIAR RESULTADO DA PESSOA
+========================================================== */
 
 function criarResultadoPessoa(
   pessoa,
@@ -3542,12 +3567,9 @@ function criarResultadoPessoa(
 
 
   botao.onclick =
-    function(
-      evento
-    ) {
+    function(evento) {
 
       evento.stopPropagation();
-
 
       aoSelecionar(
         pessoa
@@ -3586,9 +3608,9 @@ function criarResultadoPessoa(
 }
 
 
-// ============================================================
-// RETIRADA - BUSCAR
-// ============================================================
+/* ==========================================================
+   BUSCAR PESSOA - RETIRADA
+========================================================== */
 
 async function buscarPessoaRetirada() {
 
@@ -3655,8 +3677,7 @@ async function buscarPessoaRetirada() {
       await jsonp(
         'buscarPessoasPorNome',
         {
-          nome:
-            nome
+          nome: nome
         }
       );
 
@@ -3678,9 +3699,7 @@ async function buscarPessoaRetirada() {
 
 
     pessoas.forEach(
-      function(
-        pessoa
-      ) {
+      function(pessoa) {
 
         area.appendChild(
           criarResultadoPessoa(
@@ -3709,9 +3728,9 @@ async function buscarPessoaRetirada() {
 }
 
 
-// ============================================================
-// RETIRADA - SELECIONAR PESSOA
-// ============================================================
+/* ==========================================================
+   SELECIONAR PESSOA RETIRADA
+========================================================== */
 
 async function selecionarPessoaRetirada(
   pessoa
@@ -3775,9 +3794,9 @@ async function selecionarPessoaRetirada(
 }
 
 
-// ============================================================
-// LISTAR CHAVES
-// ============================================================
+/* ==========================================================
+   CARREGAR CHAVES DISPONÍVEIS
+========================================================== */
 
 async function carregarChavesDisponiveis() {
 
@@ -3788,7 +3807,7 @@ async function carregarChavesDisponiveis() {
 
 
   area.innerHTML =
-    '<p>Sincronizando e carregando chaves...</p>';
+    '<p>⏳ Carregando chaves...</p>';
 
 
   try {
@@ -3819,9 +3838,7 @@ async function carregarChavesDisponiveis() {
 
 
     chaves.forEach(
-      function(
-        chave
-      ) {
+      function(chave) {
 
         const label =
           document.createElement(
@@ -3917,12 +3934,13 @@ async function carregarChavesDisponiveis() {
   } catch (erro) {
 
     area.innerHTML =
-      '<p>Erro ao carregar chaves.</p>';
+      '';
 
 
     mostrarMensagem(
       erro.message,
-      'erro'
+      'erro',
+      'Erro ao carregar chaves'
     );
 
   }
@@ -3930,9 +3948,9 @@ async function carregarChavesDisponiveis() {
 }
 
 
-// ============================================================
-// RETIRADA - SELEÇÕES
-// ============================================================
+/* ==========================================================
+   SELEÇÃO RETIRADA
+========================================================== */
 
 function selecionarTodasRetirada() {
 
@@ -4020,10 +4038,9 @@ function atualizarContadorRetirada() {
 }
 
 
-// ============================================================
-// CONFIRMAR RETIRADA
-// AGORA COM MODAL BONITO
-// ============================================================
+/* ==========================================================
+   CONFIRMAR RETIRADA
+========================================================== */
 
 async function confirmarRetirada() {
 
@@ -4197,7 +4214,8 @@ async function confirmarRetirada() {
 
           mostrarMensagem(
             'Não foi possível confirmar toda a retirada. Verifique o painel.',
-            'erro'
+            'erro',
+            'Retirada não confirmada'
           );
 
           return;
@@ -4205,14 +4223,8 @@ async function confirmarRetirada() {
         }
 
 
-        mostrarMensagem(
-          numeros.length === 1
-
-          ? 'Chave retirada com sucesso!'
-
-          : numeros.length +
-            ' chaves retiradas com sucesso!'
-        );
+        const nomePessoa =
+          pessoaSelecionadaRetirada.nome;
 
 
         pessoaSelecionadaRetirada =
@@ -4246,6 +4258,28 @@ async function confirmarRetirada() {
         await atualizarPainel();
 
 
+        mostrarMensagem(
+
+          numeros.length === 1
+
+          ? 'A chave ' +
+            numeros[0] +
+            ' foi retirada com sucesso por ' +
+            nomePessoa +
+            '.'
+
+          : numeros.length +
+            ' chaves foram retiradas com sucesso por ' +
+            nomePessoa +
+            '.',
+
+          'sucesso',
+
+          'Retirada realizada!'
+
+        );
+
+
       } catch (erro) {
 
         mostrarMensagem(
@@ -4276,9 +4310,9 @@ async function confirmarRetirada() {
 }
 
 
-// ============================================================
-// DEVOLUÇÃO - BUSCAR
-// ============================================================
+/* ==========================================================
+   BUSCAR PESSOA DEVOLUÇÃO
+========================================================== */
 
 async function buscarPessoaDevolucao() {
 
@@ -4345,8 +4379,7 @@ async function buscarPessoaDevolucao() {
       await jsonp(
         'buscarPessoasPorNome',
         {
-          nome:
-            nome
+          nome: nome
         }
       );
 
@@ -4368,9 +4401,7 @@ async function buscarPessoaDevolucao() {
 
 
     pessoas.forEach(
-      function(
-        pessoa
-      ) {
+      function(pessoa) {
 
         area.appendChild(
           criarResultadoPessoa(
@@ -4399,9 +4430,9 @@ async function buscarPessoaDevolucao() {
 }
 
 
-// ============================================================
-// DEVOLUÇÃO - SELECIONAR PESSOA
-// ============================================================
+/* ==========================================================
+   SELECIONAR PESSOA DEVOLUÇÃO
+========================================================== */
 
 async function selecionarPessoaDevolucao(
   pessoa
@@ -4465,9 +4496,9 @@ async function selecionarPessoaDevolucao(
 }
 
 
-// ============================================================
-// CHAVES DEVOLUÇÃO
-// ============================================================
+/* ==========================================================
+   CARREGAR DEVOLUÇÃO
+========================================================== */
 
 async function carregarChavesDevolucao() {
 
@@ -4478,7 +4509,7 @@ async function carregarChavesDevolucao() {
 
 
   area.innerHTML =
-    '<p>Carregando chaves retiradas...</p>';
+    '<p>⏳ Carregando chaves retiradas...</p>';
 
 
   try {
@@ -4509,9 +4540,7 @@ async function carregarChavesDevolucao() {
 
 
     dados.forEach(
-      function(
-        item
-      ) {
+      function(item) {
 
         const label =
           document.createElement(
@@ -4644,12 +4673,13 @@ async function carregarChavesDevolucao() {
   } catch (erro) {
 
     area.innerHTML =
-      '<p>Erro ao carregar chaves.</p>';
+      '';
 
 
     mostrarMensagem(
       erro.message,
-      'erro'
+      'erro',
+      'Erro ao carregar chaves'
     );
 
   }
@@ -4657,9 +4687,9 @@ async function carregarChavesDevolucao() {
 }
 
 
-// ============================================================
-// DEVOLUÇÃO - SELEÇÃO
-// ============================================================
+/* ==========================================================
+   SELEÇÃO DEVOLUÇÃO
+========================================================== */
 
 function selecionarTodasDevolucao() {
 
@@ -4747,10 +4777,9 @@ function atualizarContadorDevolucao() {
 }
 
 
-// ============================================================
-// CONFIRMAR DEVOLUÇÃO
-// AGORA TAMBÉM COM MODAL BONITO
-// ============================================================
+/* ==========================================================
+   CONFIRMAR DEVOLUÇÃO
+========================================================== */
 
 async function confirmarDevolucao() {
 
@@ -4914,7 +4943,8 @@ async function confirmarDevolucao() {
 
           mostrarMensagem(
             'Não foi possível confirmar a devolução de todas as chaves.',
-            'erro'
+            'erro',
+            'Devolução não confirmada'
           );
 
           return;
@@ -4954,23 +4984,29 @@ async function confirmarDevolucao() {
             'none';
 
 
+        await atualizarPainel();
+
+
         mostrarMensagem(
 
           numeros.length === 1
 
-          ? 'Chave devolvida por ' +
+          ? 'A chave ' +
+            numeros[0] +
+            ' foi devolvida com sucesso por ' +
             nomeDevolvedor +
-            '!'
+            '.'
 
           : numeros.length +
-            ' chaves devolvidas por ' +
+            ' chaves foram devolvidas com sucesso por ' +
             nomeDevolvedor +
-            '!'
+            '.',
+
+          'sucesso',
+
+          'Devolução realizada!'
 
         );
-
-
-        await atualizarPainel();
 
 
       } catch (erro) {
@@ -5003,9 +5039,9 @@ async function confirmarDevolucao() {
 }
 
 
-// ============================================================
-// PAINEL
-// ============================================================
+/* ==========================================================
+   PAINEL
+========================================================== */
 
 async function atualizarPainel() {
 
@@ -5073,9 +5109,7 @@ async function atualizarPainel() {
 
 
     resumo.abertas.forEach(
-      function(
-        item
-      ) {
+      function(item) {
 
         area.appendChild(
           criarMovimentoPainel(
@@ -5106,9 +5140,9 @@ async function atualizarPainel() {
 }
 
 
-// ============================================================
-// MOVIMENTO PAINEL
-// ============================================================
+/* ==========================================================
+   CARD PAINEL
+========================================================== */
 
 function criarMovimentoPainel(
   item
@@ -5239,9 +5273,9 @@ function criarMovimentoPainel(
 }
 
 
-// ============================================================
-// ESCAPAR HTML
-// ============================================================
+/* ==========================================================
+   ESCAPAR HTML
+========================================================== */
 
 function escaparHtml(
   texto
@@ -5275,9 +5309,9 @@ function escaparHtml(
 }
 
 
-// ============================================================
-// CÂMERA
-// ============================================================
+/* ==========================================================
+   CÂMERA
+========================================================== */
 
 async function iniciarCamera() {
 
@@ -5322,8 +5356,7 @@ async function iniciarCamera() {
 
           },
 
-          audio:
-            false
+          audio: false
 
         });
 
@@ -5339,8 +5372,9 @@ async function iniciarCamera() {
   } catch (erro) {
 
     mostrarMensagem(
-      'Não foi possível abrir a câmera.',
-      'erro'
+      'Não foi possível abrir a câmera. Verifique a permissão do navegador.',
+      'erro',
+      'Câmera não disponível'
     );
 
   }
@@ -5348,9 +5382,9 @@ async function iniciarCamera() {
 }
 
 
-// ============================================================
-// PARAR CÂMERA
-// ============================================================
+/* ==========================================================
+   PARAR CÂMERA
+========================================================== */
 
 function pararCamera() {
 
@@ -5361,9 +5395,7 @@ function pararCamera() {
     streamCamera
       .getTracks()
       .forEach(
-        function(
-          track
-        ) {
+        function(track) {
 
           track.stop();
 
@@ -5379,9 +5411,9 @@ function pararCamera() {
 }
 
 
-// ============================================================
-// TIRAR FOTO
-// ============================================================
+/* ==========================================================
+   TIRAR FOTO
+========================================================== */
 
 function tirarFoto() {
 
@@ -5396,8 +5428,9 @@ function tirarFoto() {
   ) {
 
     mostrarMensagem(
-      'A câmera ainda não está pronta.',
-      'erro'
+      'A câmera ainda não está pronta. Aguarde alguns segundos.',
+      'erro',
+      'Aguarde a câmera'
     );
 
     return;
@@ -5479,9 +5512,9 @@ function tirarFoto() {
 }
 
 
-// ============================================================
-// NOVA FOTO
-// ============================================================
+/* ==========================================================
+   NOVA FOTO
+========================================================== */
 
 function novaFoto() {
 
@@ -5523,9 +5556,9 @@ function novaFoto() {
 }
 
 
-// ============================================================
-// CADASTRAR
-// ============================================================
+/* ==========================================================
+   CADASTRAR PESSOA
+========================================================== */
 
 function cadastrarPessoa() {
 
@@ -5543,8 +5576,9 @@ function cadastrarPessoa() {
   ) {
 
     mostrarMensagem(
-      'Digite o nome.',
-      'erro'
+      'Digite o nome da pessoa.',
+      'erro',
+      'Nome não informado'
     );
 
     return;
@@ -5557,8 +5591,9 @@ function cadastrarPessoa() {
   ) {
 
     mostrarMensagem(
-      'Tire a foto da pessoa.',
-      'erro'
+      'Tire uma foto da pessoa antes de cadastrar.',
+      'erro',
+      'Foto obrigatória'
     );
 
     return;
@@ -5607,8 +5642,7 @@ function cadastrarPessoa() {
           await jsonp(
             'buscarPessoasPorNome',
             {
-              nome:
-                nome
+              nome: nome
             }
           );
 
@@ -5619,6 +5653,7 @@ function cadastrarPessoa() {
 
               pessoa.nome
                 .toLowerCase() ===
+
               nome
                 .toLowerCase()
 
@@ -5630,13 +5665,27 @@ function cadastrarPessoa() {
         ) {
 
           mostrarMensagem(
-            'Não foi possível confirmar o cadastro.',
-            'erro'
+            'O cadastro não pôde ser confirmado. Tente novamente.',
+            'erro',
+            'Cadastro não confirmado'
           );
 
           return;
 
         }
+
+
+        const pessoaCadastrada =
+          resultado.find(
+            pessoa =>
+
+              pessoa.nome
+                .toLowerCase() ===
+
+              nome
+                .toLowerCase()
+
+          );
 
 
         document
@@ -5651,7 +5700,21 @@ function cadastrarPessoa() {
 
 
         mostrarMensagem(
-          'Pessoa cadastrada com sucesso!'
+
+          pessoaCadastrada
+
+          ? nome +
+            ' foi cadastrado(a) com sucesso. Número do cadastro: ' +
+            pessoaCadastrada.numero +
+            '.'
+
+          : nome +
+            ' foi cadastrado(a) com sucesso.',
+
+          'sucesso',
+
+          'Cadastro realizado!'
+
         );
 
 
@@ -5687,5 +5750,4 @@ function cadastrarPessoa() {
 </script>
 
 </body>
-
 </html>
