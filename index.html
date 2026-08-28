@@ -12,360 +12,400 @@
 
   <title>Controle de Portaria</title>
 
-
   <style>
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-
 
     body {
-
-      margin: 0;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      background: #f1f3f6;
-
-      color: #111827;
-
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: #222;
     }
 
+    /* ======================================================
+       CABEÇALHO
+    ====================================================== */
 
     header {
-
       background: #8b0000;
-
       color: white;
+      padding: 18px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
 
-      padding: 22px;
+    header h1 {
+      font-size: 25px;
+    }
 
-      text-align: center;
-
-      font-size: 26px;
-
-      font-weight: bold;
-
+    .relogio {
+      font-size: 15px;
+      text-align: right;
     }
 
 
-    .container {
+    /* ======================================================
+       MENU
+    ====================================================== */
 
-      width: 90%;
-
-      max-width: 850px;
-
-      margin: 35px auto;
-
+    nav {
       background: white;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,.08);
+      flex-wrap: wrap;
+    }
 
-      border-radius: 18px;
+    nav button {
+      border: none;
+      background: #eee;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: .2s;
+    }
 
-      padding: 30px;
+    nav button:hover {
+      background: #ddd;
+    }
 
-      box-shadow:
-        0 5px 25px
-        rgba(0,0,0,0.12);
-
+    nav button.ativo {
+      background: #8b0000;
+      color: white;
     }
 
 
-    h2 {
+    /* ======================================================
+       CONTEÚDO
+    ====================================================== */
 
-      margin-top: 0;
+    main {
+      max-width: 1150px;
+      margin: 25px auto;
+      padding: 0 18px;
+    }
 
+    .pagina {
+      display: none;
+    }
+
+    .pagina.ativa {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+
+    .card h2 {
       color: #8b0000;
-
+      margin-bottom: 20px;
     }
 
+    .card h3 {
+      margin-bottom: 12px;
+    }
+
+
+    /* ======================================================
+       FORMULÁRIOS
+    ====================================================== */
 
     label {
-
       display: block;
-
       font-weight: bold;
-
-      margin-top: 20px;
-
-      margin-bottom: 8px;
-
-    }
-
-
-    input[type="text"] {
-
-      width: 100%;
-
-      padding: 14px;
-
-      border:
-        1px solid #ccc;
-
-      border-radius: 8px;
-
-      font-size: 17px;
-
-    }
-
-
-    .camera {
-
-      width: 100%;
-
-      background: #111;
-
-      border-radius: 12px;
-
-      overflow: hidden;
-
+      margin-bottom: 7px;
       margin-top: 15px;
-
-      min-height: 400px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
     }
 
-
-    video {
-
+    input,
+    select {
       width: 100%;
-
-      max-height: 500px;
-
-      display: none;
-
-      object-fit: cover;
-
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 17px;
+      background: white;
     }
 
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #8b0000;
+      box-shadow: 0 0 0 2px rgba(139,0,0,.1);
+    }
+
+    .botao {
+      border: none;
+      background: #8b0000;
+      color: white;
+      padding: 14px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 18px;
+    }
+
+    .botao:hover {
+      background: #a00000;
+    }
+
+    .botao:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    .botao-verde {
+      background: #19713a;
+    }
+
+    .botao-verde:hover {
+      background: #145b2f;
+    }
+
+    .botao-cinza {
+      background: #555;
+    }
+
+
+    /* ======================================================
+       CADASTRO / CÂMERA
+    ====================================================== */
+
+    .camera-area {
+      max-width: 560px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    video,
+    #fotoCapturada {
+      width: 100%;
+      max-height: 400px;
+      background: #111;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    #fotoCapturada {
+      display: none;
+    }
 
     canvas {
-
       display: none;
-
     }
 
-
-    .preview {
-
-      width: 100%;
-
-      max-height: 500px;
-
-      object-fit: contain;
-
-      display: none;
-
-    }
-
-
-    .camera-status {
-
-      color: white;
-
-      text-align: center;
-
-      padding: 20px;
-
-      font-size: 18px;
-
-    }
-
-
-    .buttons {
-
+    .camera-botoes {
       display: flex;
-
       gap: 10px;
-
-      flex-wrap: wrap;
-
       justify-content: center;
-
-      margin-top: 18px;
-
+      flex-wrap: wrap;
     }
 
 
-    button {
+    /* ======================================================
+       PESSOA
+    ====================================================== */
 
-      border: none;
-
-      border-radius: 8px;
-
-      padding: 14px 22px;
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-    }
-
-
-    button:disabled {
-
-      opacity: 0.5;
-
-      cursor: not-allowed;
-
-    }
-
-
-    .btn-camera {
-
-      background: #8b0000;
-
-      color: white;
-
-    }
-
-
-    .btn-photo {
-
-      background: #16803c;
-
-      color: white;
-
-    }
-
-
-    .btn-close {
-
-      background: #666;
-
-      color: white;
-
-    }
-
-
-    .btn-save {
-
-      width: 100%;
-
-      margin-top: 25px;
-
-      background: #111827;
-
-      color: white;
-
-      font-size: 18px;
-
-    }
-
-
-    .btn-test {
-
-      width: 100%;
-
-      margin-top: 12px;
-
-      background: #2563eb;
-
-      color: white;
-
-    }
-
-
-    #mensagem {
-
+    .pessoa-encontrada {
       margin-top: 20px;
+      display: none;
+      align-items: center;
+      gap: 20px;
+      background: #f7f7f7;
+      padding: 18px;
+      border-radius: 10px;
+    }
 
-      padding: 14px;
+    .pessoa-encontrada img {
+      width: 110px;
+      height: 110px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #ddd;
+    }
 
+    .pessoa-encontrada h3 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+
+    /* ======================================================
+       PAINEL
+    ====================================================== */
+
+    .cards-resumo {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .resumo {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .resumo .numero {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .resumo .titulo {
+      font-size: 14px;
+      color: #666;
+      font-weight: bold;
+    }
+
+    .disponivel {
+      color: #19713a;
+    }
+
+    .retirada {
+      color: #b36b00;
+    }
+
+    .atrasada {
+      color: #b00020;
+    }
+
+
+    /* ======================================================
+       MOVIMENTAÇÕES
+    ====================================================== */
+
+    .movimento {
+      background: #f8f8f8;
+      border-left: 5px solid #8b0000;
       border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
 
-      text-align: center;
+    .movimento-info {
+      flex: 1;
+    }
 
+    .movimento-info strong {
+      font-size: 18px;
+    }
+
+    .movimento-info p {
+      margin-top: 5px;
+      color: #555;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
       font-weight: bold;
+      margin-top: 7px;
+    }
 
+    .status-aberta {
+      background: #fff0cc;
+      color: #805300;
+    }
+
+    .status-atrasada {
+      background: #ffd9df;
+      color: #a00020;
+    }
+
+
+    /* ======================================================
+       MENSAGENS
+    ====================================================== */
+
+    .mensagem {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 25px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
       display: none;
-
-    }
-
-
-    .sucesso {
-
-      background: #d1fae5;
-
-      color: #065f46;
-
-    }
-
-
-    .erro {
-
-      background: #fee2e2;
-
-      color: #991b1b;
-
-    }
-
-
-    .info {
-
-      background: #dbeafe;
-
-      color: #1e40af;
-
-    }
-
-
-    .numero {
-
-      font-size: 30px;
-
-      color: #8b0000;
-
+      z-index: 9999;
+      box-shadow: 0 3px 15px rgba(0,0,0,.25);
+      max-width: 90%;
       text-align: center;
-
-      margin-top: 15px;
-
-      font-weight: bold;
-
     }
 
+    .mensagem.sucesso {
+      background: #19713a;
+    }
 
-    .loading {
+    .mensagem.erro {
+      background: #b00020;
+    }
 
+    .carregando {
       display: none;
-
-      text-align: center;
-
       margin-top: 15px;
-
-      color: #8b0000;
-
       font-weight: bold;
-
+      color: #555;
     }
 
 
-    @media (max-width: 600px) {
+    /* ======================================================
+       RESPONSIVO
+    ====================================================== */
 
-      .container {
+    @media (max-width: 800px) {
 
-        width: 95%;
-
-        padding: 20px;
-
+      .cards-resumo {
+        grid-template-columns: repeat(2, 1fr);
       }
 
+      header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
 
-      .camera {
+      .relogio {
+        text-align: center;
+      }
 
-        min-height: 280px;
+    }
 
+    @media (max-width: 500px) {
+
+      .cards-resumo {
+        grid-template-columns: 1fr;
+      }
+
+      .movimento {
+        flex-direction: column;
+        align-items: stretch;
       }
 
     }
@@ -378,260 +418,408 @@
 <body>
 
 
+<!-- ========================================================
+     MENSAGEM
+========================================================= -->
+
+<div id="mensagem" class="mensagem"></div>
+
+
+<!-- ========================================================
+     IFRAME INVISÍVEL PARA ENVIAR POST
+========================================================= -->
+
+<iframe
+  name="frameEnvio"
+  id="frameEnvio"
+  style="display:none"
+></iframe>
+
+
+<!-- ========================================================
+     CABEÇALHO
+========================================================= -->
+
 <header>
 
-  🔑 CONTROLE DE PORTARIA
+  <div>
+    <h1>🔑 CONTROLE DE PORTARIA</h1>
+  </div>
+
+  <div class="relogio">
+    <div id="dataAtual"></div>
+    <div id="horaAtual"></div>
+  </div>
 
 </header>
 
 
-<div class="container">
+<!-- ========================================================
+     MENU
+========================================================= -->
 
+<nav>
 
-  <h2>
-    Cadastro de Pessoa
-  </h2>
-
-
-  <label for="nome">
-    Nome completo
-  </label>
-
-
-  <input
-    type="text"
-    id="nome"
-    placeholder="Digite o nome da pessoa"
-    autocomplete="off"
+  <button
+    id="menuPainel"
+    class="ativo"
+    onclick="abrirPagina('painel', this)"
   >
+    📊 Painel
+  </button>
+
+  <button
+    onclick="abrirPagina('retirada', this)"
+  >
+    🔑 Retirar Chave
+  </button>
+
+  <button
+    onclick="abrirPagina('devolucao', this)"
+  >
+    ↩️ Devolver
+  </button>
+
+  <button
+    onclick="abrirPagina('cadastro', this)"
+  >
+    👤 Cadastro
+  </button>
+
+</nav>
 
 
-  <label>
-    Foto
-  </label>
+<main>
 
 
-  <div class="camera">
+<!-- ========================================================
+     PAINEL
+========================================================= -->
 
+<section
+  id="painel"
+  class="pagina ativa"
+>
 
-    <video
-      id="video"
-      autoplay
-      playsinline
-    ></video>
+  <div class="cards-resumo">
 
+    <div class="resumo">
 
-    <img
-      id="preview"
-      class="preview"
-      alt="Foto da pessoa"
-    >
+      <div
+        id="totalChaves"
+        class="numero"
+      >
+        87
+      </div>
 
+      <div class="titulo">
+        TOTAL DE CHAVES
+      </div>
 
-    <div
-      id="cameraStatus"
-      class="camera-status"
-    >
-      📷 Clique em "Abrir câmera"
     </div>
 
 
-  </div>
+    <div class="resumo">
+
+      <div
+        id="totalDisponiveis"
+        class="numero disponivel"
+      >
+        -
+      </div>
+
+      <div class="titulo">
+        DISPONÍVEIS
+      </div>
+
+    </div>
 
 
-  <canvas id="canvas"></canvas>
+    <div class="resumo">
+
+      <div
+        id="totalRetiradas"
+        class="numero retirada"
+      >
+        -
+      </div>
+
+      <div class="titulo">
+        RETIRADAS
+      </div>
+
+    </div>
 
 
-  <div class="buttons">
+    <div class="resumo">
 
+      <div
+        id="totalAtrasadas"
+        class="numero atrasada"
+      >
+        -
+      </div>
 
-    <button
-      type="button"
-      class="btn-camera"
-      onclick="abrirCamera()"
-    >
+      <div class="titulo">
+        ATRASADAS
+      </div>
 
-      📷 Abrir câmera
-
-    </button>
-
-
-    <button
-      type="button"
-      class="btn-photo"
-      id="btnFoto"
-      onclick="tirarFoto()"
-      disabled
-    >
-
-      📸 Tirar foto
-
-    </button>
-
-
-    <button
-      type="button"
-      class="btn-close"
-      onclick="fecharCamera()"
-    >
-
-      ❌ Fechar câmera
-
-    </button>
-
-
-  </div>
-
-
-  <button
-    type="button"
-    class="btn-save"
-    id="btnSalvar"
-    onclick="salvarPessoa()"
-    disabled
-  >
-
-    💾 SALVAR PESSOA
-
-  </button>
-
-
-  <button
-    type="button"
-    class="btn-test"
-    onclick="testarComunicacao()"
-  >
-
-    🔧 TESTAR COMUNICAÇÃO
-
-  </button>
-
-
-  <div
-    id="loading"
-    class="loading"
-  >
-
-    ⏳ Enviando dados...
+    </div>
 
   </div>
 
 
-  <div id="mensagem"></div>
+  <div class="card">
+
+    <h2>
+      🔑 Chaves não devolvidas
+    </h2>
+
+    <div id="listaAbertas">
+
+      Carregando...
+
+    </div>
+
+  </div>
+
+</section>
 
 
-  <div
-    id="resultado"
-    class="numero"
-  ></div>
+<!-- ========================================================
+     RETIRADA
+========================================================= -->
 
-
-</div>
-
-
-<!-- =========================================================
-     FORMULÁRIO PRINCIPAL
-     ========================================================= -->
-
-<form
-  id="formCadastro"
-
-  method="POST"
-
-  action="https://script.google.com/macros/s/AKfycbzytM6CncsFj_1nqd4w_LIGyjOgeUIzkOK8o6pP-mYvgCito0Zrh7jeIJZsLGYQpHbr/exec"
-
-  target="iframeEnvio"
-
-  style="display:none;"
+<section
+  id="retirada"
+  class="pagina"
 >
 
+  <div class="card">
 
-  <input
-    type="hidden"
-    name="acao"
-    value="cadastrarPessoa"
-  >
-
-
-  <input
-    type="hidden"
-    name="nome"
-    id="formNome"
-  >
+    <h2>
+      🔑 Retirada de Chave
+    </h2>
 
 
-  <input
-    type="hidden"
-    name="foto"
-    id="formFoto"
-  >
+    <label>
+      Número da pessoa
+    </label>
+
+    <input
+      type="number"
+      id="numeroPessoaRetirada"
+      placeholder="Digite o número"
+      min="1"
+    >
 
 
-</form>
+    <button
+      class="botao"
+      onclick="buscarPessoaRetirada()"
+    >
+      🔎 Buscar Pessoa
+    </button>
 
 
-<iframe
-  name="iframeEnvio"
-  id="iframeEnvio"
-  style="display:none;"
-></iframe>
+    <div
+      id="pessoaRetirada"
+      class="pessoa-encontrada"
+    >
+
+      <img
+        id="fotoPessoaRetirada"
+        alt="Foto"
+      >
+
+      <div>
+
+        <h3 id="nomePessoaRetirada"></h3>
+
+        <div>
+          Número:
+          <strong id="codigoPessoaRetirada"></strong>
+        </div>
+
+      </div>
+
+    </div>
 
 
-<!-- =========================================================
-     FORMULÁRIO DE TESTE
-     ========================================================= -->
+    <div
+      id="areaEscolhaChave"
+      style="display:none"
+    >
 
-<form
-  id="formTeste"
+      <label>
+        Chave
+      </label>
 
-  method="POST"
+      <select id="chaveRetirada">
 
-  action="https://script.google.com/macros/s/AKfycbzytM6CncsFj_1nqd4w_LIGyjOgeUIzkOK8o6pP-mYvgCito0Zrh7jeIJZsLGYQpHbr/exec"
+        <option value="">
+          Carregando chaves...
+        </option>
 
-  target="iframeTeste"
+      </select>
 
-  style="display:none;"
+
+      <button
+        id="btnRetirar"
+        class="botao botao-verde"
+        onclick="confirmarRetirada()"
+      >
+        🔑 Confirmar Retirada
+      </button>
+
+      <div
+        id="carregandoRetirada"
+        class="carregando"
+      >
+        Registrando retirada...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     DEVOLUÇÃO
+========================================================= -->
+
+<section
+  id="devolucao"
+  class="pagina"
 >
 
+  <div class="card">
 
-  <input
-    type="hidden"
-    name="acao"
-    value="teste"
-  >
+    <h2>
+      ↩️ Devolução de Chave
+    </h2>
 
-
-  <input
-    type="hidden"
-    name="nome"
-    value="TESTE VINDO DO GITHUB"
-  >
+    <p style="margin-bottom:20px;color:#666">
+      Selecione abaixo a chave que está sendo devolvida.
+    </p>
 
 
-</form>
+    <div id="listaDevolucao">
+
+      Carregando...
+
+    </div>
+
+  </div>
+
+</section>
 
 
-<iframe
-  name="iframeTeste"
-  id="iframeTeste"
-  style="
-    width:100%;
-    height:120px;
-    border:1px solid #ddd;
-    margin-top:20px;
-    display:none;
-  "
-></iframe>
+<!-- ========================================================
+     CADASTRO
+========================================================= -->
+
+<section
+  id="cadastro"
+  class="pagina"
+>
+
+  <div class="card">
+
+    <h2>
+      👤 Cadastro de Pessoa
+    </h2>
+
+
+    <label>
+      Nome completo
+    </label>
+
+    <input
+      type="text"
+      id="nomeCadastro"
+      placeholder="Digite o nome da pessoa"
+      autocomplete="off"
+    >
+
+
+    <div class="camera-area">
+
+      <video
+        id="video"
+        autoplay
+        playsinline
+      ></video>
+
+
+      <img
+        id="fotoCapturada"
+        alt="Foto capturada"
+      >
+
+
+      <canvas id="canvas"></canvas>
+
+
+      <div class="camera-botoes">
+
+        <button
+          id="btnFoto"
+          class="botao"
+          onclick="tirarFoto()"
+        >
+          📷 Tirar Foto
+        </button>
+
+
+        <button
+          id="btnNovaFoto"
+          class="botao botao-cinza"
+          onclick="novaFoto()"
+          style="display:none"
+        >
+          🔄 Nova Foto
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="btnCadastrar"
+      class="botao botao-verde"
+      onclick="cadastrarPessoa()"
+    >
+      💾 Cadastrar Pessoa
+    </button>
+
+
+    <div
+      id="carregandoCadastro"
+      class="carregando"
+    >
+      Salvando cadastro...
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
 
 
 <script>
 
 
 // ============================================================
-// URL DO APPS SCRIPT
+// URL DO GOOGLE APPS SCRIPT
 // ============================================================
 
-const URL_APPS_SCRIPT =
+const URL_SCRIPT =
   'https://script.google.com/macros/s/AKfycbzytM6CncsFj_1nqd4w_LIGyjOgeUIzkOK8o6pP-mYvgCito0Zrh7jeIJZsLGYQpHbr/exec';
 
 
@@ -639,124 +827,481 @@ const URL_APPS_SCRIPT =
 // VARIÁVEIS
 // ============================================================
 
-let stream = null;
+let streamCamera = null;
 
 let fotoBase64 = '';
 
-let enviando = false;
+let pessoaSelecionada = null;
 
 
 // ============================================================
-// ELEMENTOS
+// INICIAR SISTEMA
 // ============================================================
 
-const video =
-  document.getElementById('video');
+window.addEventListener(
+  'load',
+  function () {
 
-const preview =
-  document.getElementById('preview');
+    atualizarRelogio();
 
-const canvas =
-  document.getElementById('canvas');
+    setInterval(
+      atualizarRelogio,
+      1000
+    );
 
-const cameraStatus =
-  document.getElementById('cameraStatus');
+    iniciarCamera();
 
-const btnFoto =
-  document.getElementById('btnFoto');
+    atualizarPainel();
 
-const btnSalvar =
-  document.getElementById('btnSalvar');
-
-const mensagem =
-  document.getElementById('mensagem');
-
-const loading =
-  document.getElementById('loading');
-
-const resultado =
-  document.getElementById('resultado');
-
-const formCadastro =
-  document.getElementById('formCadastro');
+  }
+);
 
 
 // ============================================================
-// ABRIR CÂMERA
+// RELÓGIO
 // ============================================================
 
-async function abrirCamera() {
+function atualizarRelogio() {
 
-  limparMensagem();
+  const agora =
+    new Date();
 
+
+  document.getElementById(
+    'dataAtual'
+  ).textContent =
+    agora.toLocaleDateString(
+      'pt-BR'
+    );
+
+
+  document.getElementById(
+    'horaAtual'
+  ).textContent =
+    agora.toLocaleTimeString(
+      'pt-BR'
+    );
+
+}
+
+
+// ============================================================
+// ABRIR PÁGINA
+// ============================================================
+
+function abrirPagina(
+  pagina,
+  botao
+) {
+
+  document
+    .querySelectorAll(
+      '.pagina'
+    )
+    .forEach(
+      function (item) {
+
+        item.classList.remove(
+          'ativa'
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      pagina
+    )
+    .classList.add(
+      'ativa'
+    );
+
+
+  document
+    .querySelectorAll(
+      'nav button'
+    )
+    .forEach(
+      function (item) {
+
+        item.classList.remove(
+          'ativo'
+        );
+
+      }
+    );
+
+
+  if (botao) {
+
+    botao.classList.add(
+      'ativo'
+    );
+
+  }
+
+
+  if (
+    pagina === 'painel'
+  ) {
+
+    atualizarPainel();
+
+  }
+
+
+  if (
+    pagina === 'devolucao'
+  ) {
+
+    carregarDevolucoes();
+
+  }
+
+}
+
+
+// ============================================================
+// JSONP
+// LEITURA DO APPS SCRIPT
+// ============================================================
+
+function jsonp(
+  acao,
+  parametros = {}
+) {
+
+  return new Promise(
+    function (
+      resolve,
+      reject
+    ) {
+
+      const callback =
+        'callback_' +
+        Date.now() +
+        '_' +
+        Math.floor(
+          Math.random() * 100000
+        );
+
+
+      const script =
+        document.createElement(
+          'script'
+        );
+
+
+      const params =
+        new URLSearchParams();
+
+
+      params.set(
+        'acao',
+        acao
+      );
+
+
+      params.set(
+        'callback',
+        callback
+      );
+
+
+      Object.keys(
+        parametros
+      ).forEach(
+        function (chave) {
+
+          params.set(
+            chave,
+            parametros[chave]
+          );
+
+        }
+      );
+
+
+      let timeout;
+
+
+      window[callback] =
+        function (dados) {
+
+          clearTimeout(
+            timeout
+          );
+
+
+          delete window[
+            callback
+          ];
+
+
+          script.remove();
+
+
+          if (
+            dados &&
+            dados.sucesso === false
+          ) {
+
+            reject(
+              new Error(
+                dados.erro ||
+                dados.mensagem ||
+                'Erro no servidor.'
+              )
+            );
+
+            return;
+
+          }
+
+
+          resolve(
+            dados
+          );
+
+        };
+
+
+      script.onerror =
+        function () {
+
+          clearTimeout(
+            timeout
+          );
+
+
+          delete window[
+            callback
+          ];
+
+
+          script.remove();
+
+
+          reject(
+            new Error(
+              'Não foi possível comunicar com o servidor.'
+            )
+          );
+
+        };
+
+
+      script.src =
+        URL_SCRIPT +
+        '?' +
+        params.toString();
+
+
+      document.body.appendChild(
+        script
+      );
+
+
+      timeout =
+        setTimeout(
+          function () {
+
+            delete window[
+              callback
+            ];
+
+
+            script.remove();
+
+
+            reject(
+              new Error(
+                'O servidor demorou para responder.'
+              )
+            );
+
+          },
+          15000
+        );
+
+    }
+  );
+
+}
+
+
+// ============================================================
+// ENVIAR POST
+// ============================================================
+
+function enviarPost(
+  dados
+) {
+
+  const form =
+    document.createElement(
+      'form'
+    );
+
+
+  form.method =
+    'POST';
+
+
+  form.action =
+    URL_SCRIPT;
+
+
+  form.target =
+    'frameEnvio';
+
+
+  form.style.display =
+    'none';
+
+
+  Object.keys(
+    dados
+  ).forEach(
+    function (chave) {
+
+      const input =
+        document.createElement(
+          'input'
+        );
+
+
+      input.type =
+        'hidden';
+
+
+      input.name =
+        chave;
+
+
+      input.value =
+        dados[chave];
+
+
+      form.appendChild(
+        input
+      );
+
+    }
+  );
+
+
+  document.body.appendChild(
+    form
+  );
+
+
+  form.submit();
+
+
+  setTimeout(
+    function () {
+
+      form.remove();
+
+    },
+    3000
+  );
+
+}
+
+
+// ============================================================
+// MENSAGEM
+// ============================================================
+
+function mostrarMensagem(
+  texto,
+  tipo = 'sucesso'
+) {
+
+  const caixa =
+    document.getElementById(
+      'mensagem'
+    );
+
+
+  caixa.textContent =
+    texto;
+
+
+  caixa.className =
+    'mensagem ' +
+    tipo;
+
+
+  caixa.style.display =
+    'block';
+
+
+  setTimeout(
+    function () {
+
+      caixa.style.display =
+        'none';
+
+    },
+    4000
+  );
+
+}
+
+
+// ============================================================
+// CÂMERA
+// ============================================================
+
+async function iniciarCamera() {
 
   try {
 
     if (
-      !navigator.mediaDevices ||
-      !navigator.mediaDevices.getUserMedia
+      streamCamera
     ) {
 
-      throw new Error(
-        'O navegador não permite acesso à câmera.'
-      );
+      streamCamera
+        .getTracks()
+        .forEach(
+          function (track) {
+
+            track.stop();
+
+          }
+        );
 
     }
 
 
-    fecharStream();
+    streamCamera =
+      await navigator
+        .mediaDevices
+        .getUserMedia({
 
+          video: {
+            width: {
+              ideal: 1280
+            },
 
-    mostrarMensagem(
-      '⏳ Abrindo câmera...',
-      'info'
-    );
-
-
-    stream =
-      await navigator.mediaDevices.getUserMedia({
-
-        video: {
-
-          width: {
-            ideal: 1280
+            height: {
+              ideal: 720
+            }
           },
 
-          height: {
-            ideal: 720
-          }
+          audio: false
 
-        },
-
-        audio: false
-
-      });
+        });
 
 
-    video.srcObject =
-      stream;
-
-
-    video.style.display =
-      'block';
-
-
-    preview.style.display =
-      'none';
-
-
-    cameraStatus.style.display =
-      'none';
-
-
-    btnFoto.disabled =
-      false;
-
-
-    mostrarMensagem(
-      '✅ Câmera aberta.',
-      'sucesso'
-    );
+    document.getElementById(
+      'video'
+    ).srcObject =
+      streamCamera;
 
 
   } catch (erro) {
@@ -767,8 +1312,7 @@ async function abrirCamera() {
 
 
     mostrarMensagem(
-      '❌ Não foi possível abrir a câmera: ' +
-      erro.message,
+      'Não foi possível abrir a câmera.',
       'erro'
     );
 
@@ -783,21 +1327,20 @@ async function abrirCamera() {
 
 function tirarFoto() {
 
-  if (!stream) {
-
-    mostrarMensagem(
-      'Abra a câmera primeiro.',
-      'erro'
+  const video =
+    document.getElementById(
+      'video'
     );
 
-    return;
 
-  }
+  const canvas =
+    document.getElementById(
+      'canvas'
+    );
 
 
   if (
-    video.videoWidth === 0 ||
-    video.videoHeight === 0
+    !video.videoWidth
   ) {
 
     mostrarMensagem(
@@ -819,40 +1362,38 @@ function tirarFoto() {
 
 
   const contexto =
-    canvas.getContext('2d');
+    canvas.getContext(
+      '2d'
+    );
 
 
   contexto.drawImage(
-
     video,
-
     0,
-
     0,
-
     canvas.width,
-
     canvas.height
-
   );
 
-
-  // ----------------------------------------------------------
-  // QUALIDADE 0.60 PARA DIMINUIR O TAMANHO DO ENVIO
-  // ----------------------------------------------------------
 
   fotoBase64 =
     canvas.toDataURL(
       'image/jpeg',
-      0.60
+      0.80
     );
 
 
-  preview.src =
+  const imagem =
+    document.getElementById(
+      'fotoCapturada'
+    );
+
+
+  imagem.src =
     fotoBase64;
 
 
-  preview.style.display =
+  imagem.style.display =
     'block';
 
 
@@ -860,104 +1401,65 @@ function tirarFoto() {
     'none';
 
 
-  fecharStream();
+  document.getElementById(
+    'btnFoto'
+  ).style.display =
+    'none';
 
 
-  btnFoto.disabled =
-    true;
-
-
-  btnSalvar.disabled =
-    false;
-
-
-  mostrarMensagem(
-    '📸 Foto capturada. Agora clique em SALVAR PESSOA.',
-    'sucesso'
-  );
+  document.getElementById(
+    'btnNovaFoto'
+  ).style.display =
+    'inline-block';
 
 }
 
 
 // ============================================================
-// FECHAR CÂMERA
+// NOVA FOTO
 // ============================================================
 
-function fecharCamera() {
+function novaFoto() {
 
-  fecharStream();
-
-
-  btnFoto.disabled =
-    true;
+  fotoBase64 = '';
 
 
-  if (!fotoBase64) {
-
-    video.style.display =
-      'none';
-
-
-    preview.style.display =
-      'none';
+  document.getElementById(
+    'fotoCapturada'
+  ).style.display =
+    'none';
 
 
-    cameraStatus.style.display =
-      'block';
+  document.getElementById(
+    'video'
+  ).style.display =
+    'block';
 
-  }
+
+  document.getElementById(
+    'btnFoto'
+  ).style.display =
+    'inline-block';
+
+
+  document.getElementById(
+    'btnNovaFoto'
+  ).style.display =
+    'none';
 
 }
 
 
 // ============================================================
-// PARAR CÂMERA
+// CADASTRAR PESSOA
 // ============================================================
 
-function fecharStream() {
-
-  if (stream) {
-
-    stream
-      .getTracks()
-      .forEach(
-        function(track) {
-
-          track.stop();
-
-        }
-      );
-
-    stream =
-      null;
-
-  }
-
-
-  video.srcObject =
-    null;
-
-}
-
-
-// ============================================================
-// SALVAR PESSOA
-// ============================================================
-
-function salvarPessoa() {
-
-  if (enviando) {
-
-    return;
-
-  }
-
+function cadastrarPessoa() {
 
   const nome =
-    document
-      .getElementById('nome')
-      .value
-      .trim();
+    document.getElementById(
+      'nomeCadastro'
+    ).value.trim();
 
 
   if (!nome) {
@@ -975,7 +1477,7 @@ function salvarPessoa() {
   if (!fotoBase64) {
 
     mostrarMensagem(
-      'Tire uma foto antes de salvar.',
+      'Tire a foto da pessoa.',
       'erro'
     );
 
@@ -984,51 +1486,658 @@ function salvarPessoa() {
   }
 
 
-  enviando =
+  const botao =
+    document.getElementById(
+      'btnCadastrar'
+    );
+
+
+  botao.disabled =
     true;
 
 
-  btnSalvar.disabled =
-    true;
-
-
-  loading.style.display =
+  document.getElementById(
+    'carregandoCadastro'
+  ).style.display =
     'block';
 
 
-  mostrarMensagem(
-    '⏳ Salvando nome e foto...',
-    'info'
+  enviarPost({
+
+    acao:
+      'cadastrarPessoa',
+
+    nome:
+      nome,
+
+    foto:
+      fotoBase64
+
+  });
+
+
+  setTimeout(
+    function () {
+
+      mostrarMensagem(
+        'Cadastro enviado com sucesso!'
+      );
+
+
+      document.getElementById(
+        'nomeCadastro'
+      ).value =
+        '';
+
+
+      novaFoto();
+
+
+      botao.disabled =
+        false;
+
+
+      document.getElementById(
+        'carregandoCadastro'
+      ).style.display =
+        'none';
+
+    },
+    2200
   );
 
-
-  // ----------------------------------------------------------
-  // PREENCHER FORMULÁRIO
-  // ----------------------------------------------------------
-
-  document
-    .getElementById('formNome')
-    .value =
-    nome;
+}
 
 
-  document
-    .getElementById('formFoto')
-    .value =
-    fotoBase64;
+// ============================================================
+// BUSCAR PESSOA PARA RETIRADA
+// ============================================================
+
+async function buscarPessoaRetirada() {
+
+  const numero =
+    document.getElementById(
+      'numeroPessoaRetirada'
+    ).value.trim();
 
 
-  formCadastro.action =
-    URL_APPS_SCRIPT;
+  if (!numero) {
 
+    mostrarMensagem(
+      'Digite o número da pessoa.',
+      'erro'
+    );
 
-  // ----------------------------------------------------------
-  // ENVIAR
-  // ----------------------------------------------------------
+    return;
+
+  }
+
 
   try {
 
-    formCadastro.submit();
+    pessoaSelecionada =
+      await jsonp(
+        'buscarPessoa',
+        {
+          numero:
+            numero
+        }
+      );
+
+
+    document.getElementById(
+      'nomePessoaRetirada'
+    ).textContent =
+      pessoaSelecionada.nome;
+
+
+    document.getElementById(
+      'codigoPessoaRetirada'
+    ).textContent =
+      pessoaSelecionada.numero;
+
+
+    const foto =
+      document.getElementById(
+        'fotoPessoaRetirada'
+      );
+
+
+    if (
+      pessoaSelecionada.foto
+    ) {
+
+      foto.src =
+        pessoaSelecionada.foto;
+
+    }
+
+
+    document.getElementById(
+      'pessoaRetirada'
+    ).style.display =
+      'flex';
+
+
+    document.getElementById(
+      'areaEscolhaChave'
+    ).style.display =
+      'block';
+
+
+    await carregarChavesDisponiveis();
+
+
+  } catch (erro) {
+
+    pessoaSelecionada =
+      null;
+
+
+    document.getElementById(
+      'pessoaRetirada'
+    ).style.display =
+      'none';
+
+
+    document.getElementById(
+      'areaEscolhaChave'
+    ).style.display =
+      'none';
+
+
+    mostrarMensagem(
+      erro.message,
+      'erro'
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// CARREGAR CHAVES DISPONÍVEIS
+// ============================================================
+
+async function carregarChavesDisponiveis() {
+
+  const select =
+    document.getElementById(
+      'chaveRetirada'
+    );
+
+
+  select.innerHTML =
+    '<option value="">Carregando...</option>';
+
+
+  try {
+
+    const chaves =
+      await jsonp(
+        'listarChavesDisponiveis'
+      );
+
+
+    select.innerHTML =
+      '<option value="">Selecione a chave</option>';
+
+
+    chaves.forEach(
+      function (chave) {
+
+        const option =
+          document.createElement(
+            'option'
+          );
+
+
+        option.value =
+          chave.numero;
+
+
+        option.textContent =
+          chave.numero +
+          ' — ' +
+          chave.identificacao +
+          ' — ' +
+          chave.setor;
+
+
+        select.appendChild(
+          option
+        );
+
+      }
+    );
+
+
+    if (
+      chaves.length === 0
+    ) {
+
+      select.innerHTML =
+        '<option value="">Nenhuma chave disponível</option>';
+
+    }
+
+
+  } catch (erro) {
+
+    select.innerHTML =
+      '<option value="">Erro ao carregar</option>';
+
+
+    mostrarMensagem(
+      erro.message,
+      'erro'
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// CONFIRMAR RETIRADA
+// ============================================================
+
+function confirmarRetirada() {
+
+  if (
+    !pessoaSelecionada
+  ) {
+
+    mostrarMensagem(
+      'Primeiro busque a pessoa.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  const chave =
+    document.getElementById(
+      'chaveRetirada'
+    ).value;
+
+
+  if (!chave) {
+
+    mostrarMensagem(
+      'Selecione uma chave.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  const botao =
+    document.getElementById(
+      'btnRetirar'
+    );
+
+
+  botao.disabled =
+    true;
+
+
+  document.getElementById(
+    'carregandoRetirada'
+  ).style.display =
+    'block';
+
+
+  enviarPost({
+
+    acao:
+      'retirarChave',
+
+    numeroPessoa:
+      pessoaSelecionada.numero,
+
+    numeroChave:
+      chave
+
+  });
+
+
+  setTimeout(
+    async function () {
+
+      botao.disabled =
+        false;
+
+
+      document.getElementById(
+        'carregandoRetirada'
+      ).style.display =
+        'none';
+
+
+      pessoaSelecionada =
+        null;
+
+
+      document.getElementById(
+        'numeroPessoaRetirada'
+      ).value =
+        '';
+
+
+      document.getElementById(
+        'pessoaRetirada'
+      ).style.display =
+        'none';
+
+
+      document.getElementById(
+        'areaEscolhaChave'
+      ).style.display =
+        'none';
+
+
+      mostrarMensagem(
+        'Retirada registrada!'
+      );
+
+
+      await atualizarPainel();
+
+    },
+    1800
+  );
+
+}
+
+
+// ============================================================
+// CARREGAR DEVOLUÇÕES
+// ============================================================
+
+async function carregarDevolucoes() {
+
+  const area =
+    document.getElementById(
+      'listaDevolucao'
+    );
+
+
+  area.innerHTML =
+    'Carregando...';
+
+
+  try {
+
+    const dados =
+      await jsonp(
+        'listarMovimentacoesAbertas'
+      );
+
+
+    area.innerHTML =
+      '';
+
+
+    if (
+      dados.length === 0
+    ) {
+
+      area.innerHTML =
+        '<p>✅ Nenhuma chave aguardando devolução.</p>';
+
+      return;
+
+    }
+
+
+    dados.forEach(
+      function (item) {
+
+        const div =
+          document.createElement(
+            'div'
+          );
+
+
+        div.className =
+          'movimento';
+
+
+        const info =
+          document.createElement(
+            'div'
+          );
+
+
+        info.className =
+          'movimento-info';
+
+
+        const statusClasse =
+          item.status ===
+          'ATRASADA'
+            ?
+            'status-atrasada'
+            :
+            'status-aberta';
+
+
+        info.innerHTML =
+
+          '<strong>' +
+          '🔑 Chave ' +
+          escaparHtml(
+            item.chave
+          ) +
+          ' — ' +
+          escaparHtml(
+            item.identificacao
+          ) +
+          '</strong>' +
+
+          '<p>' +
+          '👤 ' +
+          escaparHtml(
+            item.nome
+          ) +
+          ' — Nº ' +
+          escaparHtml(
+            item.numeroPessoa
+          ) +
+          '</p>' +
+
+          '<p>' +
+          '📍 ' +
+          escaparHtml(
+            item.setor
+          ) +
+          '</p>' +
+
+          '<p>' +
+          '🕒 ' +
+          escaparHtml(
+            item.dataRetirada
+          ) +
+          '</p>' +
+
+          '<span class="status ' +
+          statusClasse +
+          '">' +
+          escaparHtml(
+            item.status
+          ) +
+          '</span>';
+
+
+        const botao =
+          document.createElement(
+            'button'
+          );
+
+
+        botao.className =
+          'botao botao-verde';
+
+
+        botao.textContent =
+          '↩️ Devolver';
+
+
+        botao.onclick =
+          function () {
+
+            devolverChave(
+              item.chave,
+              botao
+            );
+
+          };
+
+
+        div.appendChild(
+          info
+        );
+
+
+        div.appendChild(
+          botao
+        );
+
+
+        area.appendChild(
+          div
+        );
+
+      }
+    );
+
+
+  } catch (erro) {
+
+    area.innerHTML =
+      '<p>Erro ao carregar as devoluções.</p>';
+
+
+    mostrarMensagem(
+      erro.message,
+      'erro'
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// DEVOLVER CHAVE
+// ============================================================
+
+function devolverChave(
+  numeroChave,
+  botao
+) {
+
+  if (
+    !confirm(
+      'Confirmar devolução da chave ' +
+      numeroChave +
+      '?'
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  botao.disabled =
+    true;
+
+
+  botao.textContent =
+    'Devolvendo...';
+
+
+  enviarPost({
+
+    acao:
+      'devolverChave',
+
+    numeroChave:
+      numeroChave
+
+  });
+
+
+  setTimeout(
+    async function () {
+
+      mostrarMensagem(
+        'Chave ' +
+        numeroChave +
+        ' devolvida!'
+      );
+
+
+      await carregarDevolucoes();
+
+      await atualizarPainel();
+
+    },
+    1800
+  );
+
+}
+
+
+// ============================================================
+// ATUALIZAR PAINEL
+// ============================================================
+
+async function atualizarPainel() {
+
+  try {
+
+    const resumo =
+      await jsonp(
+        'obterResumo'
+      );
+
+
+    document.getElementById(
+      'totalChaves'
+    ).textContent =
+      resumo.total;
+
+
+    document.getElementById(
+      'totalDisponiveis'
+    ).textContent =
+      resumo.disponiveis;
+
+
+    document.getElementById(
+      'totalRetiradas'
+    ).textContent =
+      resumo.retiradas;
+
+
+    document.getElementById(
+      'totalAtrasadas'
+    ).textContent =
+      resumo.atrasadas;
+
+
+    montarListaPainel(
+      resumo.abertas || []
+    );
+
 
   } catch (erro) {
 
@@ -1037,197 +2146,170 @@ function salvarPessoa() {
     );
 
 
-    enviando =
-      false;
+    document.getElementById(
+      'listaAbertas'
+    ).innerHTML =
+      '<p>Não foi possível carregar o painel.</p>';
+
+  }
+
+}
 
 
-    btnSalvar.disabled =
-      false;
+// ============================================================
+// MONTAR LISTA DO PAINEL
+// ============================================================
 
+function montarListaPainel(
+  dados
+) {
 
-    loading.style.display =
-      'none';
-
-
-    mostrarMensagem(
-      '❌ Erro ao enviar.',
-      'erro'
+  const area =
+    document.getElementById(
+      'listaAbertas'
     );
+
+
+  area.innerHTML =
+    '';
+
+
+  if (
+    dados.length === 0
+  ) {
+
+    area.innerHTML =
+      '<p>✅ Todas as chaves estão disponíveis.</p>';
 
     return;
 
   }
 
 
-  // ----------------------------------------------------------
-  // AGUARDAR RESPOSTA
-  // ----------------------------------------------------------
+  dados.forEach(
+    function (item) {
 
-  setTimeout(
-    function() {
-
-      enviando =
-        false;
+      const div =
+        document.createElement(
+          'div'
+        );
 
 
-      loading.style.display =
-        'none';
+      div.className =
+        'movimento';
 
 
-      mostrarMensagem(
-        '✅ Envio realizado. Verifique a aba PESSOAS e o Drive.',
-        'sucesso'
+      const statusClasse =
+        item.status ===
+        'ATRASADA'
+          ?
+          'status-atrasada'
+          :
+          'status-aberta';
+
+
+      div.innerHTML =
+
+        '<div class="movimento-info">' +
+
+          '<strong>' +
+          '🔑 Chave ' +
+          escaparHtml(
+            item.chave
+          ) +
+          ' — ' +
+          escaparHtml(
+            item.identificacao
+          ) +
+          '</strong>' +
+
+          '<p>' +
+          '👤 ' +
+          escaparHtml(
+            item.nome
+          ) +
+          ' — Nº ' +
+          escaparHtml(
+            item.numeroPessoa
+          ) +
+          '</p>' +
+
+          '<p>' +
+          '📍 ' +
+          escaparHtml(
+            item.setor
+          ) +
+          '</p>' +
+
+          '<p>' +
+          '🕒 Retirada: ' +
+          escaparHtml(
+            item.dataRetirada
+          ) +
+          '</p>' +
+
+          '<span class="status ' +
+          statusClasse +
+          '">' +
+          escaparHtml(
+            item.status
+          ) +
+          '</span>' +
+
+        '</div>';
+
+
+      area.appendChild(
+        div
       );
 
-
-      resultado.textContent =
-        'Cadastro enviado';
-
-
-      // ------------------------------------------------------
-      // LIMPAR
-      // ------------------------------------------------------
-
-      document
-        .getElementById('nome')
-        .value =
-        '';
-
-
-      fotoBase64 =
-        '';
-
-
-      preview.src =
-        '';
-
-
-      preview.style.display =
-        'none';
-
-
-      video.style.display =
-        'none';
-
-
-      cameraStatus.style.display =
-        'block';
-
-
-      btnSalvar.disabled =
-        true;
-
-    },
-    3000
+    }
   );
 
 }
 
 
 // ============================================================
-// TESTAR GITHUB → APPS SCRIPT
+// ESCAPAR HTML
 // ============================================================
 
-function testarComunicacao() {
-
-  mostrarMensagem(
-    '⏳ Testando comunicação com Apps Script...',
-    'info'
-  );
-
-
-  const iframe =
-    document.getElementById(
-      'iframeTeste'
-    );
-
-
-  iframe.style.display =
-    'block';
-
-
-  const form =
-    document.getElementById(
-      'formTeste'
-    );
-
-
-  form.action =
-    URL_APPS_SCRIPT;
-
-
-  form.submit();
-
-
-  setTimeout(
-    function() {
-
-      mostrarMensagem(
-        '✅ Teste enviado. Veja se apareceu "TESTE VINDO DO GITHUB" na aba PESSOAS.',
-        'sucesso'
-      );
-
-    },
-    2500
-  );
-
-}
-
-
-// ============================================================
-// MENSAGENS
-// ============================================================
-
-function mostrarMensagem(
-  texto,
-  tipo
+function escaparHtml(
+  texto
 ) {
 
-  mensagem.textContent =
-    texto;
+  return String(
+    texto ?? ''
+  )
 
+    .replace(
+      /&/g,
+      '&amp;'
+    )
 
-  mensagem.className =
-    tipo;
+    .replace(
+      /</g,
+      '&lt;'
+    )
 
+    .replace(
+      />/g,
+      '&gt;'
+    )
 
-  mensagem.style.display =
-    'block';
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
+    );
 
 }
-
-
-function limparMensagem() {
-
-  mensagem.textContent =
-    '';
-
-  mensagem.className =
-    '';
-
-  mensagem.style.display =
-    'none';
-
-}
-
-
-// ============================================================
-// FECHAR CÂMERA AO SAIR
-// ============================================================
-
-window.addEventListener(
-  'beforeunload',
-  function() {
-
-    fecharStream();
-
-  }
-);
-
 
 </script>
 
 
 </body>
-
 </html>
